@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreContactInquiryRequest;
+use App\Mail\ContactInquiryReceived;
 use App\Models\ContactInquiry;
 use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class ContactController extends Controller
@@ -30,7 +32,12 @@ class ContactController extends Controller
             return $this->thankYouRedirect();
         }
 
-        ContactInquiry::create($request->validated());
+        $inquiry = ContactInquiry::create($request->validated());
+
+        $recipients = config('admin.emails', []);
+        if (! empty($recipients)) {
+            Mail::to($recipients)->send(new ContactInquiryReceived($inquiry));
+        }
 
         return $this->thankYouRedirect();
     }

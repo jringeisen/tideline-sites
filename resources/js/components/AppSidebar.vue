@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { FileText, FolderOpen, LayoutGrid, Tag as TagIcon } from 'lucide-vue-next';
+import { FileText, FolderOpen, Inbox, LayoutGrid, Tag as TagIcon } from 'lucide-vue-next';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -19,6 +19,7 @@ import {
 import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { dashboard } from '@/routes';
 import categories from '@/routes/admin/categories';
+import contactInquiries from '@/routes/admin/contact-inquiries';
 import posts from '@/routes/admin/posts';
 import tags from '@/routes/admin/tags';
 import type { NavItem } from '@/types';
@@ -39,6 +40,7 @@ const adminNavItems = computed<NavItem[]>(() => [
     { title: 'Posts', href: posts.index().url, icon: FileText },
     { title: 'Categories', href: categories.index().url, icon: FolderOpen },
     { title: 'Tags', href: tags.index().url, icon: TagIcon },
+    { title: 'Contact inquiries', href: contactInquiries.index().url, icon: Inbox },
 ]);
 </script>
 

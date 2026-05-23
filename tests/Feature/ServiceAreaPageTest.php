@@ -6,8 +6,8 @@ test('service area page renders successfully', function () {
 
 test('service area page exposes the brand and primary headline', function () {
     $this->get(route('service-area'))
-        ->assertSee('Service area', false)
-        ->assertSee('Emerald Coast web design', false)
+        ->assertSee('Service Area', false)
+        ->assertSee('Emerald Coast Web Design', false)
         ->assertSee('Destin to Panama City Beach', false);
 });
 

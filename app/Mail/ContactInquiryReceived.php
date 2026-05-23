@@ -1,0 +1,37 @@
+<?php
+
+namespace App\Mail;
+
+use App\Models\ContactInquiry;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Content;
+use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Queue\SerializesModels;
+
+class ContactInquiryReceived extends Mailable implements ShouldQueue
+{
+    use Queueable, SerializesModels;
+
+    public function __construct(public ContactInquiry $inquiry) {}
+
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: "New contact inquiry from {$this->inquiry->name}",
+            replyTo: [$this->inquiry->email],
+        );
+    }
+
+    public function content(): Content
+    {
+        return new Content(
+            view: 'emails.contact-inquiry-received',
+            with: [
+                'inquiry' => $this->inquiry,
+                'adminUrl' => route('admin.contact-inquiries.show', $this->inquiry),
+            ],
+        );
+    }
+}

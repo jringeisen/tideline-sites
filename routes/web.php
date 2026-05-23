@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\ContactInquiryController as AdminContactInquiryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\BlogController;
@@ -50,6 +51,13 @@ Route::middleware(['auth', 'verified', 'admin'])
         Route::resource('posts', AdminPostController::class)->except('show');
         Route::resource('categories', AdminCategoryController::class)->except('show');
         Route::resource('tags', AdminTagController::class)->except('show');
+
+        Route::resource('contact-inquiries', AdminContactInquiryController::class)
+            ->only(['index', 'show', 'destroy']);
+        Route::patch('contact-inquiries/{contact_inquiry}/read', [AdminContactInquiryController::class, 'markRead'])
+            ->name('contact-inquiries.read');
+        Route::patch('contact-inquiries/{contact_inquiry}/unread', [AdminContactInquiryController::class, 'markUnread'])
+            ->name('contact-inquiries.unread');
     });
 
 require __DIR__.'/settings.php';
