@@ -119,7 +119,7 @@
         {{-- American flag, muted into the navy via luminosity blend so it reads as a
              premium texture rather than a loud flag. --}}
         <img
-            src="{{ asset('american-flag.png') }}"
+            src="{{ asset('american-flag.webp') }}"
             alt=""
             width="1729" height="910"
             class="absolute inset-0 -z-10 h-full w-full object-cover opacity-30 mix-blend-luminosity"
@@ -167,18 +167,18 @@
                 <dl class="mt-14 grid grid-cols-2 gap-x-8 gap-y-5 border-t border-white/15 pt-8 text-sm {{ config('features.businesses_launched') ? 'sm:grid-cols-3' : '' }}">
                     @if (config('features.businesses_launched'))
                         <div>
-                            <dt class="text-xs uppercase tracking-wider text-white/60">Businesses launched</dt>
+                            <dt class="text-xs uppercase tracking-wider text-white/80">Businesses launched</dt>
                             <dd class="mt-1 flex items-baseline gap-1 font-serif text-2xl text-white">
-                                30<span class="text-base text-white/70">+</span>
+                                30<span class="text-base text-white/80">+</span>
                             </dd>
                         </div>
                     @endif
                     <div>
-                        <dt class="text-xs uppercase tracking-wider text-white/60">Average launch</dt>
+                        <dt class="text-xs uppercase tracking-wider text-white/80">Average launch</dt>
                         <dd class="mt-1 font-serif text-2xl text-white">1&ndash;2 weeks</dd>
                     </div>
                     <div>
-                        <dt class="text-xs uppercase tracking-wider text-white/60">Where it's built</dt>
+                        <dt class="text-xs uppercase tracking-wider text-white/80">Where it's built</dt>
                         <dd class="mt-1 font-serif text-2xl text-white">In the USA</dd>
                     </div>
                 </dl>
@@ -338,12 +338,12 @@
 
             {{-- Sequential timeline: horizontal on desktop with a connecting line through the step dots,
                  vertical on mobile with the line running down the left edge. --}}
-            <ol class="mx-auto mt-16 max-w-6xl">
-                <div class="relative lg:grid lg:grid-cols-4 lg:gap-8">
-                    {{-- Connecting line, sits behind the step dots --}}
-                    <span aria-hidden="true" class="absolute top-5 left-5 hidden h-px w-[calc(100%-2.5rem)] bg-gradient-to-r from-[var(--color-emerald-600)]/30 via-[var(--color-emerald-600)]/30 to-transparent lg:block"></span>
-                    <span aria-hidden="true" class="absolute top-0 bottom-0 left-5 w-px bg-[var(--color-emerald-600)]/20 lg:hidden"></span>
+            <div class="relative mx-auto mt-16 max-w-6xl">
+                {{-- Connecting line, sits behind the step dots --}}
+                <span aria-hidden="true" class="absolute top-5 left-5 hidden h-px w-[calc(100%-2.5rem)] bg-gradient-to-r from-[var(--color-emerald-600)]/30 via-[var(--color-emerald-600)]/30 to-transparent lg:block"></span>
+                <span aria-hidden="true" class="absolute top-0 bottom-0 left-5 w-px bg-[var(--color-emerald-600)]/20 lg:hidden"></span>
 
+                <ol class="lg:grid lg:grid-cols-4 lg:gap-8">
                     @foreach ([
                         ['01', 'Discover', 'Week 1', 'A free 20-minute call to understand your business, your customers, and your goals.'],
                         ['02', 'Design', 'Week 1', 'We craft a custom design and walk you through every page before a single line of code is written.'],
@@ -361,8 +361,8 @@
                             </div>
                         </li>
                     @endforeach
-                </div>
-            </ol>
+                </ol>
+            </div>
         </div>
     </section>
 
@@ -418,7 +418,7 @@
                 'url' => 'https://learnwithventure.com',
                 'tagline' => 'Personalized K-12 learning platform',
                 'description' => 'A curiosity-led homeschooling platform that builds personalized K-12 learning paths for families. Built with Laravel, Inertia, and Stripe billing.',
-                'image' => 'projects/venture.png',
+                'image' => 'projects/venture.webp',
                 'tags' => ['Laravel', 'Inertia', 'Stripe', 'AI'],
             ],
             [
@@ -426,7 +426,7 @@
                 'url' => 'https://usewordsmith.com',
                 'tagline' => 'AI-assisted social media planner',
                 'description' => 'A social media content planning tool with AI-assisted writing — schedule, draft, and refine posts in one place.',
-                'image' => 'projects/wordsmith.png',
+                'image' => 'projects/wordsmith.webp',
                 'tags' => ['Laravel', 'AI', 'Scheduling'],
             ],
         ];
@@ -505,9 +505,9 @@
             <div class="grid items-center gap-12 lg:grid-cols-12">
                 <div class="lg:col-span-5">
                     <figure class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-[var(--color-sand-300)]/60 dark:bg-white/[0.04] dark:ring-white/10">
-                        <img src="{{ asset('team/jon-elena.jpeg') }}"
+                        <img src="{{ asset('team/jon-elena.webp') }}"
                              alt="Jon and Elena Ringeisen, co-founders of All American Web Design"
-                             width="1200" height="900"
+                             width="768" height="1024"
                              loading="lazy"
                              class="block h-auto w-full">
                     </figure>
@@ -572,7 +572,7 @@
                     {{-- Heritage stamp panel --}}
                     <div class="relative isolate overflow-hidden rounded-3xl bg-[var(--color-navy)] p-10 text-white shadow-xl ring-1 ring-black/5 sm:p-12">
                         {{-- American flag, muted into the navy via luminosity blend --}}
-                        <img src="{{ asset('american-flag.png') }}" alt="" width="1729" height="910"
+                        <img src="{{ asset('american-flag.webp') }}" alt="" width="1729" height="910"
                              class="absolute inset-0 -z-10 h-full w-full object-cover opacity-25 mix-blend-luminosity" loading="lazy">
                         <div class="absolute inset-0 -z-10 bg-gradient-to-br from-[var(--color-navy)]/80 via-[var(--color-navy)]/65 to-[var(--color-navy-deep)]/85"></div>
                         <p class="relative font-serif text-xs uppercase tracking-[0.22em] text-white/70">Est. in the USA</p>
@@ -704,21 +704,21 @@
                 </h2>
             </div>
 
-            <dl class="mt-14 divide-y divide-[var(--color-sand-300)]/70 border-y border-[var(--color-sand-300)]/70">
+            <div class="mt-14 divide-y divide-[var(--color-sand-300)]/70 border-y border-[var(--color-sand-300)]/70">
                 @foreach ($faqs as $faq)
                     <details class="faq-item group py-6">
                         <summary class="-mx-2 flex cursor-pointer list-none items-start justify-between gap-6 rounded-xl px-2 py-1 transition duration-200 hover:bg-[var(--color-sand-200)]/30 focus-visible:bg-[var(--color-sand-200)]/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-emerald-600)]/40">
-                            <dt class="font-serif text-lg text-[var(--color-deep-teal)] group-hover:text-[var(--color-emerald-800)] sm:text-xl">{{ $faq['question'] }}</dt>
+                            <h3 class="font-serif text-lg text-[var(--color-deep-teal)] group-hover:text-[var(--color-emerald-800)] sm:text-xl">{{ $faq['question'] }}</h3>
                             <span class="mt-1 grid h-8 w-8 flex-none place-items-center rounded-full bg-[var(--color-navy)]/[0.06] text-[var(--color-navy)] transition duration-300 ease-out group-open:rotate-45 group-open:bg-[var(--color-red)] group-open:text-white">
                                 <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path d="M10 4a.75.75 0 01.75.75v4.5h4.5a.75.75 0 010 1.5h-4.5v4.5a.75.75 0 01-1.5 0v-4.5h-4.5a.75.75 0 010-1.5h4.5v-4.5A.75.75 0 0110 4z" />
                                 </svg>
                             </span>
                         </summary>
-                        <dd class="faq-answer mt-3 pr-12 text-base leading-relaxed text-slate-600">{{ $faq['answer'] }}</dd>
+                        <div class="faq-answer mt-3 pr-12 text-base leading-relaxed text-slate-600">{{ $faq['answer'] }}</div>
                     </details>
                 @endforeach
-            </dl>
+            </div>
 
             <p class="mt-10 text-center text-sm text-slate-600">
                 Still have questions?
