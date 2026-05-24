@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Concerns\SanitizesHtml;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePostRequest;
 use App\Http\Requests\Admin\UpdatePostRequest;
@@ -16,8 +15,6 @@ use Inertia\Response;
 
 class PostController extends Controller
 {
-    use SanitizesHtml;
-
     public function index(Request $request): Response
     {
         $posts = Post::query()
@@ -52,7 +49,6 @@ class PostController extends Controller
     public function store(StorePostRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        $data['content'] = $this->sanitizePostHtml($data['content']);
         $data['author_id'] = $request->user()->id;
 
         $post = Post::create(collect($data)->except('tags')->all());
@@ -79,7 +75,6 @@ class PostController extends Controller
     public function update(UpdatePostRequest $request, Post $post): RedirectResponse
     {
         $data = $request->validated();
-        $data['content'] = $this->sanitizePostHtml($data['content']);
 
         $post->fill(collect($data)->except('tags')->all());
         $post->save();

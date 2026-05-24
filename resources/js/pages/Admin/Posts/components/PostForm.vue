@@ -31,7 +31,35 @@ const props = defineProps<{
 }>();
 
 const content = ref<string>(props.initial?.content ?? '');
+const excerpt = ref<string>(props.initial?.excerpt ?? '');
+const metaDescription = ref<string>(props.initial?.meta_description ?? '');
 const tagIds = ref<number[]>([...(props.initialTagIds ?? [])]);
+
+const slugify = (value: string): string =>
+    value
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s-]/g, '')
+        .replace(/[\s_-]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
+const title = ref<string>(props.initial?.title ?? '');
+const slug = ref<string>(props.initial?.slug ?? '');
+const slugTouched = ref<boolean>(Boolean(props.initial?.slug));
+
+const onTitleInput = (event: Event) => {
+    const value = (event.target as HTMLInputElement).value;
+    title.value = value;
+    if (!slugTouched.value) {
+        slug.value = slugify(value);
+    }
+};
+
+const onSlugInput = (event: Event) => {
+    const value = (event.target as HTMLInputElement).value;
+    slug.value = value;
+    slugTouched.value = value.length > 0;
+};
 
 const publishedAtForInput = computed(() => {
     const value = props.initial?.published_at;
@@ -51,20 +79,41 @@ const toggleTag = (id: number) => {
 <template>
     <Form
         v-bind="formAction"
-        :transform="(data: Record<string, unknown>) => ({ ...data, content, tags: tagIds })"
+        :transform="
+            (data: Record<string, unknown>) => ({
+                ...data,
+                content,
+                tags: tagIds,
+            })
+        "
         class="space-y-8"
         v-slot="{ errors, processing }"
     >
-        <section class="space-y-5 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-8 dark:bg-white/[0.04] dark:ring-white/10">
+        <section
+            class="space-y-5 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-8 dark:bg-white/[0.04] dark:ring-white/10"
+        >
             <div class="grid gap-2">
                 <Label for="title">Title</Label>
-                <Input id="title" name="title" :default-value="initial?.title" required maxlength="200" />
+                <Input
+                    id="title"
+                    name="title"
+                    :model-value="title"
+                    required
+                    maxlength="200"
+                    @input="onTitleInput"
+                />
                 <InputError :message="errors.title" />
             </div>
 
             <div class="grid gap-2">
                 <Label for="slug">Slug (optional — auto from title)</Label>
-                <Input id="slug" name="slug" :default-value="initial?.slug" maxlength="200" />
+                <Input
+                    id="slug"
+                    name="slug"
+                    :model-value="slug"
+                    maxlength="200"
+                    @input="onSlugInput"
+                />
                 <InputError :message="errors.slug" />
             </div>
 
@@ -75,7 +124,7 @@ const toggleTag = (id: number) => {
                     name="excerpt"
                     rows="2"
                     maxlength="500"
-                    :default-value="initial?.excerpt ?? ''"
+                    v-model="excerpt"
                     class="rounded-md border border-input bg-background px-3 py-2 text-sm"
                 />
                 <InputError :message="errors.excerpt" />
@@ -90,8 +139,14 @@ const toggleTag = (id: number) => {
         </section>
 
         <section class="grid gap-6 md:grid-cols-2">
-            <div class="space-y-5 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-7 dark:bg-white/[0.04] dark:ring-white/10">
-                <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">Publishing</h3>
+            <div
+                class="space-y-5 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
+            >
+                <h3
+                    class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+                >
+                    Publishing
+                </h3>
 
                 <div class="grid gap-2">
                     <Label for="status">Status</Label>
@@ -101,7 +156,9 @@ const toggleTag = (id: number) => {
                         :default-value="initial?.status ?? 'draft'"
                         class="rounded-md border border-input bg-background px-3 py-2 text-sm capitalize"
                     >
-                        <option v-for="s in statuses" :key="s" :value="s">{{ s }}</option>
+                        <option v-for="s in statuses" :key="s" :value="s">
+                            {{ s }}
+                        </option>
                     </select>
                     <InputError :message="errors.status" />
                 </div>
@@ -126,7 +183,13 @@ const toggleTag = (id: number) => {
                         class="rounded-md border border-input bg-background px-3 py-2 text-sm"
                     >
                         <option value="">— None —</option>
-                        <option v-for="c in categories" :key="c.id" :value="c.id">{{ c.name }}</option>
+                        <option
+                            v-for="c in categories"
+                            :key="c.id"
+                            :value="c.id"
+                        >
+                            {{ c.name }}
+                        </option>
                     </select>
                     <InputError :message="errors.category_id" />
                 </div>
@@ -148,17 +211,32 @@ const toggleTag = (id: number) => {
                         >
                             {{ tag.name }}
                         </button>
-                        <span v-if="tags.length === 0" class="text-xs text-muted-foreground">No tags yet.</span>
+                        <span
+                            v-if="tags.length === 0"
+                            class="text-xs text-muted-foreground"
+                            >No tags yet.</span
+                        >
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-5 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-7 dark:bg-white/[0.04] dark:ring-white/10">
-                <h3 class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">SEO</h3>
+            <div
+                class="space-y-5 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
+            >
+                <h3
+                    class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+                >
+                    SEO
+                </h3>
 
                 <div class="grid gap-2">
                     <Label for="meta_title">Meta title</Label>
-                    <Input id="meta_title" name="meta_title" :default-value="initial?.meta_title ?? ''" maxlength="70" />
+                    <Input
+                        id="meta_title"
+                        name="meta_title"
+                        :default-value="initial?.meta_title ?? ''"
+                        maxlength="70"
+                    />
                     <InputError :message="errors.meta_title" />
                 </div>
 
@@ -169,7 +247,7 @@ const toggleTag = (id: number) => {
                         name="meta_description"
                         rows="2"
                         maxlength="200"
-                        :default-value="initial?.meta_description ?? ''"
+                        v-model="metaDescription"
                         class="rounded-md border border-input bg-background px-3 py-2 text-sm"
                     />
                     <InputError :message="errors.meta_description" />
@@ -177,14 +255,23 @@ const toggleTag = (id: number) => {
 
                 <div class="grid gap-2">
                     <Label for="og_image_url">OG image URL</Label>
-                    <Input id="og_image_url" name="og_image_url" :default-value="initial?.og_image_url ?? ''" />
+                    <Input
+                        id="og_image_url"
+                        name="og_image_url"
+                        :default-value="initial?.og_image_url ?? ''"
+                    />
                     <InputError :message="errors.og_image_url" />
                 </div>
             </div>
         </section>
 
         <div class="flex items-center justify-end gap-3">
-            <Button :disabled="processing" variant="marketing" size="marketing">{{ submitLabel ?? 'Save post' }}</Button>
+            <Button
+                :disabled="processing"
+                variant="marketing"
+                size="marketing"
+                >{{ submitLabel ?? 'Save post' }}</Button
+            >
         </div>
     </Form>
 </template>

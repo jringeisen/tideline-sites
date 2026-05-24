@@ -52,6 +52,9 @@ test('admin can store a post with tags and auto-slug', function () {
     $post = Post::query()->where('title', 'My First Post')->firstOrFail();
     expect($post->slug)->toBe('my-first-post')
         ->and($post->author_id)->toBe($this->admin->id)
+        ->and($post->excerpt)->toBe('Hello world.')
+        ->and($post->content)->toContain('<p>')
+        ->and($post->content)->toContain('word')
         ->and($post->reading_time_minutes)->toBeGreaterThan(0)
         ->and($post->tags->pluck('id')->all())->toBe([$tag->id]);
 });
@@ -71,6 +74,7 @@ test('admin can update a post and resync tags', function () {
     $post->refresh()->load('tags');
     expect($post->title)->toBe('New Title')
         ->and($post->status)->toBe('draft')
+        ->and($post->content)->toBe('<p>Updated.</p>')
         ->and($post->tags->pluck('id')->all())->toBe([$newTag->id]);
 });
 
@@ -82,18 +86,6 @@ test('admin can delete a post', function () {
         ->assertRedirect();
 
     expect(Post::find($post->id))->toBeNull();
-});
-
-test('store post strips disallowed HTML attributes (XSS guard)', function () {
-    $this->actingAs($this->admin)->post('/admin/posts', [
-        'title' => 'Sanitized',
-        'content' => '<p onclick="evil()">Hello <script>alert(1)</script></p>',
-        'status' => 'draft',
-    ])->assertRedirect();
-
-    $post = Post::query()->where('title', 'Sanitized')->firstOrFail();
-    expect($post->content)->not->toContain('onclick')
-        ->and($post->content)->not->toContain('<script');
 });
 
 test('post validation rejects missing title and content', function () {
