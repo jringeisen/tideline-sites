@@ -53,6 +53,12 @@
 
     @vite(['resources/css/app.css'])
 
+    @production
+        {{-- Fathom - beautiful, simple website analytics --}}
+        <script src="https://cdn.usefathom.com/script.js" data-spa="auto" data-site="WAVFXUWL" defer></script>
+        {{-- / Fathom --}}
+    @endproduction
+
     @stack('schema')
 </head>
 <body class="font-sans antialiased bg-[var(--color-cream)] text-[var(--color-ink)]">
