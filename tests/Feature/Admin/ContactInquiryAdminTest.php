@@ -49,6 +49,20 @@ test('search filter narrows results by name, email, or message', function () {
         ->and(collect($rows)->pluck('name')->all())->toContain('Alice Lighthouse', 'Bob Bayside');
 });
 
+test('source filter narrows results to seo assessment submissions', function () {
+    ContactInquiry::factory()->create(['name' => 'Contact One']);
+    $seo = ContactInquiry::factory()->seoAssessment()->create(['name' => 'SEO One']);
+
+    $response = $this->actingAs($this->admin)
+        ->get('/admin/contact-inquiries?source=seo_assessment')
+        ->assertOk();
+
+    $rows = $response->viewData('page')['props']['inquiries']['data'];
+    expect(count($rows))->toBe(1)
+        ->and($rows[0]['id'])->toBe($seo->id)
+        ->and($rows[0]['source'])->toBe('seo_assessment');
+});
+
 test('unread filter hides read inquiries', function () {
     $unread = ContactInquiry::factory()->create();
     ContactInquiry::factory()->create(['read_at' => now()]);

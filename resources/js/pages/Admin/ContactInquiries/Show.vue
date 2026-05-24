@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Head, Link, router } from '@inertiajs/vue3';
+import { computed } from 'vue';
 import ContactInquiryController from '@/actions/App/Http/Controllers/Admin/ContactInquiryController';
 import { Button } from '@/components/ui/button';
 import contactInquiriesRoutes from '@/routes/admin/contact-inquiries';
@@ -8,9 +9,12 @@ type Inquiry = {
     id: number;
     name: string;
     email: string;
+    business_name: string | null;
+    website: string | null;
     phone: string | null;
     plan: string | null;
-    message: string;
+    source: string;
+    message: string | null;
     read_at: string | null;
     created_at: string;
 };
@@ -25,6 +29,10 @@ defineOptions({
         ],
     },
 });
+
+const sourceLabel = computed(() =>
+    props.inquiry.source === 'seo_assessment' ? 'SEO Assessment' : 'Contact',
+);
 
 const toggleRead = () => {
     if (props.inquiry.read_at) {
@@ -46,7 +54,7 @@ const destroy = () => {
     <header class="flex flex-wrap items-end justify-between gap-4">
         <div>
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
-                Inbox
+                {{ sourceLabel }}
             </p>
             <h1
                 class="mt-2 font-serif text-3xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl"
@@ -90,25 +98,47 @@ const destroy = () => {
                     <a class="hover:underline" :href="`mailto:${inquiry.email}`">{{ inquiry.email }}</a>
                 </dd>
             </div>
-            <div>
+            <div v-if="inquiry.business_name">
+                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                    Business
+                </dt>
+                <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
+                    {{ inquiry.business_name }}
+                </dd>
+            </div>
+            <div v-if="inquiry.website">
+                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                    Website
+                </dt>
+                <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
+                    <a
+                        class="hover:underline"
+                        :href="inquiry.website"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        >{{ inquiry.website }}</a
+                    >
+                </dd>
+            </div>
+            <div v-if="inquiry.phone">
                 <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
                     Phone
                 </dt>
                 <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
-                    {{ inquiry.phone ?? '—' }}
+                    {{ inquiry.phone }}
                 </dd>
             </div>
-            <div>
+            <div v-if="inquiry.plan">
                 <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
                     Plan
                 </dt>
                 <dd class="mt-1 capitalize text-[var(--color-deep-teal)] dark:text-white">
-                    {{ inquiry.plan ?? '—' }}
+                    {{ inquiry.plan }}
                 </dd>
             </div>
         </dl>
 
-        <div>
+        <div v-if="inquiry.message">
             <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
                 Message
             </p>

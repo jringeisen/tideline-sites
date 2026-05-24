@@ -10,8 +10,11 @@ type InquiryRow = {
     id: number;
     name: string;
     email: string;
+    business_name: string | null;
+    website: string | null;
     phone: string | null;
     plan: string | null;
+    source: string;
     read_at: string | null;
     created_at: string;
 };
@@ -24,7 +27,7 @@ const props = defineProps<{
         to: number;
         total: number;
     };
-    filters: { q: string | null; unread: boolean };
+    filters: { q: string | null; unread: boolean; source: string | null };
     unreadCount: number;
 }>();
 
@@ -36,6 +39,13 @@ defineOptions({
 
 const q = ref(props.filters.q ?? '');
 const unread = ref(props.filters.unread);
+const source = ref(props.filters.source ?? '');
+
+const sourceLabel = (value: string): string => {
+    if (value === 'seo_assessment') return 'SEO Assessment';
+    if (value === 'contact') return 'Contact';
+    return value;
+};
 
 const applyFilters = () => {
     router.get(
@@ -43,6 +53,7 @@ const applyFilters = () => {
         {
             q: q.value || undefined,
             unread: unread.value ? 1 : undefined,
+            source: source.value || undefined,
         },
         { preserveState: true, replace: true },
     );
@@ -76,8 +87,19 @@ const destroy = (inquiry: InquiryRow) => {
     <section
         class="mt-8 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
     >
-        <form class="grid gap-3 sm:grid-cols-[2fr_auto_auto]" @submit.prevent="applyFilters">
-            <Input v-model="q" placeholder="Search name, email, or message…" />
+        <form
+            class="grid gap-3 sm:grid-cols-[2fr_auto_auto_auto]"
+            @submit.prevent="applyFilters"
+        >
+            <Input v-model="q" placeholder="Search name, email, business, or message…" />
+            <select
+                v-model="source"
+                class="rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs"
+            >
+                <option value="">All sources</option>
+                <option value="contact">Contact</option>
+                <option value="seo_assessment">SEO Assessment</option>
+            </select>
             <label class="inline-flex items-center gap-2 text-sm">
                 <input
                     v-model="unread"
@@ -100,7 +122,7 @@ const destroy = (inquiry: InquiryRow) => {
                 <tr>
                     <th class="px-5 py-4">Name</th>
                     <th class="px-5 py-4">Email</th>
-                    <th class="px-5 py-4">Plan</th>
+                    <th class="px-5 py-4">Source</th>
                     <th class="px-5 py-4">Status</th>
                     <th class="px-5 py-4">Received</th>
                     <th class="px-5 py-4 text-right">Actions</th>
@@ -121,8 +143,17 @@ const destroy = (inquiry: InquiryRow) => {
                         >
                     </td>
                     <td class="px-5 py-4 text-slate-600 dark:text-white/70">{{ inquiry.email }}</td>
-                    <td class="px-5 py-4 text-slate-600 capitalize dark:text-white/70">
-                        {{ inquiry.plan ?? '—' }}
+                    <td class="px-5 py-4">
+                        <span
+                            class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium"
+                            :class="
+                                inquiry.source === 'seo_assessment'
+                                    ? 'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)]'
+                                    : 'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80'
+                            "
+                        >
+                            {{ sourceLabel(inquiry.source) }}
+                        </span>
                     </td>
                     <td class="px-5 py-4">
                         <span

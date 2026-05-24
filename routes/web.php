@@ -8,6 +8,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogFeedController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\SeoAssessmentController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,11 @@ Route::get('/contact', [ContactController::class, 'show'])->name('contact.show')
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:5,60')
     ->name('contact.store');
+
+Route::get('/seo-assessment', [SeoAssessmentController::class, 'show'])->name('seo-assessment.show');
+Route::post('/seo-assessment', [SeoAssessmentController::class, 'store'])
+    ->middleware('throttle:5,60')
+    ->name('seo-assessment.store');
 
 Route::get('/locations/{slug}', [LocationController::class, 'show'])
     ->where('slug', '[a-z0-9-]+')
