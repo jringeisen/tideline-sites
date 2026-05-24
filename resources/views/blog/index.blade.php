@@ -21,31 +21,28 @@
 
 <x-layouts.marketing :title="$headline" :description="$description">
 
-    <section class="relative isolate overflow-hidden bg-[var(--color-emerald-900)] text-white">
-        <div class="absolute inset-0 -z-10"
-             style="background:
-                radial-gradient(50% 70% at 80% 0%, rgba(16,185,129,0.30), transparent 60%),
-                radial-gradient(50% 60% at 0% 100%, rgba(15,118,110,0.30), transparent 60%),
-                linear-gradient(180deg, #0b2a2e 0%, #0d4742 100%);">
-        </div>
+    <section class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] text-white">
+        <div class="absolute inset-0 -z-10" style="background: linear-gradient(180deg, #1e2e44 0%, #243650 60%, #1a2840 100%);"></div>
+        <img src="{{ asset('american-flag.png') }}" alt="" width="1729" height="910"
+             class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-luminosity" loading="eager" fetchpriority="high">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-navy-deep)]/95 via-[var(--color-navy-deep)]/75 to-[var(--color-navy-deep)]/45"></div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--color-navy-deep)]/50 via-transparent to-[var(--color-navy-deep)]/90"></div>
         <div class="mx-auto max-w-5xl px-6 pt-32 pb-16 sm:pt-40 lg:px-8">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-sand-200)]">All American Web Design blog</p>
-            <h1 class="mt-4 font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">All American Web Design blog</p>
+            <h1 class="mt-4 font-serif text-5xl font-bold uppercase leading-[0.95] tracking-tight sm:text-6xl">
                 @if ($activeCategory)
                     {{ $activeCategory->name }}
                 @elseif ($activeTag)
                     #{{ $activeTag->name }}
                 @else
-                    Notes from the <span class="italic text-[var(--color-sand-200)]">Emerald Coast</span>.
+                    Notes from the <span class="text-[var(--color-red)]">workshop</span>.
                 @endif
             </h1>
             <p class="mt-6 max-w-2xl text-lg text-white/85">
-                Practical thinking on web design, SEO, and growing a local business online.
+                Practical thinking on web design, SEO, and growing a small business online.
             </p>
         </div>
-        <svg class="block w-full text-[var(--color-cream)]" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-            <path fill="currentColor" d="M0 40 C 240 80 480 0 720 40 S 1200 80 1440 40 L 1440 80 L 0 80 Z" />
-        </svg>
+        <div class="h-1.5 w-full bg-[var(--color-red)]"></div>
     </section>
 
     <section class="bg-[var(--color-cream)] py-12">
@@ -66,7 +63,7 @@
 
             @if ($categories->isNotEmpty())
                 <div class="mt-8">
-                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">Categories</p>
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Categories</p>
                     <ul class="mt-3 flex flex-wrap gap-2">
                         <li>
                             <a href="{{ route('blog.index') }}"

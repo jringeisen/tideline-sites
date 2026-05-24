@@ -1,10 +1,10 @@
 @php
     /** @var \App\Models\Post $post */
 @endphp
-<article class="group flex flex-col rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60 transition hover:ring-[var(--color-emerald-700)]/30 dark:bg-white/[0.04] dark:ring-white/10">
+<article class="group flex flex-col rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60 transition hover:ring-[var(--color-red)]/30 dark:bg-white/[0.04] dark:ring-white/10">
     @if ($post->category)
         <a href="{{ route('blog.category', $post->category->slug) }}"
-           class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)] hover:underline">
+           class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)] hover:underline">
             {{ $post->category->name }}
         </a>
     @endif

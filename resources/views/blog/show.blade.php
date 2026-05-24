@@ -50,7 +50,12 @@
     @endpush
 
     <article class="bg-[var(--color-cream)]">
-        <header class="bg-[var(--color-emerald-900)] text-white">
+        <header class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] text-white">
+            <div class="absolute inset-0 -z-10" style="background: linear-gradient(180deg, #1e2e44 0%, #243650 60%, #1a2840 100%);"></div>
+            <img src="{{ asset('american-flag.png') }}" alt="" width="1729" height="910"
+                 class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-luminosity" loading="eager" fetchpriority="high">
+            <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-navy-deep)]/95 via-[var(--color-navy-deep)]/75 to-[var(--color-navy-deep)]/45"></div>
+            <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--color-navy-deep)]/50 via-transparent to-[var(--color-navy-deep)]/90"></div>
             <div class="mx-auto max-w-3xl px-6 pt-32 pb-20 sm:pt-40 lg:px-8">
                 <nav aria-label="Breadcrumb" class="text-sm text-white/60">
                     <ol class="flex flex-wrap items-center gap-2">
@@ -63,13 +68,16 @@
                         @endif
                     </ol>
                 </nav>
-                <h1 class="mt-6 font-serif text-4xl leading-tight tracking-tight sm:text-5xl">{{ $post->title }}</h1>
+                <h1 class="mt-6 font-serif text-4xl font-bold leading-tight tracking-tight sm:text-5xl">{{ $post->title }}</h1>
                 <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/75">
                     <span>{{ $post->author?->name ?? 'All American Web Design' }}</span>
                     <time datetime="{{ $post->published_at?->toAtomString() }}">{{ $post->published_at?->format('F j, Y') }}</time>
                     <span>{{ $post->reading_time_minutes }} min read</span>
                 </div>
             </div>
+
+            {{-- Heritage stripe divider --}}
+            <div class="h-1.5 w-full bg-[var(--color-red)]"></div>
         </header>
 
         <div class="mx-auto max-w-3xl px-6 py-16 lg:px-8">
@@ -91,7 +99,7 @@
             @endif
 
             <section aria-label="Share this post" class="mt-12 flex flex-wrap items-center gap-3 border-y border-[var(--color-sand-300)] py-6">
-                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">Share</span>
+                <span class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Share</span>
                 <a href="https://twitter.com/intent/tweet?text={{ $shareText }}&url={{ $shareUrl }}"
                    target="_blank" rel="noopener noreferrer"
                    class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)]">Twitter</a>
@@ -121,8 +129,8 @@
         @if ($related->isNotEmpty())
             <section class="bg-[var(--color-sand-100)] py-16">
                 <div class="mx-auto max-w-5xl px-6 lg:px-8">
-                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">Keep reading</p>
-                    <h2 class="mt-3 font-serif text-3xl tracking-tight text-[var(--color-deep-teal)]">More from the blog</h2>
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Keep reading</p>
+                    <h2 class="mt-3 font-serif text-3xl font-bold uppercase tracking-tight text-[var(--color-deep-teal)]">More from the blog</h2>
                     <div class="mt-8 grid gap-6 sm:grid-cols-3">
                         @foreach ($related as $post)
                             @include('blog.partials._card', ['post' => $post])
