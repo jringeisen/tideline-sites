@@ -13,7 +13,7 @@ $heading = $isSeoAssessment ? 'New SEO assessment request' : 'New contact inquir
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.5; color: #0b2a2e; background: #f7f4ee; margin: 0; padding: 24px;">
     <div style="max-width: 560px; margin: 0 auto; background: #ffffff; border-radius: 16px; padding: 32px;">
         <p style="font-size: 12px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #047857; margin: 0;">
-            Tideline Sites
+            All American Web Design
         </p>
         <h1 style="font-size: 22px; margin: 8px 0 24px;">{{ $heading }}</h1>
 

@@ -2,7 +2,7 @@
     $jsonLd = [
         '@context' => 'https://schema.org',
         '@type' => 'WebPage',
-        'name' => 'Free SEO Assessment — Tideline Sites',
+        'name' => 'Free SEO Assessment — All American Web Design',
         'url' => url()->current(),
         'description' => 'Request a free SEO assessment for your business website. We\'ll review your site and send a personalized action plan.',
         'mainEntity' => [
@@ -10,9 +10,9 @@
             'name' => 'Free SEO Assessment',
             'provider' => [
                 '@type' => 'LocalBusiness',
-                'name' => 'Tideline Sites',
-                'email' => 'hello@tidelinesites.com',
-                'areaServed' => 'Emerald Coast, Florida',
+                'name' => 'All American Web Design',
+                'email' => 'hello@allamericanwebdesign.com',
+                'areaServed' => 'United States',
             ],
         ],
     ];
@@ -38,7 +38,7 @@
 @endphp
 
 <x-layouts.marketing
-    title="Free SEO Assessment — Tideline Sites"
+    title="Free SEO Assessment — All American Web Design"
     description="See where your website stands. Request a free SEO assessment and we'll send back a personalized action plan within two business days.">
 
     @push('schema')
@@ -46,22 +46,28 @@
     @endpush
 
     {{-- ───────── Hero band ───────── --}}
-    <section class="relative isolate overflow-hidden bg-[var(--color-emerald-900)] text-white">
-        <div class="absolute inset-0 -z-10"
-             style="background:
-                radial-gradient(50% 70% at 80% 0%, rgba(16,185,129,0.30), transparent 60%),
-                radial-gradient(50% 60% at 0% 100%, rgba(15,118,110,0.30), transparent 60%),
-                linear-gradient(180deg, #0b2a2e 0%, #0d4742 100%);">
-        </div>
+    <section class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] text-white">
+        {{-- Base navy field --}}
+        <div class="absolute inset-0 -z-10" style="background: linear-gradient(180deg, #1e2e44 0%, #243650 60%, #1a2840 100%);"></div>
+        {{-- American flag, muted into the navy via luminosity blend --}}
+        <img
+            src="{{ asset('american-flag.png') }}"
+            alt=""
+            width="1729" height="910"
+            class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-luminosity"
+            loading="eager"
+            fetchpriority="high">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-navy-deep)]/95 via-[var(--color-navy-deep)]/75 to-[var(--color-navy-deep)]/45"></div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--color-navy-deep)]/50 via-transparent to-[var(--color-navy-deep)]/90"></div>
 
         <div class="mx-auto max-w-7xl px-6 pt-36 pb-20 sm:pt-44 lg:px-8 lg:pt-52">
             <div class="max-w-2xl">
-                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-emerald-200)]"></span>
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-red)]"></span>
                     100% free · No strings
                 </span>
-                <h1 class="mt-6 font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl">
-                    See where your site <span class="italic text-[var(--color-sand-200)]">stands.</span>
+                <h1 class="mt-6 font-serif text-6xl font-bold uppercase leading-[0.95] tracking-tight sm:text-7xl">
+                    See where your site <span class="text-[var(--color-red)]">stands.</span>
                 </h1>
                 <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/85">
                     Tell us a little about your business and we'll send back a personalized SEO assessment — what's working, what's not, and what to fix first.
@@ -69,9 +75,8 @@
             </div>
         </div>
 
-        <svg class="block w-full text-[var(--color-cream)]" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-            <path fill="currentColor" d="M0 40 C 240 80 480 0 720 40 S 1200 80 1440 40 L 1440 80 L 0 80 Z" />
-        </svg>
+        {{-- Heritage stripe divider --}}
+        <div class="h-1.5 w-full bg-[var(--color-red)]"></div>
     </section>
 
     {{-- ───────── Form + benefits ───────── --}}
@@ -82,8 +87,8 @@
                 <div class="lg:col-span-7">
                     @if (session('status'))
                         <div role="status"
-                             class="mb-8 flex items-start gap-3 rounded-2xl border border-[var(--color-emerald-600)]/25 bg-[var(--color-emerald-50)] px-5 py-4 text-sm text-[var(--color-emerald-800)]">
-                            <svg class="mt-0.5 h-5 w-5 flex-none text-[var(--color-emerald-600)]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                             class="mb-8 flex items-start gap-3 rounded-2xl border border-[var(--color-navy)]/20 bg-[var(--color-navy)]/[0.05] px-5 py-4 text-sm text-[var(--color-navy)]">
+                            <svg class="mt-0.5 h-5 w-5 flex-none text-[var(--color-red)]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
                             </svg>
                             <p>{{ session('status') }}</p>
@@ -142,7 +147,7 @@
                         <div class="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                             <p class="text-xs text-slate-500">No credit card. No sales pitch. Just useful feedback.</p>
                             <button type="submit"
-                                    class="inline-flex w-full items-center justify-center rounded-full bg-[var(--color-emerald-600)] px-6 py-3 text-sm font-semibold text-white shadow transition hover:bg-[var(--color-emerald-700)] sm:w-auto">
+                                    class="inline-flex w-full items-center justify-center rounded-full bg-[var(--color-red)] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow transition hover:bg-[var(--color-red-deep)] sm:w-auto">
                                 Request my assessment
                                 <svg class="ml-2 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                     <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />

@@ -1,5 +1,5 @@
 @php
-    $title = "{$location['name']} Web Design & SEO — Tideline Sites";
+    $title = "{$location['name']} Web Design & SEO — All American Web Design";
 
     $businessId = url('/') . '#business';
     $pageUrl = url()->current();
@@ -8,13 +8,13 @@
         '@context' => 'https://schema.org',
         '@type' => 'ProfessionalService',
         '@id' => $pageUrl . '#business',
-        'name' => 'Tideline Sites — ' . $location['name'],
+        'name' => 'All American Web Design — ' . $location['name'],
         'url' => $pageUrl,
         'description' => $location['meta_description'],
         'priceRange' => '$299 - $499/mo',
         'image' => asset('og-image.jpg'),
         'telephone' => '+1-850-684-8924',
-        'email' => 'hello@tidelinesites.com',
+        'email' => 'hello@allamericanwebdesign.com',
         'address' => [
             '@type' => 'PostalAddress',
             'addressLocality' => $location['name'],
@@ -29,7 +29,7 @@
         'areaServed' => [
             '@type' => 'City',
             'name' => $location['name'],
-            'containedInPlace' => ['@type' => 'AdministrativeArea', 'name' => 'Emerald Coast, Florida'],
+            'containedInPlace' => ['@type' => 'AdministrativeArea', 'name' => "Florida's Gulf Coast"],
         ],
         'parentOrganization' => ['@id' => $businessId],
     ];
@@ -55,13 +55,19 @@
     @endpush
 
     {{-- ───────── Hero ───────── --}}
-    <section class="relative isolate overflow-hidden bg-[var(--color-emerald-900)] text-white">
-        <div class="absolute inset-0 -z-10"
-             style="background:
-                radial-gradient(50% 70% at 80% 0%, rgba(16,185,129,0.30), transparent 60%),
-                radial-gradient(50% 60% at 0% 100%, rgba(15,118,110,0.30), transparent 60%),
-                linear-gradient(180deg, #0b2a2e 0%, #0d4742 100%);">
-        </div>
+    <section class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] text-white">
+        {{-- Base navy field --}}
+        <div class="absolute inset-0 -z-10" style="background: linear-gradient(180deg, #1e2e44 0%, #243650 60%, #1a2840 100%);"></div>
+        {{-- American flag, muted into the navy via luminosity blend --}}
+        <img
+            src="{{ asset('american-flag.png') }}"
+            alt=""
+            width="1729" height="910"
+            class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-luminosity"
+            loading="eager"
+            fetchpriority="high">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-navy-deep)]/95 via-[var(--color-navy-deep)]/75 to-[var(--color-navy-deep)]/45"></div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--color-navy-deep)]/50 via-transparent to-[var(--color-navy-deep)]/90"></div>
 
         <div class="mx-auto max-w-7xl px-6 pt-36 pb-20 sm:pt-44 lg:px-8 lg:pt-52">
             <nav aria-label="Breadcrumb" class="mb-6 text-sm text-white/60">
@@ -73,40 +79,39 @@
             </nav>
 
             <div class="max-w-3xl">
-                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-emerald-200)]"></span>
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-red)]"></span>
                     Serving {{ $location['display_name'] }}
                 </span>
-                <h1 class="mt-6 font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
+                <h1 class="mt-6 font-serif text-6xl font-bold uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
                     {{ $location['name'] }}
-                    <span class="italic text-[var(--color-sand-200)]">{!! $location['tagline'] !!}.</span>
+                    <span class="block text-[var(--color-red)]">{!! $location['tagline'] !!}.</span>
                 </h1>
-                <p class="mt-6 max-w-xl font-serif text-2xl leading-snug text-white/90 sm:text-3xl">
+                <p class="mt-6 max-w-xl text-2xl leading-snug text-white/90 sm:text-3xl">
                     {!! $location['hero_subhead'] !!}
                 </p>
                 <div class="mt-10 flex flex-col gap-3 sm:flex-row">
                     <a href="{{ route('contact.show') }}"
-                       class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--color-emerald-900)] shadow-lg shadow-emerald-950/20 transition hover:bg-[var(--color-sand-200)]">
+                       class="inline-flex items-center justify-center rounded-full bg-[var(--color-red)] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg shadow-black/30 transition hover:bg-[var(--color-red-deep)]">
                         Get a quote for your {{ $location['name'] }} business
                     </a>
                     <a href="{{ route('home') }}#pricing"
-                       class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                       class="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white/10">
                         See pricing
                     </a>
                 </div>
             </div>
         </div>
 
-        <svg class="block w-full text-[var(--color-cream)]" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-            <path fill="currentColor" d="M0 40 C 240 80 480 0 720 40 S 1200 80 1440 40 L 1440 80 L 0 80 Z" />
-        </svg>
+        {{-- Heritage stripe divider --}}
+        <div class="h-1.5 w-full bg-[var(--color-red)]"></div>
     </section>
 
     {{-- ───────── Local context ───────── --}}
     <section class="bg-[var(--color-cream)] py-20 sm:py-28">
         <div class="mx-auto max-w-3xl px-6 lg:px-8">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">Why {{ $location['name'] }}</p>
-            <h2 class="mt-3 font-serif text-3xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Why {{ $location['name'] }}</p>
+            <h2 class="mt-3 font-serif text-3xl font-bold uppercase leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
                 Web design and SEO built for {{ $location['name'] }}.
             </h2>
             <p class="mt-6 text-lg leading-relaxed text-slate-700">{{ $location['intro'] }}</p>
@@ -118,8 +123,8 @@
     <section class="bg-[var(--color-sand-100)] py-20 sm:py-28">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">Who we serve</p>
-                <h2 class="mt-3 font-serif text-3xl tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Who we serve</p>
+                <h2 class="mt-3 font-serif text-3xl font-bold uppercase tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
                     {{ $location['name'] }} businesses we love working with.
                 </h2>
             </div>
@@ -139,8 +144,8 @@
     <section class="bg-[var(--color-cream)] py-20 sm:py-28">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">What we do</p>
-                <h2 class="mt-3 font-serif text-3xl tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">What we do</p>
+                <h2 class="mt-3 font-serif text-3xl font-bold uppercase tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
                     Everything {{ $location['name'] }} businesses need to win online.
                 </h2>
             </div>
@@ -169,8 +174,8 @@
     @if (! empty($location['nearby']))
         <section class="bg-[var(--color-sand-100)] py-16">
             <div class="mx-auto max-w-3xl px-6 text-center lg:px-8">
-                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">We also serve</p>
-                <h2 class="mt-3 font-serif text-2xl text-[var(--color-deep-teal)]">Nearby Emerald Coast towns</h2>
+                <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">We also serve</p>
+                <h2 class="mt-3 font-serif text-2xl font-bold uppercase text-[var(--color-deep-teal)]">Nearby Gulf Coast towns</h2>
                 <ul class="mt-6 flex flex-wrap justify-center gap-2 text-sm">
                     @foreach ($location['nearby'] as [$nearbyName, $nearbySlug])
                         @if ($nearbySlug && config("locations.{$nearbySlug}"))
@@ -186,12 +191,12 @@
     @endif
 
     {{-- ───────── Final CTA ───────── --}}
-    <section class="relative isolate overflow-hidden bg-[var(--color-emerald-900)] py-20 text-white sm:py-28">
+    <section class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] py-20 text-white sm:py-28">
         <div class="absolute inset-0 -z-10 opacity-50"
-             style="background: radial-gradient(50% 60% at 50% 100%, rgba(16,185,129,0.4), transparent 60%);">
+             style="background: radial-gradient(50% 60% at 50% 100%, rgba(59,83,120,0.5), transparent 60%);">
         </div>
         <div class="mx-auto max-w-3xl px-6 text-center lg:px-8">
-            <h2 class="font-serif text-3xl tracking-tight sm:text-4xl">
+            <h2 class="font-serif text-3xl font-bold uppercase tracking-tight sm:text-4xl">
                 Ready to put {{ $location['name'] }} on the map?
             </h2>
             <p class="mt-4 text-lg text-white/80">Tell us about your business and we'll be in touch within one business day.</p>

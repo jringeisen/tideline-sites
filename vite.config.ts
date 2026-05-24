@@ -12,11 +12,17 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.ts'],
             refresh: true,
             fonts: [
+                // App / admin UI sans.
                 bunny('Instrument Sans', {
                     weights: [400, 500, 600, 700],
                 }),
-                bunny('Instrument Serif', {
-                    weights: [400],
+                // Marketing display headlines — bold, condensed, all-caps.
+                bunny('Oswald', {
+                    weights: [500, 600, 700],
+                }),
+                // Marketing body — refined serif.
+                bunny('Source Serif 4', {
+                    weights: [400, 600],
                     styles: ['normal', 'italic'],
                 }),
             ],

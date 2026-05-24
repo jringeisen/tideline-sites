@@ -10,32 +10,57 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+    /* App / admin UI font — left untouched by the marketing rebrand. */
     --font-sans:
         Instrument Sans, ui-sans-serif, system-ui, sans-serif,
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
+    /* Marketing display/headline font — bold, condensed, all-caps Oswald.
+       Named --font-serif so every existing `font-serif` heading across the
+       marketing Blade pages re-skins without per-element edits. */
     --font-serif:
-        'Instrument Serif', ui-serif, Georgia, Cambria,
+        'Oswald', ui-sans-serif, system-ui, 'Arial Narrow', sans-serif;
+
+    /* Marketing body font — refined serif. Applied to the marketing <body>. */
+    --font-body:
+        'Source Serif 4', ui-serif, Georgia, Cambria,
         'Times New Roman', Times, serif;
 
-    /* Tideline coastal palette */
-    --color-emerald-50: #ecfdf5;
-    --color-emerald-100: #d1fae5;
-    --color-emerald-200: #a7f3d0;
-    --color-emerald-500: #10b981;
-    --color-emerald-600: #0f766e;
-    --color-emerald-700: #0d6b65;
-    --color-emerald-800: #115e59;
-    --color-emerald-900: #0b2a2e;
-    --color-sand-50: #fdfbf6;
-    --color-sand-100: #faf7f1;
-    --color-sand-200: #f5e9d7;
-    --color-sand-300: #ecdcbe;
-    --color-sand-400: #d9c197;
-    --color-deep-teal: #0b2a2e;
-    --color-cream: #faf7f1;
-    --color-ink: #0f172a;
+    /* ───────── All American Web Design — "Faded Flag" palette ─────────
+       Semantic Americana tokens. The legacy emerald/sand/teal names below
+       are repointed by ROLE so the existing marketing markup re-skins as a
+       set; the names are internal and kept only to avoid churn. */
+    --color-navy: #2a3f5c;        /* primary dark surfaces */
+    --color-navy-deep: #1e2e44;   /* darker, almost-black blue */
+    --color-red: #b4564b;         /* faded flag red — action/accent */
+    --color-red-deep: #9c3d34;    /* heritage red — hover/depth */
+    --color-flag-blue: #3b5378;   /* Old Glory blue — secondary accent */
+
+    /* Legacy names, remapped by role.
+       emerald-900/800/deep-teal -> navy (dark sections, footer, hero, pricing)
+       emerald-700               -> navy (eyebrow labels, inline links)
+       emerald-600/500           -> red  (buttons, badges, FAQ icon) */
+    --color-emerald-50: #f4e9e2;   /* warm cream tint for icon chips */
+    --color-emerald-100: #ecd9cf;
+    --color-emerald-200: #e9cfc6;  /* accent text on dark surfaces */
+    --color-emerald-500: #b4564b;
+    --color-emerald-600: #b4564b;
+    --color-emerald-700: #2a3f5c;
+    --color-emerald-800: #233650;
+    --color-emerald-900: #1e2e44;
+    /* Light surfaces: white primary (--color-cream) + a near-neutral soft gray
+       for alternating section bands (--color-sand-100) — just a hair of warmth,
+       not cream. The ramp is desaturated so hovers/hairlines read as soft gray
+       rather than tan. */
+    --color-sand-50: #faf9f6;
+    --color-sand-100: #f5f5f3;
+    --color-sand-200: #ebe8e2;
+    --color-sand-300: #e2ddd4;
+    --color-sand-400: #c9bfa8;
+    --color-deep-teal: #1e2e44;
+    --color-cream: #ffffff;
+    --color-ink: #222428;
 
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -156,9 +181,9 @@
        backgrounds in marketing pages, plus --color-ink (body text). Tokens
        with dual roles (sand-200 accent text, deep-teal text on white cards)
        are left intact and handled per-element with `dark:` variants. */
-    --color-cream: #0b2a2e;
-    --color-sand-50: #0e3539;
-    --color-sand-100: #0e3539;
+    --color-cream: #14213a;
+    --color-sand-50: #1b2b47;
+    --color-sand-100: #1b2b47;
     --color-sand-300: rgba(255, 255, 255, 0.12);
     --color-ink: rgba(255, 255, 255, 0.92);
 
@@ -234,7 +259,7 @@
 /* `.keep-light` ancestor (the Growth pricing card, which intentionally stays
    light in dark mode) re-asserts the light palette. */
 .dark .keep-light,
-.dark .keep-light .text-\[var\(--color-deep-teal\)\] { color: #0b2a2e; }
+.dark .keep-light .text-\[var\(--color-deep-teal\)\] { color: #1e2e44; }
 .dark .keep-light .text-\[var\(--color-emerald-700\)\] { color: var(--color-emerald-700); }
 .dark .keep-light .text-\[var\(--color-emerald-800\)\] { color: var(--color-emerald-800); }
 .dark .keep-light .bg-\[var\(--color-emerald-50\)\] { background-color: var(--color-emerald-50); }

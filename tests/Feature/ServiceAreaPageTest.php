@@ -7,11 +7,12 @@ test('service area page renders successfully', function () {
 test('service area page exposes the brand and primary headline', function () {
     $this->get(route('service-area'))
         ->assertSee('Service Area', false)
-        ->assertSee('Emerald Coast Web Design', false)
-        ->assertSee('Destin to Panama City Beach', false);
+        ->assertSee('Built across America', false)
+        ->assertSee('Destin to Panama City Beach', false)
+        ->assertDontSee('Emerald Coast', false);
 });
 
-test('service area page lists every Emerald Coast town we serve', function () {
+test('service area page lists every Gulf Coast town we serve', function () {
     $response = $this->get(route('service-area'));
 
     foreach ([

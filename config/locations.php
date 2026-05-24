@@ -10,7 +10,7 @@ return [
         'hero_subhead' => 'From the Destin Harbor to Crab Island — websites that bring local customers to your door.',
         'meta_description' => 'Web design and SEO for Destin, FL businesses — charter captains, beachfront restaurants, vacation rentals, and local services. Plans from $299/month.',
         'intro' => "Destin's economy runs on local services and a steady stream of visitors looking for charters, restaurants, and rentals. We build sites that rank for the searches your future customers are actually making in the Destin area — and we run the SEO that keeps you there.",
-        'why_local' => "We live and work on the Emerald Coast. We know what 'shoulder season' means for a Destin charter operator's cash flow, and we know the difference between a tourist searching from out of state and a local searching from East Pass. Your site is built for both.",
+        'why_local' => "We live and work on Florida's Gulf Coast. We know what 'shoulder season' means for a Destin charter operator's cash flow, and we know the difference between a tourist searching from out of state and a local searching from East Pass. Your site is built for both.",
         'segments' => [
             ['Charter &amp; fishing operators', 'Get found by anglers searching for half-day charters, deep-sea trips, and family-friendly boats well before they land in Destin.'],
             ['Beach restaurants &amp; bars', 'Beat the chains in local search results with a fast site that converts hungry visitors into reservations.'],

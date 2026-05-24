@@ -23,7 +23,7 @@ const isAdmin = computed(() => user.value?.is_admin === true);
     <div class="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 lg:px-8 lg:py-10">
         <header>
             <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
-                Tideline Sites
+                All American Web Design
             </p>
             <h1
                 class="mt-2 font-serif text-3xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl"

@@ -6,10 +6,12 @@ test('home page renders successfully', function () {
 
 test('home page exposes the brand and primary headline', function () {
     $this->get(route('home'))
-        ->assertSee('Tideline Sites', false)
-        ->assertSee('Emerald Coast', false)
-        ->assertSee('Web Design &amp; SEO', false)
-        ->assertSee('Websites that win', false);
+        ->assertSee('All American Web Design', false)
+        ->assertSee('Built in America.', false)
+        ->assertSee('Not outsourced.', false)
+        ->assertSee('Veteran-owned', false)
+        ->assertDontSee('Tideline', false)
+        ->assertDontSee('Emerald Coast', false);
 });
 
 test('home page advertises both pricing tiers', function () {
@@ -20,12 +22,12 @@ test('home page advertises both pricing tiers', function () {
         ->assertSee('Growth', false);
 });
 
-test('home page lists key Emerald Coast service areas', function () {
-    $response = $this->get(route('home'));
-
-    foreach (['Destin', 'Santa Rosa Beach', 'Seaside', 'Rosemary Beach', 'Panama City Beach'] as $city) {
-        $response->assertSee($city, false);
-    }
+test('home page presents the made-in-America positioning', function () {
+    $this->get(route('home'))
+        ->assertSee('Built here. For businesses everywhere.', false)
+        ->assertSee('100% USA', false)
+        ->assertSee('Nationwide', false)
+        ->assertSee('Built in the USA', false);
 });
 
 test('home page emits SEO meta and LocalBusiness, Service, and FAQ JSON-LD', function () {
@@ -60,7 +62,7 @@ test('home page hides testimonials and businesses-launched stat by default', fun
 
     $response->assertDontSee('What local owners are saying', false);
     $response->assertDontSee('Real businesses. Real results.', false);
-    $response->assertDontSee('Local businesses launched', false);
+    $response->assertDontSee('Businesses launched', false);
 });
 
 test('home page shows testimonials when the feature flag is enabled', function () {
@@ -75,7 +77,7 @@ test('home page shows the businesses-launched stat when the feature flag is enab
     config()->set('features.businesses_launched', true);
 
     $this->get(route('home'))
-        ->assertSee('Local businesses launched', false);
+        ->assertSee('Businesses launched', false);
 });
 
 test('home page showcases recent project work with outbound links', function () {

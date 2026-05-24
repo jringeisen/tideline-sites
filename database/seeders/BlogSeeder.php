@@ -13,9 +13,9 @@ class BlogSeeder extends Seeder
     public function run(): void
     {
         $author = User::query()->first() ?? User::factory()->create([
-            'name' => 'Tideline Admin',
+            'name' => 'All American Web Design Admin',
             'email' => 'admin@example.com',
-            'bio' => 'Lead writer for Tideline.',
+            'bio' => 'Lead writer for All American Web Design.',
         ]);
 
         $categories = Category::factory()->count(3)->create();

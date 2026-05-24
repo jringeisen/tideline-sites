@@ -21,7 +21,7 @@
         ],
         'publisher' => [
             '@type' => 'Organization',
-            'name' => 'Tideline Sites',
+            'name' => 'All American Web Design',
             'logo' => ['@type' => 'ImageObject', 'url' => asset('og-image.jpg')],
         ],
         'description' => $description,
@@ -65,7 +65,7 @@
                 </nav>
                 <h1 class="mt-6 font-serif text-4xl leading-tight tracking-tight sm:text-5xl">{{ $post->title }}</h1>
                 <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/75">
-                    <span>{{ $post->author?->name ?? 'Tideline' }}</span>
+                    <span>{{ $post->author?->name ?? 'All American Web Design' }}</span>
                     <time datetime="{{ $post->published_at?->toAtomString() }}">{{ $post->published_at?->format('F j, Y') }}</time>
                     <span>{{ $post->reading_time_minutes }} min read</span>
                 </div>

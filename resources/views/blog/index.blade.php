@@ -6,16 +6,16 @@
     /** @var \App\Models\Tag|null $activeTag */
 
     $headline = match (true) {
-        (bool) $activeCategory => "{$activeCategory->name} — Tideline Blog",
-        (bool) $activeTag => "#{$activeTag->name} — Tideline Blog",
-        $q !== '' => "Search: {$q} — Tideline Blog",
-        default => 'Blog — Tideline Sites',
+        (bool) $activeCategory => "{$activeCategory->name} — All American Web Design Blog",
+        (bool) $activeTag => "#{$activeTag->name} — All American Web Design Blog",
+        $q !== '' => "Search: {$q} — All American Web Design Blog",
+        default => 'Blog — All American Web Design',
     };
 
     $description = match (true) {
         (bool) $activeCategory => "Posts in the {$activeCategory->name} category.",
         (bool) $activeTag => "Posts tagged #{$activeTag->name}.",
-        default => 'Marketing, SEO, and web-design notes from the Tideline Sites team.',
+        default => 'Marketing, SEO, and web-design notes from the All American Web Design team.',
     };
 @endphp
 
@@ -29,7 +29,7 @@
                 linear-gradient(180deg, #0b2a2e 0%, #0d4742 100%);">
         </div>
         <div class="mx-auto max-w-5xl px-6 pt-32 pb-16 sm:pt-40 lg:px-8">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-sand-200)]">Tideline blog</p>
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-sand-200)]">All American Web Design blog</p>
             <h1 class="mt-4 font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl">
                 @if ($activeCategory)
                     {{ $activeCategory->name }}

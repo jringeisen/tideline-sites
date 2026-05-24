@@ -22,7 +22,7 @@
             @if ($post->author?->avatar_url)
                 <img src="{{ $post->author->avatar_url }}" alt="" class="h-6 w-6 rounded-full object-cover">
             @endif
-            <span>{{ $post->author?->name ?? 'Tideline' }}</span>
+            <span>{{ $post->author?->name ?? 'All American Web Design' }}</span>
         </div>
         <div class="flex items-center gap-3">
             <time datetime="{{ $post->published_at?->toAtomString() }}">

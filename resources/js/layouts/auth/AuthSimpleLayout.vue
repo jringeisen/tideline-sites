@@ -19,7 +19,7 @@ defineProps<{
                 <a
                     :href="home.url()"
                     class="flex items-center gap-2.5 text-[var(--color-deep-teal)]"
-                    aria-label="Tideline Sites home"
+                    aria-label="All American Web Design home"
                 >
                     <svg
                         class="h-8 w-auto"
@@ -51,7 +51,7 @@ defineProps<{
                         />
                     </svg>
                     <span class="font-serif text-xl tracking-tight">
-                        Tideline Sites
+                        All American Web Design
                     </span>
                 </a>
 
@@ -85,7 +85,7 @@ defineProps<{
                         <p
                             class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]"
                         >
-                            {{ eyebrow ?? 'Tideline Sites' }}
+                            {{ eyebrow ?? 'All American Web Design' }}
                         </p>
                         <h1
                             class="mt-3 font-serif text-3xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl"
@@ -112,7 +112,7 @@ defineProps<{
                 class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-8 text-xs text-slate-500 sm:flex-row lg:px-8 dark:text-white/50"
             >
                 <p>
-                    &copy; {{ new Date().getFullYear() }} Tideline Sites. All
+                    &copy; {{ new Date().getFullYear() }} All American Web Design. All
                     rights reserved.
                 </p>
                 <p>Made on the Emerald Coast.</p>

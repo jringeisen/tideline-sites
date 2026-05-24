@@ -44,32 +44,41 @@
     $serviceAreaSchema = [
         '@context' => 'https://schema.org',
         '@type' => 'Service',
-        'name' => 'Web Design & SEO on the Emerald Coast',
+        'name' => 'Web Design & SEO for American Small Businesses',
         'provider' => ['@id' => $businessId],
-        'areaServed' => array_map(fn ($city) => [
-            '@type' => 'City',
-            'name' => $city,
-            'containedInPlace' => ['@type' => 'AdministrativeArea', 'name' => 'Emerald Coast, Florida'],
-        ], $cities),
+        'areaServed' => array_merge(
+            [['@type' => 'Country', 'name' => 'United States']],
+            array_map(fn ($city) => [
+                '@type' => 'City',
+                'name' => $city,
+                'containedInPlace' => ['@type' => 'AdministrativeArea', 'name' => "Florida's Gulf Coast"],
+            ], $cities),
+        ),
     ];
 @endphp
 
 <x-layouts.marketing
-    title="Service Area — Tideline Sites | Emerald Coast Web Design &amp; SEO"
-    description="Tideline Sites serves businesses from Destin to Panama City Beach — including 30A, Sandestin, Seaside, Rosemary Beach, and the surrounding Emerald Coast communities.">
+    title="Service Area — All American Web Design | Custom Websites Nationwide"
+    description="All American Web Design builds custom websites for small businesses across the United States — and does hands-on local SEO on Florida's Gulf Coast, from Destin to Panama City Beach.">
 
     @push('schema')
         <script type="application/ld+json">{!! json_encode($serviceAreaSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
     @endpush
 
     {{-- ───────── Hero ───────── --}}
-    <section class="relative isolate overflow-hidden bg-[var(--color-emerald-900)] text-white">
-        <div class="absolute inset-0 -z-10"
-             style="background:
-                radial-gradient(50% 70% at 80% 0%, rgba(16,185,129,0.30), transparent 60%),
-                radial-gradient(50% 60% at 0% 100%, rgba(15,118,110,0.30), transparent 60%),
-                linear-gradient(180deg, #0b2a2e 0%, #0d4742 100%);">
-        </div>
+    <section class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] text-white">
+        {{-- Base navy field --}}
+        <div class="absolute inset-0 -z-10" style="background: linear-gradient(180deg, #1e2e44 0%, #243650 60%, #1a2840 100%);"></div>
+        {{-- American flag, muted into the navy via luminosity blend --}}
+        <img
+            src="{{ asset('american-flag.png') }}"
+            alt=""
+            width="1729" height="910"
+            class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-luminosity"
+            loading="eager"
+            fetchpriority="high">
+        <div class="absolute inset-0 -z-10 bg-gradient-to-r from-[var(--color-navy-deep)]/95 via-[var(--color-navy-deep)]/75 to-[var(--color-navy-deep)]/45"></div>
+        <div class="absolute inset-0 -z-10 bg-gradient-to-b from-[var(--color-navy-deep)]/50 via-transparent to-[var(--color-navy-deep)]/90"></div>
 
         <div class="mx-auto max-w-7xl px-6 pt-36 pb-20 sm:pt-44 lg:px-8 lg:pt-52">
             <nav aria-label="Breadcrumb" class="mb-6 text-sm text-white/60">
@@ -81,43 +90,43 @@
             </nav>
 
             <div class="max-w-3xl">
-                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur">
-                    <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-emerald-200)]"></span>
+                <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/90 backdrop-blur">
+                    <span class="h-1.5 w-1.5 rounded-full bg-[var(--color-red)]"></span>
                     Service Area
                 </span>
-                <h1 class="mt-6 font-serif text-5xl leading-[1.05] tracking-tight sm:text-6xl lg:text-7xl">
-                    From Destin to <span class="italic text-[var(--color-sand-200)]">Panama City Beach.</span>
+                <h1 class="mt-6 font-serif text-6xl font-bold uppercase leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl">
+                    Built across America. <span class="block text-[var(--color-red)]">Rooted at home.</span>
                 </h1>
-                <p class="mt-6 max-w-2xl font-serif text-2xl leading-snug text-white/90 sm:text-3xl">
-                    We're locals — and we build every site to win in the towns it serves.
+                <p class="mt-6 max-w-2xl text-2xl leading-snug text-white/90 sm:text-3xl">
+                    We build custom websites for small businesses anywhere in the country — and do hands-on local SEO right here on Florida's Gulf Coast, from Destin to Panama City Beach.
                 </p>
 
                 <dl class="mt-10 grid max-w-md grid-cols-2 gap-6">
                     <div>
-                        <dt class="text-xs font-medium uppercase tracking-wider text-white/60">Towns served</dt>
-                        <dd class="mt-1 font-serif text-4xl">{{ count($cities) }}+</dd>
+                        <dt class="text-xs font-medium uppercase tracking-wider text-white/60">Where we build</dt>
+                        <dd class="mt-1 font-serif text-4xl">Nationwide</dd>
                     </div>
                     <div>
-                        <dt class="text-xs font-medium uppercase tracking-wider text-white/60">Miles of coast</dt>
-                        <dd class="mt-1 font-serif text-4xl">~50</dd>
+                        <dt class="text-xs font-medium uppercase tracking-wider text-white/60">Local SEO markets</dt>
+                        <dd class="mt-1 font-serif text-4xl">{{ count($cities) }}+ towns</dd>
                     </div>
                 </dl>
             </div>
         </div>
 
-        <svg class="block w-full text-[var(--color-cream)]" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-            <path fill="currentColor" d="M0 40 C 240 80 480 0 720 40 S 1200 80 1440 40 L 1440 80 L 0 80 Z" />
-        </svg>
+        {{-- Heritage stripe divider --}}
+        <div class="h-1.5 w-full bg-[var(--color-red)]"></div>
     </section>
 
     {{-- ───────── Featured locations ───────── --}}
     <section class="bg-[var(--color-cream)] py-24 sm:py-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
-            <h2 class="font-serif text-3xl tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
-                Where we work
+            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Local markets</p>
+            <h2 class="mt-3 font-serif text-3xl font-bold uppercase tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
+                Where we got our start
             </h2>
             <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-                Three primary markets along the Emerald Coast. Each has its own dedicated page with industry-specific notes — and we serve every community in between.
+                We're rooted on Florida's Gulf Coast — these are the local markets we know best. Each has its own page with industry-specific notes, and we serve every community in between.
             </p>
 
             <div class="mt-12 grid gap-6 lg:grid-cols-3">
@@ -143,24 +152,28 @@
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="grid items-start gap-16 lg:grid-cols-12">
                 <div class="lg:col-span-5">
-                    <h2 class="font-serif text-3xl tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
-                        Every town along the coast
+                    <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Gulf Coast, Florida</p>
+                    <h2 class="mt-3 font-serif text-3xl font-bold uppercase tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
+                        Every town on the Gulf Coast
                     </h2>
                     <p class="mt-5 text-lg leading-relaxed text-slate-600">
-                        From Destin through 30A and out to Panama City Beach, we work with local service businesses and tourism operators in every community along the Emerald Coast.
+                        From Destin through 30A and out to Panama City Beach, we work hands-on with local service businesses and tourism operators in every community on Florida's Gulf Coast.
                     </p>
                     <p class="mt-4 text-base leading-relaxed text-slate-600">
-                        Don't see your town? We probably serve it too — drop us a line and we'll let you know.
+                        Don't see your town? We probably serve it too — and we build websites for small businesses nationwide. Drop us a line.
                     </p>
                     <a href="{{ route('contact.show') }}"
-                       class="mt-8 inline-flex items-center rounded-full bg-[var(--color-emerald-700)] px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--color-emerald-800)]">
+                       class="mt-8 inline-flex items-center rounded-full bg-[var(--color-red)] px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[var(--color-red-deep)]">
                         Ask about your area
                     </a>
                 </div>
 
                 <div class="lg:col-span-7">
                     <div class="relative rounded-3xl bg-white p-6 shadow-sm ring-1 ring-[var(--color-sand-300)]/60 sm:p-8">
-                        <x-marketing.coastline class="mb-6 h-24 w-full text-[var(--color-emerald-600)]" />
+                        <div class="mb-6 flex items-center justify-between border-b border-[var(--color-sand-300)]/60 pb-4">
+                            <span class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Florida's Gulf Coast</span>
+                            <span class="font-serif text-sm font-bold uppercase tracking-wide text-[var(--color-deep-teal)]">{{ count($cities) }} towns</span>
+                        </div>
 
                         <ul class="grid grid-cols-2 gap-x-4 gap-y-2 text-sm sm:grid-cols-3">
                             @foreach ($cities as $city)
@@ -183,14 +196,14 @@
     </section>
 
     {{-- ───────── Final CTA ───────── --}}
-    <section class="relative isolate overflow-hidden bg-[var(--color-emerald-900)] py-20 text-white sm:py-28">
+    <section class="relative isolate overflow-hidden bg-[var(--color-navy-deep)] py-20 text-white sm:py-28">
         <div class="absolute inset-0 -z-10 opacity-50"
-             style="background: radial-gradient(50% 60% at 50% 100%, rgba(16,185,129,0.4), transparent 60%);">
+             style="background: radial-gradient(50% 60% at 50% 100%, rgba(59,83,120,0.5), transparent 60%);">
         </div>
         <div class="mx-auto max-w-3xl px-6 text-center lg:px-8">
-            <h2 class="font-serif text-3xl tracking-tight sm:text-4xl">Ready to win in your town?</h2>
+            <h2 class="font-serif text-3xl font-bold uppercase tracking-tight sm:text-4xl">Ready to win in your town?</h2>
             <p class="mt-4 text-lg text-white/80">
-                Tell us where you are and what you do. We'll show you exactly how a Tideline site can move the needle.
+                Tell us where you are and what you do. We'll show you exactly how an All American Web Design site can move the needle.
             </p>
             <div class="mt-8">
                 <a href="{{ route('contact.show') }}"
