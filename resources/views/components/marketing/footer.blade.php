@@ -3,7 +3,6 @@
         <div class="grid gap-10 md:grid-cols-12">
             <div class="md:col-span-5">
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5 text-white">
-                    <x-marketing.logo class="h-8 w-auto" />
                     <span class="font-serif text-base font-semibold uppercase leading-[0.95] tracking-wide">All American<br>Web Design</span>
                 </a>
                 <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/70">

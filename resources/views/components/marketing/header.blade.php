@@ -1,7 +1,6 @@
 <header class="absolute inset-x-0 top-0 z-30">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
         <a href="{{ route('home') }}" class="flex items-center gap-2.5 text-white" aria-label="All American Web Design home">
-            <x-marketing.logo class="h-8 w-auto" />
             <span class="font-serif text-base font-semibold uppercase leading-[0.95] tracking-wide">All American<br>Web Design</span>
         </a>
 
@@ -47,7 +46,6 @@
         <div class="fixed inset-x-0 top-0 z-50 mx-4 mt-4 rounded-3xl bg-[var(--color-emerald-900)] p-6 text-white shadow-2xl ring-1 ring-white/15">
             <div class="flex items-center justify-between">
                 <a href="{{ route('home') }}" class="flex items-center gap-2.5 text-white" aria-label="All American Web Design home">
-                    <x-marketing.logo class="h-8 w-auto" />
                     <span class="font-serif text-base font-semibold uppercase leading-[0.95] tracking-wide">All American<br>Web Design</span>
                 </a>
                 <button type="button"
