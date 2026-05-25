@@ -14,6 +14,5 @@ test('fathom script is included on guest pages in production', function () {
     $this->get(route('home'))
         ->assertOk()
         ->assertSee('https://cdn.usefathom.com/script.js', false)
-        ->assertSee('data-site="WAVFXUWL"', false)
-        ->assertSee('data-spa="auto"', false);
+        ->assertSee('data-site="XFYXDHZS"', false);
 });

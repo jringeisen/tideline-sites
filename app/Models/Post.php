@@ -9,9 +9,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
+/**
+ * @property Carbon|null $published_at
+ */
 #[Fillable([
     'title',
     'slug',
@@ -50,7 +54,7 @@ class Post extends Model
     {
         static::saving(function (Post $post): void {
             if (empty($post->slug)) {
-                $post->slug = static::uniqueSlug($post->title, $post->id);
+                $post->slug = self::uniqueSlug($post->title, $post->id);
             }
 
             $post->reading_time_minutes = static::computeReadingTime((string) $post->content);

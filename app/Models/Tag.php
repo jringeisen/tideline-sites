@@ -19,7 +19,7 @@ class Tag extends Model
     {
         static::saving(function (Tag $tag): void {
             if (empty($tag->slug)) {
-                $tag->slug = static::uniqueSlug($tag->name, $tag->id);
+                $tag->slug = self::uniqueSlug($tag->name, $tag->id);
             }
         });
     }

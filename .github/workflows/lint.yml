@@ -15,7 +15,7 @@ on:
       - workos
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   quality:
@@ -28,22 +28,32 @@ jobs:
         with:
           php-version: '8.4'
 
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
       - name: Install Dependencies
         run: |
           composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
           npm install
 
-      - name: Run Pint
-        run: composer lint
+      - name: Prepare Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
 
-      - name: Format Frontend
-        run: npm run format
+      - name: Check PHP Code Style (Pint)
+        run: composer lint:check
 
-      - name: Lint Frontend
-        run: npm run lint
+      - name: Static Analysis (Larastan)
+        run: composer stan
 
-      # - name: Commit Changes
-      #   uses: stefanzweifel/git-auto-commit-action@v7
-      #   with:
-      #     commit_message: fix code style
-      #     commit_options: '--no-verify'
+      - name: Check Frontend Formatting (Prettier)
+        run: npm run format:check
+
+      - name: Lint Frontend (ESLint)
+        run: npm run lint:check
+
+      - name: Type Check Frontend (vue-tsc)
+        run: npm run types:check

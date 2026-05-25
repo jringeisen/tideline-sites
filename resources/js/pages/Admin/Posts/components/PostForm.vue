@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Method } from '@inertiajs/core';
 import { Form } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import InputError from '@/components/InputError.vue';
@@ -10,7 +11,7 @@ import TipTapEditor from './TipTapEditor.vue';
 type Option = { id: number; name: string };
 
 const props = defineProps<{
-    formAction: { action: string; method: string; _method?: string };
+    formAction: { action: string; method: Method; _method?: string };
     initial?: {
         title?: string;
         slug?: string;
@@ -50,6 +51,7 @@ const slugTouched = ref<boolean>(Boolean(props.initial?.slug));
 const onTitleInput = (event: Event) => {
     const value = (event.target as HTMLInputElement).value;
     title.value = value;
+
     if (!slugTouched.value) {
         slug.value = slugify(value);
     }
@@ -63,7 +65,11 @@ const onSlugInput = (event: Event) => {
 
 const publishedAtForInput = computed(() => {
     const value = props.initial?.published_at;
-    if (!value) return '';
+
+    if (!value) {
+        return '';
+    }
+
     return value.slice(0, 16);
 });
 

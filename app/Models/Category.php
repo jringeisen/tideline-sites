@@ -19,7 +19,7 @@ class Category extends Model
     {
         static::saving(function (Category $category): void {
             if (empty($category->slug)) {
-                $category->slug = static::uniqueSlug($category->name, $category->id);
+                $category->slug = self::uniqueSlug($category->name, $category->id);
             }
         });
     }
