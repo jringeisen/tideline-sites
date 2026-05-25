@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { FileText, FolderOpen, Inbox, LayoutGrid, Tag as TagIcon } from 'lucide-vue-next';
+import {
+    FileText,
+    FolderOpen,
+    Inbox,
+    LayoutGrid,
+    Tag as TagIcon,
+} from 'lucide-vue-next';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -40,7 +46,11 @@ const adminNavItems = computed<NavItem[]>(() => [
     { title: 'Posts', href: posts.index().url, icon: FileText },
     { title: 'Categories', href: categories.index().url, icon: FolderOpen },
     { title: 'Tags', href: tags.index().url, icon: TagIcon },
-    { title: 'Contact inquiries', href: contactInquiries.index().url, icon: Inbox },
+    {
+        title: 'Contact inquiries',
+        href: contactInquiries.index().url,
+        icon: Inbox,
+    },
 ]);
 </script>
 
@@ -64,7 +74,10 @@ const adminNavItems = computed<NavItem[]>(() => [
             <SidebarGroup v-if="isAdmin" class="px-2 py-0">
                 <SidebarGroupLabel>Admin</SidebarGroupLabel>
                 <SidebarMenu>
-                    <SidebarMenuItem v-for="item in adminNavItems" :key="item.title">
+                    <SidebarMenuItem
+                        v-for="item in adminNavItems"
+                        :key="item.title"
+                    >
                         <SidebarMenuButton
                             as-child
                             :is-active="isCurrentUrl(item.href)"

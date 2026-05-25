@@ -36,15 +36,30 @@ const sourceLabel = computed(() =>
 
 const toggleRead = () => {
     if (props.inquiry.read_at) {
-        router.patch(ContactInquiryController.markUnread.url({ contact_inquiry: props.inquiry.id }));
+        router.patch(
+            ContactInquiryController.markUnread.url({
+                contact_inquiry: props.inquiry.id,
+            }),
+        );
     } else {
-        router.patch(ContactInquiryController.markRead.url({ contact_inquiry: props.inquiry.id }));
+        router.patch(
+            ContactInquiryController.markRead.url({
+                contact_inquiry: props.inquiry.id,
+            }),
+        );
     }
 };
 
 const destroy = () => {
-    if (!window.confirm(`Delete inquiry from "${props.inquiry.name}"?`)) return;
-    router.delete(ContactInquiryController.destroy.url({ contact_inquiry: props.inquiry.id }));
+    if (!window.confirm(`Delete inquiry from "${props.inquiry.name}"?`)) {
+        return;
+    }
+
+    router.delete(
+        ContactInquiryController.destroy.url({
+            contact_inquiry: props.inquiry.id,
+        }),
+    );
 };
 </script>
 
@@ -53,7 +68,9 @@ const destroy = () => {
 
     <header class="flex flex-wrap items-end justify-between gap-4">
         <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
+            <p
+                class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+            >
                 {{ sourceLabel }}
             </p>
             <h1
@@ -77,7 +94,9 @@ const destroy = () => {
         </div>
         <div class="flex gap-3">
             <Button as-child variant="secondary">
-                <Link :href="contactInquiriesRoutes.index().url">Back to list</Link>
+                <Link :href="contactInquiriesRoutes.index().url"
+                    >Back to list</Link
+                >
             </Button>
             <Button variant="secondary" @click="toggleRead">
                 {{ inquiry.read_at ? 'Mark unread' : 'Mark read' }}
@@ -87,19 +106,27 @@ const destroy = () => {
     </header>
 
     <section
-        class="mt-8 grid gap-6 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-8 dark:bg-white/[0.04] dark:ring-white/10"
+        class="mt-8 grid gap-6 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-8 dark:bg-white/[0.04] dark:ring-white/10"
     >
         <dl class="grid gap-4 sm:grid-cols-2">
             <div>
-                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                <dt
+                    class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+                >
                     Email
                 </dt>
                 <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
-                    <a class="hover:underline" :href="`mailto:${inquiry.email}`">{{ inquiry.email }}</a>
+                    <a
+                        class="hover:underline"
+                        :href="`mailto:${inquiry.email}`"
+                        >{{ inquiry.email }}</a
+                    >
                 </dd>
             </div>
             <div v-if="inquiry.business_name">
-                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                <dt
+                    class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+                >
                     Business
                 </dt>
                 <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
@@ -107,7 +134,9 @@ const destroy = () => {
                 </dd>
             </div>
             <div v-if="inquiry.website">
-                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                <dt
+                    class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+                >
                     Website
                 </dt>
                 <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
@@ -121,7 +150,9 @@ const destroy = () => {
                 </dd>
             </div>
             <div v-if="inquiry.phone">
-                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                <dt
+                    class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+                >
                     Phone
                 </dt>
                 <dd class="mt-1 text-[var(--color-deep-teal)] dark:text-white">
@@ -129,21 +160,27 @@ const destroy = () => {
                 </dd>
             </div>
             <div v-if="inquiry.plan">
-                <dt class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+                <dt
+                    class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+                >
                     Plan
                 </dt>
-                <dd class="mt-1 capitalize text-[var(--color-deep-teal)] dark:text-white">
+                <dd
+                    class="mt-1 text-[var(--color-deep-teal)] capitalize dark:text-white"
+                >
                     {{ inquiry.plan }}
                 </dd>
             </div>
         </dl>
 
         <div v-if="inquiry.message">
-            <p class="text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+            <p
+                class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+            >
                 Message
             </p>
             <div
-                class="mt-2 whitespace-pre-wrap rounded-2xl bg-[var(--color-sand-100)]/50 p-5 text-[var(--color-deep-teal)] dark:bg-white/[0.04] dark:text-white"
+                class="mt-2 rounded-2xl bg-[var(--color-sand-100)]/50 p-5 whitespace-pre-wrap text-[var(--color-deep-teal)] dark:bg-white/[0.04] dark:text-white"
             >
                 {{ inquiry.message }}
             </div>

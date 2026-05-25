@@ -34,7 +34,7 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From Pier Park to Front Beach Road — websites that work as hard as PCB does.',
         'meta_description' => 'Web design and SEO for Panama City Beach businesses — vacation rentals, restaurants, charter operators, med spas, and local services. Plans from $299/month.',
-        'intro' => "Panama City Beach is one of the busiest tourist markets on the Gulf, and the local search competition is fierce. We build websites and run SEO programs that help PCB businesses win year-round — not just during spring break.",
+        'intro' => 'Panama City Beach is one of the busiest tourist markets on the Gulf, and the local search competition is fierce. We build websites and run SEO programs that help PCB businesses win year-round — not just during spring break.',
         'why_local' => "We're based in Panama City Beach. We know the difference between a Front Beach Road condo manager and a Thomas Drive seafood spot, and your site is built around the customer you actually serve.",
         'segments' => [
             ['Vacation rental managers', 'Custom property sites and listing pages that rank for "PCB vacation rentals" and the specific neighborhoods you manage.'],
@@ -59,8 +59,8 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From Grayton to Rosemary Beach — websites built for the 30A way.',
         'meta_description' => 'Web design and SEO for 30A businesses — boutiques, vacation rentals, restaurants, and service pros from Seaside to Alys Beach. Plans from $299/month.',
-        'intro' => "30A businesses live by their brand. Seaside, WaterColor, Alys, Rosemary — each town has a distinct look and a customer with high expectations. We build sites that hold up next to your storefront, then run the SEO that brings the right people through the door.",
-        'why_local' => "We work with 30A businesses all the way from Dune Allen to Inlet Beach. We understand the difference between a Watercolor real estate office and a Seacrest boutique — your site is designed to look at home in your specific town.",
+        'intro' => '30A businesses live by their brand. Seaside, WaterColor, Alys, Rosemary — each town has a distinct look and a customer with high expectations. We build sites that hold up next to your storefront, then run the SEO that brings the right people through the door.',
+        'why_local' => 'We work with 30A businesses all the way from Dune Allen to Inlet Beach. We understand the difference between a Watercolor real estate office and a Seacrest boutique — your site is designed to look at home in your specific town.',
         'segments' => [
             ['Boutiques &amp; galleries', 'Beautiful, on-brand websites that match the design standard of your storefront and rank for "30A shopping" and town-specific searches.'],
             ['Vacation rental managers', 'Property sites with the polish 30A guests expect, optimized for the towns and neighborhoods you actually manage.'],
@@ -85,7 +85,7 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From Scenic 98 to Silver Sands — websites that turn vacation traffic into year-round customers.',
         'meta_description' => 'Web design and SEO for Miramar Beach, FL businesses — resort shops, restaurants, vacation rentals, and local services along Scenic 98. Plans from $299/month.',
-        'intro' => "Miramar Beach sits in the sweet spot between Destin and Sandestin, with a steady flow of resort guests, second-home owners, and locals running real businesses. We build sites that capture the searches happening from Scenic 98 condos and the outlets at Silver Sands — and run the SEO that keeps you ranking after the season ends.",
+        'intro' => 'Miramar Beach sits in the sweet spot between Destin and Sandestin, with a steady flow of resort guests, second-home owners, and locals running real businesses. We build sites that capture the searches happening from Scenic 98 condos and the outlets at Silver Sands — and run the SEO that keeps you ranking after the season ends.',
         'why_local' => "We know Miramar Beach isn't just \"east of Destin\" — it has its own crowd, its own price points, and its own search patterns. Whether you're on Scenic Gulf Drive or tucked off 98, your site is built around the customers actually looking for you.",
         'segments' => [
             ['Resort shops &amp; boutiques', 'Storefront-quality websites that hold up next to Silver Sands and pull in shoppers searching before they arrive.'],
@@ -136,7 +136,7 @@ return [
         'hero_subhead' => 'From Okaloosa Island to the Eglin gate — websites built for FWB\'s year-round economy.',
         'meta_description' => 'Web design and SEO for Fort Walton Beach businesses — local services, restaurants, military-friendly shops, and Okaloosa Island rentals. Plans from $299/month.',
         'intro' => "Fort Walton Beach runs differently than Destin. There's a real year-round base of military families, retirees, and locals — plus a strong tourist pull on Okaloosa Island. We build sites and SEO programs that win the everyday searches, not just the spring-and-summer rush.",
-        'why_local' => "We understand the FWB customer mix — Eglin and Hurlburt households, longtime residents on Beal Parkway, and visitors crossing the bridge to the island. Your site is built to bring in the customer base you actually serve.",
+        'why_local' => 'We understand the FWB customer mix — Eglin and Hurlburt households, longtime residents on Beal Parkway, and visitors crossing the bridge to the island. Your site is built to bring in the customer base you actually serve.',
         'segments' => [
             ['Local service businesses', 'Plumbers, HVAC, auto repair, contractors — pages that rank for FWB neighborhood searches all year.'],
             ['Restaurants &amp; family attractions', 'Mobile-fast menus and Google profiles that win both locals and Okaloosa Island visitors.'],
@@ -161,7 +161,7 @@ return [
         'hero_subhead' => 'From Historic St. Andrews to Harrison Avenue — websites built for the real, year-round Panama City.',
         'meta_description' => 'Web design and SEO for Panama City, FL businesses — downtown shops, St. Andrews restaurants, contractors, medical practices, and local services. Plans from $299/month.',
         'intro' => "Panama City is where the year-round economy lives. Downtown's coming back, St. Andrews is full of local favorites, and the surrounding neighborhoods are packed with the trades, medical practices, and service businesses that keep the area running. We build sites and SEO programs designed for that everyday customer, not just the beach crowd.",
-        'why_local' => "We know the difference between a Harrison Avenue retailer, a Cove dentist, and a contractor working out of Lynn Haven. Your site is built for the customers in your actual service area — not lumped in with Panama City Beach.",
+        'why_local' => 'We know the difference between a Harrison Avenue retailer, a Cove dentist, and a contractor working out of Lynn Haven. Your site is built for the customers in your actual service area — not lumped in with Panama City Beach.',
         'segments' => [
             ['Trades &amp; home services', 'Roofers, electricians, plumbers, and remodelers — local SEO that wins neighborhood-level searches across Bay County.'],
             ['Medical, dental &amp; professional', 'Practice sites and content that rank for Panama City service searches, not generic state-wide terms.'],
@@ -185,7 +185,7 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From Sheffield Park to Highway 77 — websites built for Lynn Haven\'s growing year-round community.',
         'meta_description' => 'Web design and SEO for Lynn Haven, FL businesses — contractors, medical practices, family-owned shops, and local services. Plans from $299/month.',
-        'intro' => "Lynn Haven keeps growing — new families, new builds, and a steady demand for local services. We build websites and run SEO that puts your business in front of the homeowners actually moving in and searching for you on Google.",
+        'intro' => 'Lynn Haven keeps growing — new families, new builds, and a steady demand for local services. We build websites and run SEO that puts your business in front of the homeowners actually moving in and searching for you on Google.',
         'why_local' => "We work with businesses across Bay County and we know Lynn Haven's customer is different from Panama City Beach's. Your site is tuned for the year-round residents, families, and local pros who shop here every day.",
         'segments' => [
             ['Trades &amp; home services', 'Contractors, lawn care, HVAC, and remodelers — content that ranks for "Lynn Haven" plus the services you actually offer.'],
@@ -210,7 +210,7 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From the canal to Highway 98 — websites built for Mexico Beach\'s small-town comeback.',
         'meta_description' => 'Web design and SEO for Mexico Beach, FL businesses — vacation rentals, restaurants, charter captains, and small-town service pros. Plans from $299/month.',
-        'intro' => "Mexico Beach is rebuilding into something special — quieter than PCB, with a loyal returning crowd and a tight-knit business community. We build sites and run SEO that puts you in front of the visitors planning their trip and the locals choosing where to spend.",
+        'intro' => 'Mexico Beach is rebuilding into something special — quieter than PCB, with a loyal returning crowd and a tight-knit business community. We build sites and run SEO that puts you in front of the visitors planning their trip and the locals choosing where to spend.',
         'why_local' => "We know Mexico Beach isn't trying to be Panama City Beach, and we won't market it that way. Your site reflects the slower, smaller, repeat-visitor town your customers are actually coming to find.",
         'segments' => [
             ['Vacation rental managers &amp; owners', 'Property sites that capture the families who book Mexico Beach year after year.'],
@@ -235,8 +235,8 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From the Amphitheater to Central Square — websites that match the Seaside standard.',
         'meta_description' => 'Web design and SEO for Seaside, FL businesses — boutiques, restaurants, galleries, and vacation rentals at the original 30A town. Plans from $299/month.',
-        'intro' => "Seaside set the design standard the rest of 30A is still chasing. Your customers — boutique shoppers, second-home owners, design-conscious families — expect a website that lives up to the storefront. We build sites that do, and run the SEO that brings the right kind of traffic to your door.",
-        'why_local' => "Working with Seaside businesses means respecting the brand of the town itself. Pastel-perfect, walkable, hand-built — your site should feel like an extension of Central Square, not a generic real-estate-template knockoff.",
+        'intro' => 'Seaside set the design standard the rest of 30A is still chasing. Your customers — boutique shoppers, second-home owners, design-conscious families — expect a website that lives up to the storefront. We build sites that do, and run the SEO that brings the right kind of traffic to your door.',
+        'why_local' => 'Working with Seaside businesses means respecting the brand of the town itself. Pastel-perfect, walkable, hand-built — your site should feel like an extension of Central Square, not a generic real-estate-template knockoff.',
         'segments' => [
             ['Boutiques, galleries &amp; design shops', 'On-brand sites that match the Seaside aesthetic and rank for shopping searches up and down 30A.'],
             ['Restaurants &amp; cafés', 'Menus, reservations, and Google profile work tuned for the locals-and-visitors mix Seaside spots depend on.'],
@@ -261,7 +261,7 @@ return [
         'hero_subhead' => 'From Western Lake to the BeachClub — websites built for the WaterColor brand.',
         'meta_description' => 'Web design and SEO for WaterColor, FL businesses — vacation rentals, restaurants, boutiques, and design pros at one of 30A\'s premier communities. Plans from $299/month.',
         'intro' => "WaterColor guests come for the dune lake, the BeachClub, and the kind of design-led vacation you can't fake. We build sites and SEO programs for the businesses serving that customer — without the generic \"30A vacation rental\" template the search results are full of.",
-        'why_local' => "We know the WaterColor customer is different from a Seacrest renter or a Destin condo guest. Your site is built around the price point, the polish, and the searches that actually convert here.",
+        'why_local' => 'We know the WaterColor customer is different from a Seacrest renter or a Destin condo guest. Your site is built around the price point, the polish, and the searches that actually convert here.',
         'segments' => [
             ['Vacation rental managers', 'Property sites and listing pages optimized for WaterColor cottages, homes, and BeachClub-access rentals.'],
             ['Boutiques &amp; lifestyle shops', 'On-brand websites that match the WaterColor design standard and pull in shoppers from across 30A.'],
@@ -285,7 +285,7 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From Town Hall to the boardwalks — websites built for Rosemary\'s distinctive standard.',
         'meta_description' => 'Web design and SEO for Rosemary Beach, FL businesses — vacation rentals, boutiques, restaurants, and design pros at one of 30A\'s most distinctive towns. Plans from $299/month.',
-        'intro' => "Rosemary Beach has a look you can spot from a block away — Dutch West Indies architecture, narrow walkways, deep porches, and a customer who notices the difference. We build websites that hold up to that level of detail, and run the SEO that brings the right guests through your door.",
+        'intro' => 'Rosemary Beach has a look you can spot from a block away — Dutch West Indies architecture, narrow walkways, deep porches, and a customer who notices the difference. We build websites that hold up to that level of detail, and run the SEO that brings the right guests through your door.',
         'why_local' => "We've worked with enough 30A businesses to know Rosemary's not just another beach town. Your site is built around the design sensibility, price point, and customer Rosemary actually attracts.",
         'segments' => [
             ['Boutiques &amp; galleries', 'On-brand sites that match Rosemary\'s storefront standard and rank for east-end-of-30A shopping searches.'],
@@ -310,8 +310,8 @@ return [
         'tagline' => 'Web Design &amp; SEO',
         'hero_subhead' => 'From the white walls to the Caliza pool — websites built for the Alys standard.',
         'meta_description' => 'Web design and SEO for Alys Beach, FL businesses — vacation rentals, restaurants, design pros, and boutiques at 30A\'s most architectural town. Plans from $299/month.',
-        'intro' => "Alys Beach is unlike anything else on 30A — all-white architecture, courtyards, and a level of design discipline you only get when an entire town is built to one standard. We build websites and run SEO for businesses that have to live up to that, without looking like every other beach-town site on the search results page.",
-        'why_local' => "We respect the Alys brand. Your site should look like it belongs across the courtyard from Caliza — restrained, considered, and built for guests who notice every detail.",
+        'intro' => 'Alys Beach is unlike anything else on 30A — all-white architecture, courtyards, and a level of design discipline you only get when an entire town is built to one standard. We build websites and run SEO for businesses that have to live up to that, without looking like every other beach-town site on the search results page.',
+        'why_local' => 'We respect the Alys brand. Your site should look like it belongs across the courtyard from Caliza — restrained, considered, and built for guests who notice every detail.',
         'segments' => [
             ['Vacation rentals &amp; private homes', 'Property pages with the restraint and polish Alys guests expect.'],
             ['Restaurants &amp; private dining', 'Menus, reservations, and Google profile work for Alys spots competing on experience, not volume.'],

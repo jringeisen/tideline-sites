@@ -76,14 +76,16 @@ defineProps<{
             </div>
         </header>
 
-        <main class="flex flex-1 items-center justify-center px-6 py-12 lg:py-20">
+        <main
+            class="flex flex-1 items-center justify-center px-6 py-12 lg:py-20"
+        >
             <div class="w-full max-w-md">
                 <div
-                    class="rounded-3xl bg-white p-8 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-10 dark:bg-white/[0.04] dark:ring-white/10"
+                    class="rounded-3xl bg-white p-8 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-10 dark:bg-white/[0.04] dark:ring-white/10"
                 >
                     <div class="text-center">
                         <p
-                            class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]"
+                            class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
                         >
                             {{ eyebrow ?? 'All American Web Design' }}
                         </p>
@@ -112,8 +114,8 @@ defineProps<{
                 class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-8 text-xs text-slate-500 sm:flex-row lg:px-8 dark:text-white/50"
             >
                 <p>
-                    &copy; {{ new Date().getFullYear() }} All American Web Design. All
-                    rights reserved.
+                    &copy; {{ new Date().getFullYear() }} All American Web
+                    Design. All rights reserved.
                 </p>
                 <p>Made on the Emerald Coast.</p>
             </div>

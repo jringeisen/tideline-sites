@@ -33,7 +33,12 @@ const props = defineProps<{
 
 defineOptions({
     layout: {
-        breadcrumbs: [{ title: 'Contact inquiries', href: contactInquiriesRoutes.index().url }],
+        breadcrumbs: [
+            {
+                title: 'Contact inquiries',
+                href: contactInquiriesRoutes.index().url,
+            },
+        ],
     },
 });
 
@@ -43,12 +48,12 @@ const source = ref(props.filters.source ?? '');
 
 const sourceLabel = (value: string): string => {
     if (value === 'seo_assessment') {
-return 'SEO Assessment';
-}
+        return 'SEO Assessment';
+    }
 
     if (value === 'contact') {
-return 'Contact';
-}
+        return 'Contact';
+    }
 
     return value;
 };
@@ -67,10 +72,12 @@ const applyFilters = () => {
 
 const destroy = (inquiry: InquiryRow) => {
     if (!window.confirm(`Delete inquiry from "${inquiry.name}"?`)) {
-return;
-}
+        return;
+    }
 
-    router.delete(ContactInquiryController.destroy.url({ contact_inquiry: inquiry.id }));
+    router.delete(
+        ContactInquiryController.destroy.url({ contact_inquiry: inquiry.id }),
+    );
 };
 </script>
 
@@ -79,7 +86,9 @@ return;
 
     <header class="flex flex-wrap items-end justify-between gap-4">
         <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
+            <p
+                class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+            >
                 Inbox
             </p>
             <h1
@@ -94,13 +103,16 @@ return;
     </header>
 
     <section
-        class="mt-8 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
+        class="mt-8 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
     >
         <form
             class="grid gap-3 sm:grid-cols-[2fr_auto_auto_auto]"
             @submit.prevent="applyFilters"
         >
-            <Input v-model="q" placeholder="Search name, email, business, or message…" />
+            <Input
+                v-model="q"
+                placeholder="Search name, email, business, or message…"
+            />
             <select
                 v-model="source"
                 class="rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs"
@@ -122,11 +134,13 @@ return;
     </section>
 
     <section
-        class="mt-6 overflow-hidden rounded-3xl bg-white ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] dark:bg-white/[0.04] dark:ring-white/10"
+        class="mt-6 overflow-hidden rounded-3xl bg-white shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 dark:bg-white/[0.04] dark:ring-white/10"
     >
-        <table class="min-w-full divide-y divide-[var(--color-sand-300)]/60 text-sm dark:divide-white/10">
+        <table
+            class="min-w-full divide-y divide-[var(--color-sand-300)]/60 text-sm dark:divide-white/10"
+        >
             <thead
-                class="text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]"
+                class="text-left text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
             >
                 <tr>
                     <th class="px-5 py-4">Name</th>
@@ -137,7 +151,9 @@ return;
                     <th class="px-5 py-4 text-right">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-[var(--color-sand-300)]/60 dark:divide-white/10">
+            <tbody
+                class="divide-y divide-[var(--color-sand-300)]/60 dark:divide-white/10"
+            >
                 <tr
                     v-for="inquiry in inquiries.data"
                     :key="inquiry.id"
@@ -151,7 +167,9 @@ return;
                             >{{ inquiry.name }}</Link
                         >
                     </td>
-                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">{{ inquiry.email }}</td>
+                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">
+                        {{ inquiry.email }}
+                    </td>
                     <td class="px-5 py-4">
                         <span
                             class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium"
@@ -195,12 +213,18 @@ return;
                     </td>
                 </tr>
                 <tr v-if="inquiries.data.length === 0">
-                    <td colspan="6" class="px-5 py-12 text-center text-slate-500 dark:text-white/60">
-                        <p class="font-serif text-xl text-[var(--color-deep-teal)]">
+                    <td
+                        colspan="6"
+                        class="px-5 py-12 text-center text-slate-500 dark:text-white/60"
+                    >
+                        <p
+                            class="font-serif text-xl text-[var(--color-deep-teal)]"
+                        >
                             No inquiries match.
                         </p>
                         <p class="mt-1 text-sm">
-                            Try clearing the filters or check back when new inquiries arrive.
+                            Try clearing the filters or check back when new
+                            inquiries arrive.
                         </p>
                     </td>
                 </tr>

@@ -24,7 +24,9 @@ defineOptions({
     <Head title="New post" />
 
     <header>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
+        <p
+            class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+        >
             Blog
         </p>
         <h1

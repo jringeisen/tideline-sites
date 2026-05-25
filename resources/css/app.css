@@ -24,26 +24,26 @@
 
     /* Marketing body font — refined serif. Applied to the marketing <body>. */
     --font-body:
-        'Source Serif 4', ui-serif, Georgia, Cambria,
-        'Times New Roman', Times, serif;
+        'Source Serif 4', ui-serif, Georgia, Cambria, 'Times New Roman', Times,
+        serif;
 
     /* ───────── All American Web Design — "Faded Flag" palette ─────────
        Semantic Americana tokens. The legacy emerald/sand/teal names below
        are repointed by ROLE so the existing marketing markup re-skins as a
        set; the names are internal and kept only to avoid churn. */
-    --color-navy: #2a3f5c;        /* primary dark surfaces */
-    --color-navy-deep: #1e2e44;   /* darker, almost-black blue */
-    --color-red: #b4564b;         /* faded flag red — action/accent */
-    --color-red-deep: #9c3d34;    /* heritage red — hover/depth */
-    --color-flag-blue: #3b5378;   /* Old Glory blue — secondary accent */
+    --color-navy: #2a3f5c; /* primary dark surfaces */
+    --color-navy-deep: #1e2e44; /* darker, almost-black blue */
+    --color-red: #b4564b; /* faded flag red — action/accent */
+    --color-red-deep: #9c3d34; /* heritage red — hover/depth */
+    --color-flag-blue: #3b5378; /* Old Glory blue — secondary accent */
 
     /* Legacy names, remapped by role.
        emerald-900/800/deep-teal -> navy (dark sections, footer, hero, pricing)
        emerald-700               -> navy (eyebrow labels, inline links)
        emerald-600/500           -> red  (buttons, badges, FAQ icon) */
-    --color-emerald-50: #f4e9e2;   /* warm cream tint for icon chips */
+    --color-emerald-50: #f4e9e2; /* warm cream tint for icon chips */
     --color-emerald-100: #ecd9cf;
-    --color-emerald-200: #e9cfc6;  /* accent text on dark surfaces */
+    --color-emerald-200: #e9cfc6; /* accent text on dark surfaces */
     --color-emerald-500: #b4564b;
     --color-emerald-600: #b4564b;
     --color-emerald-700: #2a3f5c;
@@ -242,30 +242,66 @@
    uses --color-foreground / --color-muted-foreground tokens instead. These
    overrides flip slate text to white-with-opacity in dark mode without
    touching every element in markup. */
-.dark .text-slate-500 { color: rgba(255, 255, 255, 0.6); }
-.dark .text-slate-600 { color: rgba(255, 255, 255, 0.72); }
-.dark .text-slate-700 { color: rgba(255, 255, 255, 0.85); }
-.dark .text-slate-800 { color: rgba(255, 255, 255, 0.92); }
-.dark .text-slate-900 { color: #ffffff; }
+.dark .text-slate-500 {
+    color: rgba(255, 255, 255, 0.6);
+}
+.dark .text-slate-600 {
+    color: rgba(255, 255, 255, 0.72);
+}
+.dark .text-slate-700 {
+    color: rgba(255, 255, 255, 0.85);
+}
+.dark .text-slate-800 {
+    color: rgba(255, 255, 255, 0.92);
+}
+.dark .text-slate-900 {
+    color: #ffffff;
+}
 
 /* Marketing tokens shift in dark mode for legibility against dark surfaces. */
-.dark .text-\[var\(--color-deep-teal\)\] { color: #ffffff; }
-.dark .text-\[var\(--color-emerald-700\)\] { color: var(--color-emerald-200); }
-.dark .text-\[var\(--color-emerald-800\)\] { color: var(--color-emerald-200); }
-.dark .hover\:text-\[var\(--color-emerald-700\)\]:hover { color: var(--color-emerald-100); }
-.dark .hover\:text-\[var\(--color-emerald-800\)\]:hover { color: #ffffff; }
-.dark .bg-\[var\(--color-emerald-50\)\] { background-color: rgba(255, 255, 255, 0.08); }
+.dark .text-\[var\(--color-deep-teal\)\] {
+    color: #ffffff;
+}
+.dark .text-\[var\(--color-emerald-700\)\] {
+    color: var(--color-emerald-200);
+}
+.dark .text-\[var\(--color-emerald-800\)\] {
+    color: var(--color-emerald-200);
+}
+.dark .hover\:text-\[var\(--color-emerald-700\)\]:hover {
+    color: var(--color-emerald-100);
+}
+.dark .hover\:text-\[var\(--color-emerald-800\)\]:hover {
+    color: #ffffff;
+}
+.dark .bg-\[var\(--color-emerald-50\)\] {
+    background-color: rgba(255, 255, 255, 0.08);
+}
 
 /* `.keep-light` ancestor (the Growth pricing card, which intentionally stays
    light in dark mode) re-asserts the light palette. */
 .dark .keep-light,
-.dark .keep-light .text-\[var\(--color-deep-teal\)\] { color: #1e2e44; }
-.dark .keep-light .text-\[var\(--color-emerald-700\)\] { color: var(--color-emerald-700); }
-.dark .keep-light .text-\[var\(--color-emerald-800\)\] { color: var(--color-emerald-800); }
-.dark .keep-light .bg-\[var\(--color-emerald-50\)\] { background-color: var(--color-emerald-50); }
-.dark .keep-light .text-slate-500 { color: rgb(100 116 139); }
-.dark .keep-light .text-slate-600 { color: rgb(71 85 105); }
-.dark .keep-light .text-slate-700 { color: rgb(51 65 85); }
+.dark .keep-light .text-\[var\(--color-deep-teal\)\] {
+    color: #1e2e44;
+}
+.dark .keep-light .text-\[var\(--color-emerald-700\)\] {
+    color: var(--color-emerald-700);
+}
+.dark .keep-light .text-\[var\(--color-emerald-800\)\] {
+    color: var(--color-emerald-800);
+}
+.dark .keep-light .bg-\[var\(--color-emerald-50\)\] {
+    background-color: var(--color-emerald-50);
+}
+.dark .keep-light .text-slate-500 {
+    color: rgb(100 116 139);
+}
+.dark .keep-light .text-slate-600 {
+    color: rgb(71 85 105);
+}
+.dark .keep-light .text-slate-700 {
+    color: rgb(51 65 85);
+}
 
 /* FAQ open animation — fade + slide the answer in. The summary toggle is instant
    for accessibility (screen readers don't wait for transitions), but the visible
@@ -274,15 +310,25 @@
     animation: faq-reveal 280ms ease-out;
 }
 @keyframes faq-reveal {
-    from { opacity: 0; transform: translateY(-4px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* Respect prefers-reduced-motion: disable hover-lifts, transforms, and the FAQ
    reveal so users who've opted out of motion don't get any. */
 @media (prefers-reduced-motion: reduce) {
-    .faq-item[open] .faq-answer { animation: none; }
-    *, *::before, *::after {
+    .faq-item[open] .faq-answer {
+        animation: none;
+    }
+    *,
+    *::before,
+    *::after {
         animation-duration: 0.001ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.001ms !important;

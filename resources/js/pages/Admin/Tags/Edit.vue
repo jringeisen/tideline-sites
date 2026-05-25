@@ -25,7 +25,9 @@ defineOptions({
     <Head :title="`Edit · ${tag.name}`" />
 
     <header>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
+        <p
+            class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+        >
             Editing
         </p>
         <h1
@@ -37,21 +39,34 @@ defineOptions({
 
     <Form
         v-bind="TagController.update.form({ tag: tag.id })"
-        class="mt-8 max-w-2xl space-y-5 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-8 dark:bg-white/[0.04] dark:ring-white/10"
+        class="mt-8 max-w-2xl space-y-5 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-8 dark:bg-white/[0.04] dark:ring-white/10"
         v-slot="{ errors, processing }"
     >
         <div class="grid gap-2">
             <Label for="name">Name</Label>
-            <Input id="name" name="name" :default-value="tag.name" required maxlength="100" />
+            <Input
+                id="name"
+                name="name"
+                :default-value="tag.name"
+                required
+                maxlength="100"
+            />
             <InputError :message="errors.name" />
         </div>
         <div class="grid gap-2">
             <Label for="slug">Slug</Label>
-            <Input id="slug" name="slug" :default-value="tag.slug" maxlength="100" />
+            <Input
+                id="slug"
+                name="slug"
+                :default-value="tag.slug"
+                maxlength="100"
+            />
             <InputError :message="errors.slug" />
         </div>
         <div class="pt-2">
-            <Button :disabled="processing" variant="marketing" size="marketing">Save changes</Button>
+            <Button :disabled="processing" variant="marketing" size="marketing"
+                >Save changes</Button
+            >
         </div>
     </Form>
 </template>

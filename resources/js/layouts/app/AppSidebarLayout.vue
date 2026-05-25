@@ -18,7 +18,10 @@ withDefaults(defineProps<Props>(), {
 <template>
     <AppShell variant="sidebar">
         <AppSidebar />
-        <AppContent variant="sidebar" class="overflow-x-hidden bg-[var(--color-cream)] text-[var(--color-ink)]">
+        <AppContent
+            variant="sidebar"
+            class="overflow-x-hidden bg-[var(--color-cream)] text-[var(--color-ink)]"
+        >
             <AppSidebarHeader :breadcrumbs="breadcrumbs" />
             <slot />
         </AppContent>

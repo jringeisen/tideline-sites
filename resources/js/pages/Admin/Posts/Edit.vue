@@ -38,7 +38,9 @@ defineOptions({
     <Head :title="`Edit · ${post.title}`" />
 
     <header>
-        <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
+        <p
+            class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+        >
             Editing
         </p>
         <h1

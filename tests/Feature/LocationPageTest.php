@@ -28,7 +28,7 @@ test('the {slug} location page emits city-scoped LocalBusiness + Breadcrumb JSON
     $this->get(route('location.show', $slug))
         ->assertSee('"@type":"ProfessionalService"', false)
         ->assertSee('"@type":"BreadcrumbList"', false)
-        ->assertSee('"addressLocality":"' . $name . '"', false);
+        ->assertSee('"addressLocality":"'.$name.'"', false);
 })->with('locations');
 
 test('the {slug} location page links to the contact and pricing', function (string $slug) {

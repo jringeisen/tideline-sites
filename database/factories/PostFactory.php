@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\CarbonInterface;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -40,7 +41,7 @@ class PostFactory extends Factory
         ]);
     }
 
-    public function scheduled(\DateTimeInterface|\Carbon\CarbonInterface|null $at = null): static
+    public function scheduled(\DateTimeInterface|CarbonInterface|null $at = null): static
     {
         return $this->state(fn () => [
             'status' => Post::STATUS_SCHEDULED,
@@ -48,7 +49,7 @@ class PostFactory extends Factory
         ]);
     }
 
-    public function published(\DateTimeInterface|\Carbon\CarbonInterface|null $at = null): static
+    public function published(\DateTimeInterface|CarbonInterface|null $at = null): static
     {
         return $this->state(fn () => [
             'status' => Post::STATUS_PUBLISHED,

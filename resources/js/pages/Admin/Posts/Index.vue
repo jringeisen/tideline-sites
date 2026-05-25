@@ -20,16 +20,24 @@ type PostRow = {
 };
 
 const props = defineProps<{
-    posts: { data: PostRow[]; links: { url: string | null; label: string; active: boolean }[]; from: number; to: number; total: number };
+    posts: {
+        data: PostRow[];
+        links: { url: string | null; label: string; active: boolean }[];
+        from: number;
+        to: number;
+        total: number;
+    };
     categories: Category[];
-    filters: { status: string | null; category: string | null; q: string | null };
+    filters: {
+        status: string | null;
+        category: string | null;
+        q: string | null;
+    };
 }>();
 
 defineOptions({
     layout: {
-        breadcrumbs: [
-            { title: 'Posts', href: postsRoutes.index().url },
-        ],
+        breadcrumbs: [{ title: 'Posts', href: postsRoutes.index().url }],
     },
 });
 
@@ -40,15 +48,19 @@ const category = ref(props.filters.category ?? '');
 const applyFilters = () => {
     router.get(
         postsRoutes.index().url,
-        { q: q.value || undefined, status: status.value || undefined, category: category.value || undefined },
+        {
+            q: q.value || undefined,
+            status: status.value || undefined,
+            category: category.value || undefined,
+        },
         { preserveState: true, replace: true },
     );
 };
 
 const destroy = (post: PostRow) => {
     if (!window.confirm(`Delete "${post.title}"?`)) {
-return;
-}
+        return;
+    }
 
     router.delete(PostController.destroy.url({ post: post.id }));
 };
@@ -59,7 +71,9 @@ return;
 
     <header class="flex flex-wrap items-end justify-between gap-4">
         <div>
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-700)]">
+            <p
+                class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
+            >
                 Blog
             </p>
             <h1
@@ -74,9 +88,12 @@ return;
     </header>
 
     <section
-        class="mt-8 rounded-3xl bg-white p-6 ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
+        class="mt-8 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
     >
-        <form class="grid gap-3 sm:grid-cols-[2fr_1fr_1fr_auto]" @submit.prevent="applyFilters">
+        <form
+            class="grid gap-3 sm:grid-cols-[2fr_1fr_1fr_auto]"
+            @submit.prevent="applyFilters"
+        >
             <Input v-model="q" placeholder="Search title…" />
             <select
                 v-model="status"
@@ -92,17 +109,23 @@ return;
                 class="rounded-md border border-input bg-background px-3 py-2 text-sm"
             >
                 <option value="">All categories</option>
-                <option v-for="c in categories" :key="c.id" :value="c.id">{{ c.name }}</option>
+                <option v-for="c in categories" :key="c.id" :value="c.id">
+                    {{ c.name }}
+                </option>
             </select>
             <Button type="submit" variant="secondary">Filter</Button>
         </form>
     </section>
 
     <section
-        class="mt-6 overflow-hidden rounded-3xl bg-white ring-1 ring-[var(--color-sand-300)]/60 shadow-[0_1px_0_rgba(11,42,46,0.04)] dark:bg-white/[0.04] dark:ring-white/10"
+        class="mt-6 overflow-hidden rounded-3xl bg-white shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 dark:bg-white/[0.04] dark:ring-white/10"
     >
-        <table class="min-w-full divide-y divide-[var(--color-sand-300)]/60 text-sm dark:divide-white/10">
-            <thead class="text-left text-xs font-semibold uppercase tracking-[0.12em] text-[var(--color-emerald-700)]">
+        <table
+            class="min-w-full divide-y divide-[var(--color-sand-300)]/60 text-sm dark:divide-white/10"
+        >
+            <thead
+                class="text-left text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+            >
                 <tr>
                     <th class="px-5 py-4">Title</th>
                     <th class="px-5 py-4">Status</th>
@@ -112,40 +135,74 @@ return;
                     <th class="px-5 py-4 text-right">Actions</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-[var(--color-sand-300)]/60 dark:divide-white/10">
-                <tr v-for="post in posts.data" :key="post.id" class="transition hover:bg-[var(--color-sand-100)]/40 dark:hover:bg-white/[0.02]">
-                    <td class="px-5 py-4 font-medium text-[var(--color-deep-teal)]">
-                        <Link :href="postsRoutes.edit(post.id).url" class="hover:underline">{{ post.title }}</Link>
+            <tbody
+                class="divide-y divide-[var(--color-sand-300)]/60 dark:divide-white/10"
+            >
+                <tr
+                    v-for="post in posts.data"
+                    :key="post.id"
+                    class="transition hover:bg-[var(--color-sand-100)]/40 dark:hover:bg-white/[0.02]"
+                >
+                    <td
+                        class="px-5 py-4 font-medium text-[var(--color-deep-teal)]"
+                    >
+                        <Link
+                            :href="postsRoutes.edit(post.id).url"
+                            class="hover:underline"
+                            >{{ post.title }}</Link
+                        >
                     </td>
                     <td class="px-5 py-4">
                         <span
                             class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
                             :class="{
-                                'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)]': post.status === 'published',
-                                'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300': post.status === 'scheduled',
-                                'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80': post.status === 'draft',
+                                'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)]':
+                                    post.status === 'published',
+                                'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300':
+                                    post.status === 'scheduled',
+                                'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80':
+                                    post.status === 'draft',
                             }"
-                        >{{ post.status }}</span>
+                            >{{ post.status }}</span
+                        >
                     </td>
-                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">{{ post.category?.name ?? '—' }}</td>
-                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">{{ post.author?.name ?? '—' }}</td>
-                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">{{ post.published_at?.slice(0, 10) ?? '—' }}</td>
+                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">
+                        {{ post.category?.name ?? '—' }}
+                    </td>
+                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">
+                        {{ post.author?.name ?? '—' }}
+                    </td>
+                    <td class="px-5 py-4 text-slate-600 dark:text-white/70">
+                        {{ post.published_at?.slice(0, 10) ?? '—' }}
+                    </td>
                     <td class="px-5 py-4 text-right">
                         <Link
                             :href="postsRoutes.edit(post.id).url"
                             class="text-sm font-medium text-[var(--color-emerald-700)] underline-offset-4 hover:underline"
-                        >Edit</Link>
+                            >Edit</Link
+                        >
                         <button
                             type="button"
                             class="ml-4 text-sm font-medium text-destructive underline-offset-4 hover:underline"
                             @click="destroy(post)"
-                        >Delete</button>
+                        >
+                            Delete
+                        </button>
                     </td>
                 </tr>
                 <tr v-if="posts.data.length === 0">
-                    <td colspan="6" class="px-5 py-12 text-center text-slate-500 dark:text-white/60">
-                        <p class="font-serif text-xl text-[var(--color-deep-teal)]">No posts yet.</p>
-                        <p class="mt-1 text-sm">Click "New post" to create your first one.</p>
+                    <td
+                        colspan="6"
+                        class="px-5 py-12 text-center text-slate-500 dark:text-white/60"
+                    >
+                        <p
+                            class="font-serif text-xl text-[var(--color-deep-teal)]"
+                        >
+                            No posts yet.
+                        </p>
+                        <p class="mt-1 text-sm">
+                            Click "New post" to create your first one.
+                        </p>
                     </td>
                 </tr>
             </tbody>
@@ -161,7 +218,10 @@ return;
                 v-if="link.url"
                 :href="link.url"
                 class="rounded-full px-3 py-1.5 ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)] dark:ring-white/15 dark:hover:bg-white/[0.06]"
-                :class="{ 'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)] dark:bg-[var(--color-emerald-700)] dark:ring-[var(--color-emerald-700)]': link.active }"
+                :class="{
+                    'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)] dark:bg-[var(--color-emerald-700)] dark:ring-[var(--color-emerald-700)]':
+                        link.active,
+                }"
             >
                 <span v-html="link.label" />
             </Link>
