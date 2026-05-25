@@ -25,17 +25,17 @@
         [
             'slug' => 'destin',
             'name' => 'Destin',
-            'blurb' => 'From the Destin Harbor to Crab Island — websites for charter captains, beachfront restaurants, vacation rentals, and year-round local services.',
+            'blurb' => 'From the Destin Harbor to Crab Island, websites for charter captains, beachfront restaurants, vacation rentals, and year-round local services.',
         ],
         [
             'slug' => '30a',
             'name' => '30A',
-            'blurb' => 'Seaside, WaterColor, Alys, Rosemary, Inlet, and the rest of the 30A corridor — sites built for the boutique communities that define the brand.',
+            'blurb' => 'Seaside, WaterColor, Alys, Rosemary, Inlet, and the rest of the 30A corridor, sites built for the boutique communities that define the brand.',
         ],
         [
             'slug' => 'panama-city-beach',
             'name' => 'Panama City Beach',
-            'blurb' => 'From Pier Park to Front Beach Road — websites and SEO that help PCB businesses win year-round, not just during spring break.',
+            'blurb' => 'From Pier Park to Front Beach Road, websites and SEO that help PCB businesses win year-round, not just during spring break.',
         ],
     ];
 
@@ -59,7 +59,7 @@
 
 <x-layouts.marketing
     title="Service Area — All American Web Design | Custom Websites Nationwide"
-    description="All American Web Design builds custom websites for small businesses across the United States — and does hands-on local SEO on Florida's Gulf Coast, from Destin to Panama City Beach.">
+    description="All American Web Design builds custom websites for small businesses across the United States, and does hands-on local SEO on Florida's Gulf Coast, from Destin to Panama City Beach.">
 
     @push('schema')
         <script type="application/ld+json">{!! json_encode($serviceAreaSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
@@ -98,7 +98,7 @@
                     Built across America. <span class="block text-[var(--color-red)]">Rooted at home.</span>
                 </h1>
                 <p class="mt-6 max-w-2xl text-2xl leading-snug text-white/90 sm:text-3xl">
-                    We build custom websites for small businesses anywhere in the country — and do hands-on local SEO right here on Florida's Gulf Coast, from Destin to Panama City Beach.
+                    We build custom websites for small businesses anywhere in the country, and do hands-on local SEO right here on Florida's Gulf Coast, from Destin to Panama City Beach.
                 </p>
 
                 <dl class="mt-10 grid max-w-md grid-cols-2 gap-6">
@@ -126,7 +126,7 @@
                 Where we got our start
             </h2>
             <p class="mt-4 max-w-2xl text-lg leading-relaxed text-slate-600">
-                We're rooted on Florida's Gulf Coast — these are the local markets we know best. Each has its own page with industry-specific notes, and we serve every community in between.
+                We're rooted on Florida's Gulf Coast. These are the local markets we know best. Each has its own page with industry-specific notes, and we serve every community in between.
             </p>
 
             <div class="mt-12 grid gap-6 lg:grid-cols-3">
@@ -160,7 +160,7 @@
                         From Destin through 30A and out to Panama City Beach, we work hands-on with local service businesses and tourism operators in every community on Florida's Gulf Coast.
                     </p>
                     <p class="mt-4 text-base leading-relaxed text-slate-600">
-                        Don't see your town? We probably serve it too — and we build websites for small businesses nationwide. Drop us a line.
+                        Don't see your town? We probably serve it too, and we build websites for small businesses nationwide. Drop us a line.
                     </p>
                     <a href="{{ route('contact.show') }}"
                        class="mt-8 inline-flex items-center rounded-full bg-[var(--color-red)] px-5 py-2.5 text-sm font-semibold uppercase tracking-wide text-white shadow-sm transition hover:bg-[var(--color-red-deep)]">

@@ -48,7 +48,7 @@
                     Let's build something <span class="text-[var(--color-red)]">built to last.</span>
                 </h1>
                 <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/85">
-                    Tell us about your business and which plan you're eyeing. We'll get back to you within one business day — from a real person, not a sales bot.
+                    Tell us about your business and which plan you're eyeing. We'll get back to you within one business day, from a real person, not a sales bot.
                 </p>
             </div>
         </div>
@@ -120,7 +120,7 @@
                                         <option value="">— Select a plan —</option>
                                         <option value="essential" @selected($selectedPlan === 'essential')>Essential — $299/mo (Web Design + SEO)</option>
                                         <option value="growth" @selected($selectedPlan === 'growth')>Growth — $499/mo (Web Design + SEO + Blogs + Newsletters)</option>
-                                        <option value="unsure" @selected($selectedPlan === 'unsure')>Not sure yet — help me decide</option>
+                                        <option value="unsure" @selected($selectedPlan === 'unsure')>Not sure yet, help me decide</option>
                                     </select>
                                     <svg class="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.06l3.71-3.83a.75.75 0 111.08 1.04l-4.25 4.39a.75.75 0 01-1.08 0L5.21 8.27a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
@@ -143,7 +143,7 @@
                         </div>
 
                         <div class="mt-7 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                            <p class="text-xs text-slate-500">We'll only use your info to reply. No spam — ever.</p>
+                            <p class="text-xs text-slate-500">We'll only use your info to reply. No spam, ever.</p>
                             <button type="submit"
                                     class="inline-flex w-full items-center justify-center rounded-full bg-[var(--color-red)] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow transition hover:bg-[var(--color-red-deep)] sm:w-auto">
                                 Send message

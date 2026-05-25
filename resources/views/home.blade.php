@@ -23,12 +23,12 @@
     ];
 
     $faqs = [
-        ['question' => 'Do I own my website?', 'answer' => 'Yes — always. The design, content, and domain are yours. If you ever leave us, we hand it off cleanly.'],
-        ['question' => 'Is there a contract?', 'answer' => 'No long-term contracts. Essential and Growth are month-to-month — cancel anytime. Build & Own is a one-time build with $20/month hosting you can cancel anytime.'],
+        ['question' => 'Do I own my website?', 'answer' => 'Yes, always. The design, content, and domain are yours. If you ever leave us, we hand it off cleanly.'],
+        ['question' => 'Is there a contract?', 'answer' => 'No long-term contracts. Essential and Growth are month-to-month, cancel anytime. Build & Own is a one-time build with $20/month hosting you can cancel anytime.'],
         ['question' => 'How fast can my site launch?', 'answer' => 'Most Essential sites launch in one to two weeks from kickoff. Growth plan sites with extra content take two to three weeks.'],
-        ['question' => 'Do you work with my industry?', 'answer' => 'We specialize in small service businesses (HVAC, contractors, med spas, lawyers, dentists) and hospitality (restaurants, shops, vacation rentals) — for owners across the country.'],
-        ['question' => 'What if I already have a website?', 'answer' => 'We can redesign it, optimize what you have, or run SEO and content on your existing site — whichever makes sense.'],
-        ['question' => 'Are there setup fees?', 'answer' => 'No setup fees on Essential or Growth — your first month covers design and launch. Build & Own is a one-time project starting at $1,000; contact us for a quote.'],
+        ['question' => 'Do you work with my industry?', 'answer' => 'We specialize in small service businesses (HVAC, contractors, med spas, lawyers, dentists) and hospitality (restaurants, shops, vacation rentals), for owners across the country.'],
+        ['question' => 'What if I already have a website?', 'answer' => 'We can redesign it, optimize what you have, or run SEO and content on your existing site, whichever makes sense.'],
+        ['question' => 'Are there setup fees?', 'answer' => 'No setup fees on Essential or Growth. Your first month covers design and launch. Build & Own is a one-time project starting at $1,000; contact us for a quote.'],
     ];
 
     $businessId = url('/') . '#business';
@@ -144,7 +144,7 @@
                     Custom websites for American small businesses.
                 </p>
                 <p class="mt-5 max-w-xl text-base leading-relaxed text-white/75">
-                    We design and build high-converting websites — by hand, here in the States, with the discipline of a veteran-owned shop. No overseas hand-offs. No cookie-cutter templates.
+                    We design and build high-converting websites, by hand, here in the States, with the discipline of a veteran-owned shop. No overseas hand-offs. No cookie-cutter templates.
                 </p>
                 <div class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
                     <a href="#pricing"
@@ -332,7 +332,7 @@
             <div class="mx-auto max-w-2xl text-center">
                 <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">How it works</p>
                 <h2 class="mt-3 font-serif text-4xl font-bold uppercase tracking-tight text-[var(--color-deep-teal)] sm:text-5xl">
-                    Our process — four steps, no surprises.
+                    Our process. Four steps, no surprises.
                 </h2>
             </div>
 
@@ -347,7 +347,7 @@
                     @foreach ([
                         ['01', 'Discover', 'Week 1', 'A free 20-minute call to understand your business, your customers, and your goals.'],
                         ['02', 'Design', 'Week 1', 'We craft a custom design and walk you through every page before a single line of code is written.'],
-                        ['03', 'Launch', 'Week 1–2', 'We build, test, and launch your new site — fast, mobile-ready, and SEO-optimized from day one.'],
+                        ['03', 'Launch', 'Week 1–2', 'We build, test, and launch your new site. Fast, mobile-ready, and SEO-optimized from day one.'],
                         ['04', 'Grow', 'Ongoing', 'Every month we sharpen your SEO and (on the Growth plan) publish fresh blogs and newsletters.'],
                     ] as [$num, $title, $duration, $copy])
                         <li class="relative flex gap-5 pb-10 last:pb-0 lg:flex-col lg:gap-0 lg:pb-0">
@@ -373,13 +373,13 @@
                 <div class="lg:col-span-5">
                     <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">How we build</p>
                     <h2 class="mt-3 font-serif text-4xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-5xl">
-                        Custom-built with Laravel — <span class="text-[var(--color-red)]">not</span> WordPress, Wix, or Squarespace.
+                        Custom-built with Laravel, <span class="text-[var(--color-red)]">not</span> WordPress, Wix, or Squarespace.
                     </h2>
                     <p class="mt-5 text-lg leading-relaxed text-slate-700">
-                        Every site we ship is a real web application — written from scratch in Laravel and engineered to grow with your business. That means we can do far more than a marketing site.
+                        Every site we ship is a real web application, written from scratch in Laravel and engineered to grow with your business. That means we can do far more than a marketing site.
                     </p>
                     <p class="mt-4 text-lg leading-relaxed text-slate-700">
-                        Need a booking system that talks to your calendar? A CRM your team will actually use? A customer portal, intake form, or internal tool? We build it — on the same foundation as your website.
+                        Need a booking system that talks to your calendar? A CRM your team will actually use? A customer portal, intake form, or internal tool? We build it, on the same foundation as your website.
                     </p>
                     <p class="mt-8">
                         <a href="{{ route('contact.show') }}" class="inline-flex items-center gap-2 text-sm font-semibold text-[var(--color-emerald-700)] hover:text-[var(--color-emerald-800)]">
@@ -425,7 +425,7 @@
                 'name' => 'Wordsmith',
                 'url' => 'https://usewordsmith.com',
                 'tagline' => 'AI-assisted social media planner',
-                'description' => 'A social media content planning tool with AI-assisted writing — schedule, draft, and refine posts in one place.',
+                'description' => 'A social media content planning tool with AI-assisted writing. Schedule, draft, and refine posts in one place.',
                 'image' => 'projects/wordsmith.webp',
                 'tags' => ['Laravel', 'AI', 'Scheduling'],
             ],
@@ -439,7 +439,7 @@
                     Real products we've shipped.
                 </h2>
                 <p class="mt-5 text-lg leading-relaxed text-slate-600">
-                    A peek at what we build when the brief goes beyond a marketing site — full web applications, custom-built from the ground up.
+                    A peek at what we build when the brief goes beyond a marketing site. Full web applications, custom-built from the ground up.
                 </p>
             </div>
 
@@ -515,10 +515,10 @@
                 <div class="lg:col-span-7">
                     <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Meet the team</p>
                     <h2 class="mt-3 font-serif text-3xl font-bold uppercase leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl">
-                        Family &amp; veteran owned — <span class="normal-case text-[var(--color-red)]">built in America</span>.
+                        Family &amp; veteran owned, <span class="normal-case text-[var(--color-red)]">built in America</span>.
                     </h2>
                     <p class="mt-5 text-lg leading-relaxed text-slate-700">
-                        All American Web Design is Jon and Elena — a husband-and-wife team. Jon, a US Army veteran, writes the code; Elena runs the strategy. When you hire us, you get the two people who actually do the work — and a website built by hand, here in the States.
+                        All American Web Design is Jon and Elena, a husband-and-wife team. Jon, a US Army veteran, writes the code; Elena runs the strategy. When you hire us, you get the two people who actually do the work, and a website built by hand, here in the States.
                     </p>
                     <ul class="mt-6 flex flex-wrap gap-2 text-sm">
                         <li class="rounded-full bg-white px-3 py-1.5 text-[var(--color-emerald-800)] ring-1 ring-[var(--color-emerald-600)]/20 dark:bg-white/10 dark:text-[var(--color-emerald-200)] dark:ring-white/15">Husband &amp; wife team</li>
@@ -548,7 +548,7 @@
                         Built here. For businesses everywhere.
                     </h2>
                     <p class="mt-5 text-base leading-relaxed text-slate-600">
-                        Every site is designed and coded in the United States — no overseas outsourcing, no offshore template farms. We work with small business owners from coast to coast, and we treat every build like it's our own name on the door.
+                        Every site is designed and coded in the United States. No overseas outsourcing, no offshore template farms. We work with small business owners from coast to coast, and we treat every build like it's our own name on the door.
                     </p>
                     <dl class="mt-6 grid grid-cols-2 gap-6">
                         <div>
@@ -580,7 +580,7 @@
                             All American<br>Web Design
                         </p>
                         <p class="relative mt-5 max-w-sm text-sm leading-relaxed text-white/75">
-                            Veteran-owned. American-made. Built to last — like the businesses we build for.
+                            Veteran-owned. American-made. Built to last, like the businesses we build for.
                         </p>
                         <div class="relative mt-6 h-1 w-16 bg-[var(--color-red)]"></div>
                     </div>
@@ -599,9 +599,9 @@
             <div class="mx-auto max-w-2xl text-center">
                 <p class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-emerald-200)]">Pricing</p>
                 <h2 class="mt-3 font-serif text-4xl font-bold uppercase tracking-tight sm:text-5xl">Pricing that fits how you work.</h2>
-                <p class="mt-3 font-body text-2xl italic text-[var(--color-sand-200)]/90">Monthly plans or a one-time build — no contracts.</p>
+                <p class="mt-3 font-body text-2xl italic text-[var(--color-sand-200)]/90">Monthly plans or a one-time build, no contracts.</p>
                 <p class="mt-5 text-lg leading-relaxed text-white/75">
-                    Pick the plan that fits. Cancel anytime — your site is always yours.
+                    Pick the plan that fits. Cancel anytime. Your site is always yours.
                 </p>
             </div>
 
@@ -742,7 +742,7 @@
                 Ready to build something built to last?
             </h2>
             <p class="mt-5 text-lg text-white/80">
-                Pick a plan and we'll have your new site live in weeks, not months — built right here in America.
+                Pick a plan and we'll have your new site live in weeks, not months, built right here in America.
             </p>
             <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
                 <a href="{{ route('contact.show', ['plan' => 'growth']) }}"

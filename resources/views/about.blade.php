@@ -50,7 +50,7 @@
         'name' => 'All American Web Design',
         'url' => url('/'),
         'logo' => asset('og-image.jpg'),
-        'description' => 'A husband-and-wife, veteran-owned web design and SEO studio building custom websites for American small businesses — built in America, not outsourced.',
+        'description' => 'A husband-and-wife, veteran-owned web design and SEO studio building custom websites for American small businesses, built in America, not outsourced.',
         'foundingLocation' => ['@type' => 'Place', 'name' => 'Panama City Beach, Florida'],
         'founder' => [
             ['@id' => $pageUrl . '#jon'],
@@ -113,7 +113,7 @@
                     <span class="block text-[var(--color-red)]">Veteran-owned.</span>
                 </h1>
                 <p class="mt-6 max-w-2xl text-2xl leading-snug text-white/90 sm:text-3xl">
-                    A husband-and-wife team building custom websites for American small businesses — by hand, here in the States.
+                    A husband-and-wife team building custom websites for American small businesses, by hand, here in the States.
                 </p>
             </div>
         </div>
@@ -134,10 +134,10 @@
                     All American Web Design is a husband-and-wife team. We started it for a simple reason: we'd watched too many small business owners get stuck with cookie-cutter websites, ghosted by their agencies, and locked into contracts that didn't serve them.
                 </p>
                 <p>
-                    We do things differently. Jon writes the code. Elena handles the strategy. There's no junior account manager bouncing your emails to a developer overseas — every site we build is built right here in America, by the two people you actually hired.
+                    We do things differently. Jon writes the code. Elena handles the strategy. There's no junior account manager bouncing your emails to a developer overseas. Every site we build is built right here in America, by the two people you actually hired.
                 </p>
                 <p>
-                    We're proud to be family-owned and veteran-owned, and proud to build every website in the USA. We're not going anywhere — and neither is your website.
+                    We're proud to be family-owned and veteran-owned, and proud to build every website in the USA. We're not going anywhere, and neither is your website.
                 </p>
             </div>
         </div>
@@ -165,7 +165,7 @@
                             <span class="text-sm font-medium uppercase tracking-wider text-[var(--color-red)]">Co-founder &amp; Lead Developer</span>
                         </div>
                         <p class="mt-3 text-base leading-relaxed text-slate-700">
-                            Jon has been a software engineer for 15 years, with a string of SaaS products to his name and one successful exit behind him. Before software, he served eight years in the U.S. Army as a paratrooper and 35F intelligence analyst, finishing his enlistment as a Sergeant with two combat deployments — Mosul, Iraq and Kuwait. At All American Web Design he writes the code, runs the SEO, and sweats the details that decide whether your site loads fast and ranks well.
+                            Jon has been a software engineer for 15 years, with a string of SaaS products to his name and one successful exit behind him. Before software, he served eight years in the U.S. Army as a paratrooper and 35F intelligence analyst, finishing his enlistment as a Sergeant with two combat deployments, Mosul, Iraq and Kuwait. At All American Web Design he writes the code, runs the SEO, and sweats the details that decide whether your site loads fast and ranks well.
                         </p>
                         <ul class="mt-4 flex flex-wrap gap-2 text-xs">
                             <li class="rounded-full bg-white px-3 py-1 text-[var(--color-emerald-800)] ring-1 ring-[var(--color-emerald-600)]/20 dark:bg-white/10 dark:text-[var(--color-emerald-200)] dark:ring-white/15">U.S. Army Veteran</li>
@@ -179,7 +179,7 @@
                             <span class="text-sm font-medium uppercase tracking-wider text-[var(--color-red)]">Co-founder, Marketing &amp; Sales</span>
                         </div>
                         <p class="mt-3 text-base leading-relaxed text-slate-700">
-                            Elena is an entrepreneur, a homeschooling mom of four, and the marketing and sales mind behind All American Web Design. She knows how to talk to small business owners because she is one, and she's run enough of her own ventures to know what it takes to grow a brand from zero. She handles the conversations, the strategy, and the customer side of the business — and somehow still teaches four kids long division.
+                            Elena is an entrepreneur, a homeschooling mom of four, and the marketing and sales mind behind All American Web Design. She knows how to talk to small business owners because she is one, and she's run enough of her own ventures to know what it takes to grow a brand from zero. She handles the conversations, the strategy, and the customer side of the business, and somehow still teaches four kids long division.
                         </p>
                         <ul class="mt-4 flex flex-wrap gap-2 text-xs">
                             <li class="rounded-full bg-white px-3 py-1 text-[var(--color-emerald-800)] ring-1 ring-[var(--color-emerald-600)]/20 dark:bg-white/10 dark:text-[var(--color-emerald-200)] dark:ring-white/15">Marketing &amp; Sales</li>
@@ -206,7 +206,7 @@
                 @foreach ([
                     ['Family-owned', 'A husband-and-wife team that has skin in the game on every project. Your success is our family\'s livelihood.', 'M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z'],
                     ['Veteran-owned', 'Eight years in the US Army taught Jon that discipline and follow-through aren\'t optional. We bring the same standard to your website.', 'M9.661 2.237a.531.531 0 01.678 0 11.947 11.947 0 007.078 2.749.5.5 0 01.479.425c.069.52.104 1.05.104 1.59 0 5.162-3.26 9.563-7.834 11.256a.48.48 0 01-.332 0C5.26 16.814 2 12.413 2 7.251c0-.54.035-1.07.104-1.59a.5.5 0 01.48-.425 11.947 11.947 0 007.077-2.75z'],
-                    ['American-made', 'Every site is designed and built right here in the United States. Never outsourced, never offshored — American craftsmanship you can stand behind.', 'M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z'],
+                    ['American-made', 'Every site is designed and built right here in the United States. Never outsourced, never offshored. American craftsmanship you can stand behind.', 'M10.868 2.884c-.321-.772-1.415-.772-1.736 0l-1.83 4.401-4.753.381c-.833.067-1.171 1.107-.536 1.651l3.62 3.102-1.106 4.637c-.194.813.691 1.456 1.405 1.02L10 15.591l4.069 2.485c.713.436 1.598-.207 1.404-1.02l-1.106-4.637 3.62-3.102c.635-.544.297-1.584-.536-1.65l-4.752-.382-1.831-4.401z'],
                 ] as [$title, $copy, $icon])
                     <article class="rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60 dark:bg-white/[0.04] dark:ring-white/10">
                         <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-[var(--color-navy)] text-[var(--color-cream)] ring-1 ring-white/10 dark:bg-white/10 dark:text-white dark:ring-white/15">
@@ -232,7 +232,7 @@
                 Want to work with us?
             </h2>
             <p class="mt-4 text-lg text-white/80">
-                Tell us about your business. We'll get back to you within one business day — from one real person, not a sales bot.
+                Tell us about your business. We'll get back to you within one business day, from one real person, not a sales bot.
             </p>
             <div class="mt-8">
                 <a href="{{ route('contact.show') }}"

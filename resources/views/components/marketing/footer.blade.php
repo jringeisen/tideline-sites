@@ -6,7 +6,7 @@
                     <span class="font-serif text-base font-semibold uppercase leading-[0.95] tracking-wide">All American<br>Web Design</span>
                 </a>
                 <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
-                    Veteran-owned web design for American small businesses. Custom websites built in America — never outsourced, never templated.
+                    Veteran-owned web design for American small businesses. Custom websites built in America, never outsourced, never templated.
                 </p>
             </div>
 
@@ -29,7 +29,7 @@
                     <li><a href="{{ route('location.show', 'panama-city-beach') }}" class="rounded-full bg-white/10 px-3 py-1 text-white/90 transition hover:bg-white/20">Panama City Beach</a></li>
                 </ul>
                 <p class="mt-4 text-sm leading-relaxed text-white/60">
-                    Proudly building websites for small businesses across the United States — with local roots on Florida's Gulf Coast.
+                    Proudly building websites for small businesses across the United States, with local roots on Florida's Gulf Coast.
                 </p>
                 <a href="{{ route('service-area') }}" class="mt-4 inline-flex items-center text-sm font-semibold text-white/90 transition hover:text-white">
                     See where we work
