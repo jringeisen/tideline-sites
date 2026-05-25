@@ -23,6 +23,7 @@ class ContactInquiry extends Model
         'website',
         'phone',
         'plan',
+        'is_veteran',
         'source',
         'message',
         'read_at',
@@ -34,6 +35,7 @@ class ContactInquiry extends Model
     protected function casts(): array
     {
         return [
+            'is_veteran' => 'boolean',
             'read_at' => 'datetime',
         ];
     }

@@ -74,3 +74,13 @@ test('the mailable renders with inquiry details and an admin link', function () 
         ->toContain('Need a refresh of my charter site.')
         ->toContain(route('admin.contact-inquiries.show', $inquiry));
 });
+
+test('the mailable surfaces veteran status only when the inquiry is from a veteran', function () {
+    $veteran = ContactInquiry::factory()->veteran()->create();
+    expect((new ContactInquiryReceived($veteran))->render())
+        ->toContain('apply 20% discount');
+
+    $civilian = ContactInquiry::factory()->create(['is_veteran' => false]);
+    expect((new ContactInquiryReceived($civilian))->render())
+        ->not->toContain('apply 20% discount');
+});

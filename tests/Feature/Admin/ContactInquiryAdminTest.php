@@ -84,6 +84,16 @@ test('admin can view an inquiry', function () {
         ->assertOk();
 });
 
+test('the inquiry show page receives the veteran flag', function () {
+    $inquiry = ContactInquiry::factory()->veteran()->create();
+
+    $response = $this->actingAs($this->admin)
+        ->get("/admin/contact-inquiries/{$inquiry->id}")
+        ->assertOk();
+
+    expect($response->viewData('page')['props']['inquiry']['is_veteran'])->toBeTrue();
+});
+
 test('viewing an inquiry does not auto-mark it as read', function () {
     $inquiry = ContactInquiry::factory()->create(['read_at' => null]);
 

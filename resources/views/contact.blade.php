@@ -1,5 +1,6 @@
 @php
     $selectedPlan = old('plan', $selectedPlan ?? null);
+    $isVeteran = (bool) old('is_veteran', $isVeteran ?? false);
 
     $jsonLd = [
         '@context' => 'https://schema.org',
@@ -127,6 +128,20 @@
                                     </svg>
                                 </div>
                                 @error('plan')
+                                    <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div class="sm:col-span-2">
+                                <label for="is_veteran" class="flex items-start gap-3 rounded-xl bg-[var(--color-sand-50)] px-4 py-3 ring-1 ring-inset ring-[var(--color-sand-300)] dark:bg-white/[0.04] dark:ring-white/10">
+                                    <input type="checkbox" name="is_veteran" id="is_veteran" value="1" @checked($isVeteran)
+                                           class="mt-0.5 h-5 w-5 flex-none rounded border-[var(--color-sand-400)] text-[var(--color-red)] focus:ring-[var(--color-red)]">
+                                    <span class="text-sm text-[var(--color-deep-teal)] dark:text-white/90">
+                                        <span class="font-medium">I'm a U.S. military veteran</span>
+                                        <span class="block text-[var(--color-ink)]/70 dark:text-white/60">A 20% veteran discount applies to your plan.</span>
+                                    </span>
+                                </label>
+                                @error('is_veteran')
                                     <p class="mt-1.5 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>

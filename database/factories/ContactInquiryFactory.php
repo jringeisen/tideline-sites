@@ -20,9 +20,17 @@ class ContactInquiryFactory extends Factory
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'plan' => fake()->randomElement(['essential', 'growth', 'unsure']),
+            'is_veteran' => false,
             'source' => ContactInquiry::SOURCE_CONTACT,
             'message' => fake()->paragraph(),
         ];
+    }
+
+    public function veteran(): static
+    {
+        return $this->state(fn () => [
+            'is_veteran' => true,
+        ]);
     }
 
     public function seoAssessment(): static

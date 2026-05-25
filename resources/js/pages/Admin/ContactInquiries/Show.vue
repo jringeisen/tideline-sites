@@ -13,6 +13,7 @@ type Inquiry = {
     website: string | null;
     phone: string | null;
     plan: string | null;
+    is_veteran: boolean;
     source: string;
     message: string | null;
     read_at: string | null;
@@ -89,6 +90,12 @@ const destroy = () => {
                     "
                 >
                     {{ inquiry.read_at ? 'Read' : 'Unread' }}
+                </span>
+                <span
+                    v-if="inquiry.is_veteran"
+                    class="ml-2 inline-flex rounded-full bg-[var(--color-red)] px-2.5 py-0.5 text-xs font-semibold text-white"
+                >
+                    U.S. Veteran · 20% off
                 </span>
             </p>
         </div>

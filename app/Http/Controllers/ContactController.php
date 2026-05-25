@@ -23,6 +23,7 @@ class ContactController extends Controller
     {
         return view('contact', [
             'selectedPlan' => request()->query('plan'),
+            'isVeteran' => request()->boolean('veteran'),
         ]);
     }
 

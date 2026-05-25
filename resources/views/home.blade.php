@@ -620,7 +620,26 @@
                 </p>
             </div>
 
-            <div class="mx-auto mt-24 grid max-w-6xl gap-6 lg:grid-cols-3 sm:mt-28">
+            {{-- Veteran discount toggle --}}
+            <div class="mx-auto mt-10 flex max-w-md flex-col items-center gap-3 text-center">
+                <button type="button"
+                        data-veteran-toggle
+                        role="switch"
+                        aria-checked="false"
+                        aria-label="Show veteran pricing (20% off)"
+                        class="group inline-flex items-center gap-3 rounded-full bg-white/[0.06] px-5 py-2.5 text-sm font-semibold text-white ring-1 ring-white/20 backdrop-blur transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+                    <span class="inline-flex h-6 w-11 flex-none items-center rounded-full bg-white/20 p-0.5 transition-colors duration-200 group-aria-checked:bg-[var(--color-red)]">
+                        <span data-veteran-toggle-knob class="h-5 w-5 rounded-full bg-white shadow transition-transform duration-200 group-aria-checked:translate-x-5"></span>
+                    </span>
+                    Veteran pricing
+                    <span class="rounded-full bg-[var(--color-red)] px-2 py-0.5 text-xs font-bold uppercase tracking-wide text-white">20% off</span>
+                </button>
+                <p data-veteran-toggle-note class="hidden text-sm text-[var(--color-emerald-200)]">
+                    Veteran discount applied. Thank you for your service. 🇺🇸
+                </p>
+            </div>
+
+            <div class="mx-auto mt-16 grid max-w-6xl gap-6 lg:grid-cols-3 sm:mt-20">
                 {{-- Essential --}}
                 <article class="flex flex-col rounded-3xl bg-white/[0.04] p-8 ring-1 ring-white/15 backdrop-blur">
                     <div class="flex items-baseline justify-between">
@@ -629,8 +648,15 @@
                     </div>
                     <p class="mt-2 text-sm text-white/70">Get a beautiful website and start ranking locally.</p>
                     <p class="mt-6">
-                        <span class="font-serif text-5xl">$299</span>
-                        <span class="ml-1 text-sm text-white/70">/month</span>
+                        <span data-price-regular>
+                            <span class="font-serif text-5xl">$299</span>
+                            <span class="ml-1 text-sm text-white/70">/month</span>
+                        </span>
+                        <span data-price-veteran class="hidden">
+                            <span class="font-serif text-5xl">$239</span>
+                            <span class="ml-1 text-sm text-white/70">/month</span>
+                            <span class="ml-2 align-middle text-2xl text-white/50 line-through">$299</span>
+                        </span>
                     </p>
                     <ul class="mt-8 space-y-3 text-sm text-white/85">
                         <li class="flex gap-3"><x-marketing.check />Custom web design</li>
@@ -642,6 +668,7 @@
                         <li class="flex gap-3"><x-marketing.check />Hosting, SSL, backups</li>
                     </ul>
                     <a href="{{ route('contact.show', ['plan' => 'essential']) }}"
+                       data-veteran-cta
                        class="mt-10 inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition duration-200 ease-out hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-deep-teal)]">
                         Start with Essential
                     </a>
@@ -661,8 +688,15 @@
                     </div>
                     <p class="mt-2 text-sm text-slate-600">Everything in Essential, plus the content that drives long-term growth.</p>
                     <p class="mt-6">
-                        <span class="font-serif text-5xl lg:text-6xl">$499</span>
-                        <span class="ml-1 text-sm text-slate-500">/month</span>
+                        <span data-price-regular>
+                            <span class="font-serif text-5xl lg:text-6xl">$499</span>
+                            <span class="ml-1 text-sm text-slate-500">/month</span>
+                        </span>
+                        <span data-price-veteran class="hidden">
+                            <span class="font-serif text-5xl lg:text-6xl">$399</span>
+                            <span class="ml-1 text-sm text-slate-500">/month</span>
+                            <span class="ml-2 align-middle text-2xl text-slate-400 line-through">$499</span>
+                        </span>
                     </p>
                     <ul class="mt-8 space-y-3 text-sm text-slate-700">
                         <li class="flex gap-3"><x-marketing.check color="emerald" />Everything in Essential</li>
@@ -673,6 +707,7 @@
                         <li class="flex gap-3"><x-marketing.check color="emerald" />Quarterly performance report</li>
                     </ul>
                     <a href="{{ route('contact.show', ['plan' => 'growth']) }}"
+                       data-veteran-cta
                        class="mt-10 inline-flex items-center justify-center rounded-full bg-[var(--color-red)] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow transition duration-200 ease-out hover:bg-[var(--color-red-deep)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-red)] focus-visible:ring-offset-2 focus-visible:ring-offset-white">
                         Start with Growth
                     </a>
@@ -686,8 +721,15 @@
                     </div>
                     <p class="mt-2 text-sm text-white/70">For owners who'd rather not be on a managed plan.</p>
                     <p class="mt-6">
-                        <span class="font-serif text-5xl">$1,000+</span>
-                        <span class="ml-1 text-sm text-white/70">/one-time</span>
+                        <span data-price-regular>
+                            <span class="font-serif text-5xl">$1,000+</span>
+                            <span class="ml-1 text-sm text-white/70">/one-time</span>
+                        </span>
+                        <span data-price-veteran class="hidden">
+                            <span class="font-serif text-5xl">$800+</span>
+                            <span class="ml-1 text-sm text-white/70">/one-time</span>
+                            <span class="ml-2 align-middle text-2xl text-white/50 line-through">$1,000+</span>
+                        </span>
                     </p>
                     <p class="mt-1 text-sm text-white/70">+ $20/month hosting, SSL, backups &amp; security updates</p>
                     <ul class="mt-8 space-y-3 text-sm text-white/85">
@@ -697,6 +739,7 @@
                         <li class="flex gap-3"><x-marketing.check />Hosting, SSL, backups &amp; security updates</li>
                     </ul>
                     <a href="{{ route('contact.show') }}"
+                       data-veteran-cta
                        class="mt-10 inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition duration-200 ease-out hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-deep-teal)]">
                         Contact for pricing
                     </a>
@@ -707,6 +750,43 @@
                 Need something custom? <a href="{{ route('contact.show') }}" class="underline underline-offset-4 hover:text-white">Get in touch</a>.
             </p>
         </div>
+
+        <script>
+            (() => {
+                const toggle = document.querySelector('[data-veteran-toggle]');
+                if (!toggle) return;
+
+                const note = document.querySelector('[data-veteran-toggle-note]');
+                const regularPrices = document.querySelectorAll('[data-price-regular]');
+                const veteranPrices = document.querySelectorAll('[data-price-veteran]');
+                const ctas = document.querySelectorAll('[data-veteran-cta]');
+
+                const apply = (on) => {
+                    toggle.setAttribute('aria-checked', on ? 'true' : 'false');
+                    regularPrices.forEach((el) => el.classList.toggle('hidden', on));
+                    veteranPrices.forEach((el) => el.classList.toggle('hidden', !on));
+                    note?.classList.toggle('hidden', !on);
+                    ctas.forEach((cta) => {
+                        const url = new URL(cta.href, window.location.origin);
+                        if (on) {
+                            url.searchParams.set('veteran', '1');
+                        } else {
+                            url.searchParams.delete('veteran');
+                        }
+                        cta.href = url.toString();
+                    });
+                };
+
+                toggle.addEventListener('click', () => {
+                    apply(toggle.getAttribute('aria-checked') !== 'true');
+                });
+
+                // Arrive pre-toggled when linked from the veteran banner (?veteran=1).
+                if (new URLSearchParams(window.location.search).get('veteran') === '1') {
+                    apply(true);
+                }
+            })();
+        </script>
     </section>
 
     {{-- ───────── FAQ ───────── --}}

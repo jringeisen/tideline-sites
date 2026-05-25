@@ -23,6 +23,7 @@ class StoreContactInquiryRequest extends FormRequest
             'email' => ['required', 'email:rfc', 'max:255'],
             'phone' => ['required', 'string', 'min:7', 'max:32'],
             'plan' => ['nullable', Rule::in(['essential', 'growth', 'unsure'])],
+            'is_veteran' => ['nullable', 'boolean'],
             'message' => ['required', 'string', 'min:10', 'max:5000'],
         ];
     }

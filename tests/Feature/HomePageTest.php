@@ -22,6 +22,25 @@ test('home page advertises both pricing tiers', function () {
         ->assertSee('Growth', false);
 });
 
+test('home page shows the veteran discount banner', function () {
+    $this->get(route('home'))
+        ->assertSee('Veterans save 20% on every plan', false);
+});
+
+test('home page offers a veteran pricing toggle with discounted prices for every plan', function () {
+    $this->get(route('home'))
+        ->assertSee('data-veteran-toggle', false)
+        ->assertSee('Veteran pricing', false)
+        // Discounted (rounded) prices for all three plans.
+        ->assertSee('$239', false)
+        ->assertSee('$399', false)
+        ->assertSee('$800+', false)
+        // Regular prices remain in the DOM (toggled client-side).
+        ->assertSee('$299', false)
+        ->assertSee('$499', false)
+        ->assertSee('$1,000+', false);
+});
+
 test('home page presents the made-in-America positioning', function () {
     $this->get(route('home'))
         ->assertSee('Built here. For businesses everywhere.', false)

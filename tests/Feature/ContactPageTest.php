@@ -44,6 +44,33 @@ test('the contact page preselects the plan from the query string', function () {
         ->assertSee('value="growth" selected', false);
 });
 
+test('the contact page renders the veteran checkbox unchecked by default', function () {
+    $this->get(route('contact.show'))
+        ->assertOk()
+        ->assertSee('name="is_veteran"', false)
+        ->assertDontSee('name="is_veteran" id="is_veteran" value="1" checked', false);
+});
+
+test('the contact page checks the veteran box from the query string', function () {
+    $this->get(route('contact.show', ['veteran' => 1]))
+        ->assertOk()
+        ->assertSee('name="is_veteran" id="is_veteran" value="1" checked', false);
+});
+
+test('submitting with is_veteran persists the veteran flag', function () {
+    $this->post(route('contact.store'), contactPayload(['is_veteran' => '1']))
+        ->assertRedirect(route('contact.show'));
+
+    expect(ContactInquiry::sole()->is_veteran)->toBeTrue();
+});
+
+test('is_veteran defaults to false when omitted', function () {
+    $this->post(route('contact.store'), contactPayload())
+        ->assertRedirect(route('contact.show'));
+
+    expect(ContactInquiry::sole()->is_veteran)->toBeFalse();
+});
+
 test('submitting valid data persists the inquiry and redirects with a success flash', function () {
     $this->post(route('contact.store'), contactPayload())
         ->assertRedirect(route('contact.show'))

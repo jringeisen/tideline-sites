@@ -50,6 +50,14 @@ $heading = $isSeoAssessment ? 'New SEO assessment request' : 'New contact inquir
                     <td style="padding: 6px 0; text-transform: capitalize;">{{ $inquiry->plan }}</td>
                 </tr>
             @endif
+            @if ($inquiry->is_veteran)
+                <tr>
+                    <td style="padding: 6px 0; color: #475569;">Veteran</td>
+                    <td style="padding: 6px 0;">
+                        <span style="display: inline-block; background: #b4564b; color: #ffffff; padding: 2px 10px; border-radius: 999px; font-size: 12px; font-weight: 600;">Yes — apply 20% discount</span>
+                    </td>
+                </tr>
+            @endif
         </table>
 
         @if ($inquiry->message)

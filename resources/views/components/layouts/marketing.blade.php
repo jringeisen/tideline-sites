@@ -68,11 +68,17 @@
         Skip to content
     </a>
 
-    <x-marketing.header />
+    <x-marketing.veteran-banner />
 
-    <main id="main">
-        {{ $slot }}
-    </main>
+    {{-- Wrapper is the positioning context for the floating (absolute) header, so
+         the header keeps overlaying the hero whether or not the banner is shown. --}}
+    <div class="relative">
+        <x-marketing.header />
+
+        <main id="main">
+            {{ $slot }}
+        </main>
+    </div>
 
     <x-marketing.footer />
 </body>
