@@ -72,6 +72,11 @@
                     'description' => 'One-time custom website build starting at $1,000, plus $20/month for hosting, SSL, backups, and security updates.'],
             ],
         ],
+        'founder' => [
+            ['@type' => 'Person', 'name' => 'Jon Ringeisen', 'jobTitle' => 'Co-founder & Lead Developer'],
+            ['@type' => 'Person', 'name' => 'Elena Ringeisen', 'jobTitle' => 'Co-founder, Marketing & Sales'],
+        ],
+        'knowsAbout' => ['Web Design', 'SEO', 'Local SEO', 'Laravel', 'Small Business Websites'],
     ];
 
     $servicesSchema = [
@@ -100,6 +105,15 @@
             'acceptedAnswer' => ['@type' => 'Answer', 'text' => $faq['answer']],
         ], $faqs),
     ];
+
+    $websiteSchema = [
+        '@context' => 'https://schema.org',
+        '@type' => 'WebSite',
+        '@id' => url('/') . '#website',
+        'name' => 'All American Web Design',
+        'url' => url('/'),
+        'publisher' => ['@id' => $businessId],
+    ];
 @endphp
 
 <x-layouts.marketing
@@ -110,6 +124,7 @@
         <script type="application/ld+json">{!! json_encode($localBusinessSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
         <script type="application/ld+json">{!! json_encode($servicesSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
         <script type="application/ld+json">{!! json_encode($faqSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
+        <script type="application/ld+json">{!! json_encode($websiteSchema, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
     @endpush
 
     {{-- ───────── Hero ───────── --}}

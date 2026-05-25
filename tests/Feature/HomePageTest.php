@@ -39,7 +39,10 @@ test('home page emits SEO meta and LocalBusiness, Service, and FAQ JSON-LD', fun
     $response->assertSee('"@type":"ProfessionalService"', false);
     $response->assertSee('"@type":"FAQPage"', false);
     $response->assertSee('"@type":"Service"', false);
+    $response->assertSee('"@type":"WebSite"', false);
     $response->assertSee('"areaServed"', false);
+    $response->assertSee('"founder"', false);
+    $response->assertSee('"knowsAbout"', false);
 });
 
 test('home page links the pricing CTAs to the contact route with a plan', function () {
