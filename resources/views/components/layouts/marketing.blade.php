@@ -57,7 +57,7 @@
 
     @production
         {{-- Fathom - beautiful, simple website analytics --}}
-        <script src="https://cdn.usefathom.com/script.js" data-spa="auto" data-site="WAVFXUWL" defer></script>
+        <script src="https://cdn.usefathom.com/script.js" data-site="XFYXDHZS" defer></script>
         {{-- / Fathom --}}
     @endproduction
 
