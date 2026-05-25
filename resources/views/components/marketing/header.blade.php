@@ -6,9 +6,10 @@
 
         <nav class="hidden items-center gap-9 text-sm font-medium text-white/85 lg:flex" aria-label="Primary">
             <a href="{{ route('home') }}#services" class="transition hover:text-white">Services</a>
-            <a href="{{ route('service-area') }}" class="transition hover:text-white">Service Area</a>
             <a href="{{ route('home') }}#pricing" class="transition hover:text-white">Pricing</a>
+            <a href="{{ route('service-area') }}" class="transition hover:text-white">Service Area</a>
             <a href="{{ route('about') }}" class="transition hover:text-white">About</a>
+            <a href="{{ route('blog.index') }}" class="transition hover:text-white">Blog</a>
             <a href="{{ route('contact.show') }}" class="transition hover:text-white">Contact</a>
         </nav>
 
@@ -61,9 +62,10 @@
 
             <nav class="mt-8 flex flex-col gap-1 text-base font-medium" aria-label="Mobile">
                 <a href="{{ route('home') }}#services" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">Services</a>
-                <a href="{{ route('service-area') }}" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">Service Area</a>
                 <a href="{{ route('home') }}#pricing" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">Pricing</a>
+                <a href="{{ route('service-area') }}" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">Service Area</a>
                 <a href="{{ route('about') }}" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">About</a>
+                <a href="{{ route('blog.index') }}" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">Blog</a>
                 <a href="{{ route('contact.show') }}" class="rounded-xl px-3 py-3 text-white/90 transition hover:bg-white/10 hover:text-white">Contact</a>
             </nav>
 
