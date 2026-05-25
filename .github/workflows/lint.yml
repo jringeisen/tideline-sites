@@ -43,6 +43,9 @@ jobs:
           cp .env.example .env
           php artisan key:generate
 
+      - name: Generate Wayfinder Files
+        run: php artisan wayfinder:generate --with-form
+
       - name: Check PHP Code Style (Pint)
         run: composer lint:check
 
