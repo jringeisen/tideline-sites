@@ -42,8 +42,14 @@ const unread = ref(props.filters.unread);
 const source = ref(props.filters.source ?? '');
 
 const sourceLabel = (value: string): string => {
-    if (value === 'seo_assessment') return 'SEO Assessment';
-    if (value === 'contact') return 'Contact';
+    if (value === 'seo_assessment') {
+return 'SEO Assessment';
+}
+
+    if (value === 'contact') {
+return 'Contact';
+}
+
     return value;
 };
 
@@ -60,7 +66,10 @@ const applyFilters = () => {
 };
 
 const destroy = (inquiry: InquiryRow) => {
-    if (!window.confirm(`Delete inquiry from "${inquiry.name}"?`)) return;
+    if (!window.confirm(`Delete inquiry from "${inquiry.name}"?`)) {
+return;
+}
+
     router.delete(ContactInquiryController.destroy.url({ contact_inquiry: inquiry.id }));
 };
 </script>
@@ -212,8 +221,9 @@ const destroy = (inquiry: InquiryRow) => {
                     'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)] dark:bg-[var(--color-emerald-700)] dark:ring-[var(--color-emerald-700)]':
                         link.active,
                 }"
-                v-html="link.label"
-            />
+            >
+                <span v-html="link.label" />
+            </Link>
             <span
                 v-else
                 class="rounded-full px-3 py-1.5 text-slate-400 ring-1 ring-[var(--color-sand-300)]/50 dark:text-white/40 dark:ring-white/10"

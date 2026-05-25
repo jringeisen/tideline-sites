@@ -46,7 +46,10 @@ const applyFilters = () => {
 };
 
 const destroy = (post: PostRow) => {
-    if (!window.confirm(`Delete "${post.title}"?`)) return;
+    if (!window.confirm(`Delete "${post.title}"?`)) {
+return;
+}
+
     router.delete(PostController.destroy.url({ post: post.id }));
 };
 </script>
@@ -159,8 +162,9 @@ const destroy = (post: PostRow) => {
                 :href="link.url"
                 class="rounded-full px-3 py-1.5 ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)] dark:ring-white/15 dark:hover:bg-white/[0.06]"
                 :class="{ 'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)] dark:bg-[var(--color-emerald-700)] dark:ring-[var(--color-emerald-700)]': link.active }"
-                v-html="link.label"
-            />
+            >
+                <span v-html="link.label" />
+            </Link>
             <span
                 v-else
                 class="rounded-full px-3 py-1.5 text-slate-400 ring-1 ring-[var(--color-sand-300)]/50 dark:text-white/40 dark:ring-white/10"

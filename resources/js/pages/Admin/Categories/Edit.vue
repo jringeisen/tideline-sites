@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import categories from '@/routes/admin/categories';
 
-const props = defineProps<{
+defineProps<{
     category: { id: number; name: string; slug: string; description: string | null };
 }>();
 

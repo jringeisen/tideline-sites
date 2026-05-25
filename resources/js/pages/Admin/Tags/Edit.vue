@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import tags from '@/routes/admin/tags';
 
-const props = defineProps<{
+defineProps<{
     tag: { id: number; name: string; slug: string };
 }>();
 

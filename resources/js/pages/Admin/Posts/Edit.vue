@@ -4,7 +4,7 @@ import PostController from '@/actions/App/Http/Controllers/Admin/PostController'
 import posts from '@/routes/admin/posts';
 import PostForm from './components/PostForm.vue';
 
-const props = defineProps<{
+defineProps<{
     post: {
         id: number;
         slug: string;
