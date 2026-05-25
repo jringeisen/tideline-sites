@@ -179,9 +179,7 @@
                         <dl class="mt-8 space-y-6 text-sm">
                             <div class="flex items-start gap-4">
                                 <span class="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/10 text-[var(--color-emerald-200)]">
-                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M2 4.5A2.5 2.5 0 014.5 2h2.879A2.5 2.5 0 019.9 3.464l.708 1.768a2.5 2.5 0 01-.547 2.69l-1.06 1.06a11.04 11.04 0 005.018 5.018l1.06-1.06a2.5 2.5 0 012.69-.547l1.768.708A2.5 2.5 0 0118 15.622V18.5a2.5 2.5 0 01-2.5 2.5h-.5C8.073 21 0 12.927 0 4.5V4a2 2 0 011-1.732V4.5z" clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-phone class="h-4 w-4" aria-hidden="true" />
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Phone</dt>
@@ -191,9 +189,7 @@
 
                             <div class="flex items-start gap-4">
                                 <span class="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/10 text-[var(--color-emerald-200)]">
-                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path d="M2.5 4A1.5 1.5 0 001 5.5v9A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0017.5 4h-15zM3 6.18l6.4 4.27a1.5 1.5 0 001.66 0L17.5 6.18V14.5H3V6.18zM16.1 5.5L10 9.57 3.9 5.5h12.2z" />
-                                    </svg>
+                                    <x-heroicon-m-envelope class="h-4 w-4" aria-hidden="true" />
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Email</dt>
@@ -203,9 +199,7 @@
 
                             <div class="flex items-start gap-4">
                                 <span class="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/10 text-[var(--color-emerald-200)]">
-                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-13a.75.75 0 00-1.5 0v5c0 .2.08.39.22.53l3 3a.75.75 0 101.06-1.06l-2.78-2.78V5z" clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-clock class="h-4 w-4" aria-hidden="true" />
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Hours</dt>
@@ -215,9 +209,7 @@
 
                             <div class="flex items-start gap-4">
                                 <span class="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/10 text-[var(--color-emerald-200)]">
-                                    <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="M9.69 18.933A8.501 8.501 0 0118 10a8.5 8.5 0 10-8.31 8.933zM10 11.5a3.5 3.5 0 100-7 3.5 3.5 0 000 7z" clip-rule="evenodd" />
-                                    </svg>
+                                    <x-heroicon-m-map-pin class="h-4 w-4" aria-hidden="true" />
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Service area</dt>
