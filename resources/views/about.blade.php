@@ -49,7 +49,7 @@
         '@id' => $businessId,
         'name' => 'All American Web Design',
         'url' => url('/'),
-        'logo' => asset('og-image.jpg'),
+        'logo' => asset('og-image.png'),
         'description' => 'A husband-and-wife, veteran-owned web design and SEO studio building custom websites for American small businesses, built in America, not outsourced.',
         'foundingLocation' => ['@type' => 'Place', 'name' => 'Panama City Beach, Florida'],
         'founder' => [

@@ -2,8 +2,8 @@
     <div class="mx-auto max-w-7xl px-6 pt-16 pb-10 lg:px-8">
         <div class="grid gap-10 md:grid-cols-12">
             <div class="md:col-span-5">
-                <a href="{{ route('home') }}" class="flex items-center gap-2.5 text-white">
-                    <span class="font-serif text-base font-semibold uppercase leading-[0.95] tracking-wide">All American<br>Web Design</span>
+                <a href="{{ route('home') }}" class="flex items-center text-white">
+                    <img src="{{ asset('logo.png') }}" alt="All American Web Design" class="h-14 w-auto">
                 </a>
                 <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
                     Veteran-owned web design for American small businesses. Custom websites built in America, never outsourced, never templated.

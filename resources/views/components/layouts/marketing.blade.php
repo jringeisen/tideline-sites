@@ -2,7 +2,7 @@
     $title = $title ?? 'All American Web Design — Custom Websites, Built in America';
     $description = $description ?? 'All American Web Design is a veteran-owned studio building custom, high-converting websites for American small businesses — built in America, not outsourced.';
     $canonical = $canonical ?? url()->current();
-    $ogImage = $ogImage ?? asset('og-image.jpg');
+    $ogImage = $ogImage ?? asset('og-image.png');
 @endphp
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">

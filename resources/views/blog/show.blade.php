@@ -5,7 +5,7 @@
     $title = $post->meta_title ?: $post->title;
     $description = $post->meta_description ?: $post->excerpt ?: \Illuminate\Support\Str::limit(strip_tags($post->content), 160);
     $canonical = route('blog.show', $post->slug);
-    $ogImage = $post->og_image_url ?: asset('og-image.jpg');
+    $ogImage = $post->og_image_url ?: asset('og-image.png');
 
     $blogPostingSchema = [
         '@context' => 'https://schema.org',
@@ -22,7 +22,7 @@
         'publisher' => [
             '@type' => 'Organization',
             'name' => 'All American Web Design',
-            'logo' => ['@type' => 'ImageObject', 'url' => asset('og-image.jpg')],
+            'logo' => ['@type' => 'ImageObject', 'url' => asset('og-image.png')],
         ],
         'description' => $description,
     ];

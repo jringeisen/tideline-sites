@@ -12,7 +12,7 @@
         'url' => $pageUrl,
         'description' => $location['meta_description'],
         'priceRange' => '$299 - $499/mo',
-        'image' => asset('og-image.jpg'),
+        'image' => asset('og-image.png'),
         'telephone' => '+1-850-684-8924',
         'email' => 'hello@allamericanwebdesign.com',
         'address' => [
