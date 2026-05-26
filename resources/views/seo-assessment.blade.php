@@ -10,8 +10,8 @@
             'name' => 'Free SEO Assessment',
             'provider' => [
                 '@type' => 'LocalBusiness',
-                'name' => 'All American Web Design',
-                'email' => 'hello@allamericanwebdesign.com',
+                'name' => config('company.name'),
+                'email' => config('company.email'),
                 'areaServed' => 'United States',
             ],
         ],

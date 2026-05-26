@@ -4,6 +4,7 @@ import { ref } from 'vue';
 import ContactInquiryController from '@/actions/App/Http/Controllers/Admin/ContactInquiryController';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { inquirySourceLabel } from '@/lib/inquiry';
 import contactInquiriesRoutes from '@/routes/admin/contact-inquiries';
 
 type InquiryRow = {
@@ -45,18 +46,6 @@ defineOptions({
 const q = ref(props.filters.q ?? '');
 const unread = ref(props.filters.unread);
 const source = ref(props.filters.source ?? '');
-
-const sourceLabel = (value: string): string => {
-    if (value === 'seo_assessment') {
-        return 'SEO Assessment';
-    }
-
-    if (value === 'contact') {
-        return 'Contact';
-    }
-
-    return value;
-};
 
 const applyFilters = () => {
     router.get(
@@ -179,7 +168,7 @@ const destroy = (inquiry: InquiryRow) => {
                                     : 'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80'
                             "
                         >
-                            {{ sourceLabel(inquiry.source) }}
+                            {{ inquirySourceLabel(inquiry.source) }}
                         </span>
                     </td>
                     <td class="px-5 py-4">

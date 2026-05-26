@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Enums\InquirySource;
 use Database\Factories\ContactInquiryFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property InquirySource $source
+ */
 class ContactInquiry extends Model
 {
     /** @use HasFactory<ContactInquiryFactory> */
     use HasFactory;
-
-    public const SOURCE_CONTACT = 'contact';
-
-    public const SOURCE_SEO_ASSESSMENT = 'seo_assessment';
 
     protected $fillable = [
         'name',
@@ -35,6 +35,7 @@ class ContactInquiry extends Model
     protected function casts(): array
     {
         return [
+            'source' => InquirySource::class,
             'is_veteran' => 'boolean',
             'read_at' => 'datetime',
         ];
@@ -51,8 +52,8 @@ class ContactInquiry extends Model
     /**
      * @param  Builder<ContactInquiry>  $query
      */
-    public function scopeOfSource(Builder $query, string $source): void
+    public function scopeOfSource(Builder $query, InquirySource|string $source): void
     {
-        $query->where('source', $source);
+        $query->where('source', $source instanceof InquirySource ? $source->value : $source);
     }
 }

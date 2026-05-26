@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\InquirySource;
 use App\Mail\ContactInquiryReceived;
 use App\Models\ContactInquiry;
 use Illuminate\Support\Facades\Crypt;
@@ -45,7 +46,7 @@ test('submitting valid data persists the inquiry and redirects with a success fl
         ->and($inquiry->email)->toBe('jane@example.com')
         ->and($inquiry->business_name)->toBe('Beachgoer Rentals')
         ->and($inquiry->website)->toBe('https://beachgoer.example.com')
-        ->and($inquiry->source)->toBe(ContactInquiry::SOURCE_SEO_ASSESSMENT)
+        ->and($inquiry->source)->toBe(InquirySource::SeoAssessment)
         ->and($inquiry->phone)->toBeNull()
         ->and($inquiry->plan)->toBeNull()
         ->and($inquiry->message)->toBeNull();

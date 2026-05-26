@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\InquirySource;
 use App\Models\ContactInquiry;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +22,7 @@ class ContactInquiryFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'plan' => fake()->randomElement(['essential', 'growth', 'unsure']),
             'is_veteran' => false,
-            'source' => ContactInquiry::SOURCE_CONTACT,
+            'source' => InquirySource::Contact,
             'message' => fake()->paragraph(),
         ];
     }
@@ -36,7 +37,7 @@ class ContactInquiryFactory extends Factory
     public function seoAssessment(): static
     {
         return $this->state(fn () => [
-            'source' => ContactInquiry::SOURCE_SEO_ASSESSMENT,
+            'source' => InquirySource::SeoAssessment,
             'business_name' => fake()->company(),
             'website' => fake()->url(),
             'phone' => null,

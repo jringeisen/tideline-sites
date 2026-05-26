@@ -3,7 +3,7 @@
         <div class="grid gap-10 md:grid-cols-12">
             <div class="md:col-span-5">
                 <a href="{{ route('home') }}" class="flex items-center text-white">
-                    <img src="{{ asset('logo-dark.png') }}" alt="All American Web Design" class="h-14 w-auto">
+                    <img src="{{ asset('logo-dark.png') }}" alt="{{ config('company.name') }}" class="h-14 w-auto">
                 </a>
                 <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
                     Veteran-owned web design for American small businesses. Custom websites built in America, never outsourced, never templated.
@@ -42,7 +42,7 @@
         </div>
 
         <div class="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-6 text-xs text-white/60 sm:flex-row sm:items-center">
-            <p>&copy; {{ date('Y') }} All American Web Design. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} {{ config('company.name') }}. All rights reserved.</p>
             <p>Veteran-owned &middot; Built in America.</p>
         </div>
     </div>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
 import { home } from '@/routes';
 
 defineProps<{
@@ -6,6 +8,8 @@ defineProps<{
     description?: string;
     eyebrow?: string;
 }>();
+
+const company = computed(() => usePage().props.company);
 </script>
 
 <template>
@@ -19,11 +23,11 @@ defineProps<{
                 <a
                     :href="home.url()"
                     class="flex items-center gap-2.5 text-[var(--color-deep-teal)]"
-                    aria-label="All American Web Design home"
+                    :aria-label="`${company.name} home`"
                 >
                     <img
                         src="/logo-light.png"
-                        alt="All American Web Design"
+                        :alt="company.name"
                         class="h-9 w-auto object-contain"
                     />
                 </a>
@@ -60,7 +64,7 @@ defineProps<{
                         <p
                             class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
                         >
-                            {{ eyebrow ?? 'All American Web Design' }}
+                            {{ eyebrow ?? company.name }}
                         </p>
                         <h1
                             class="mt-3 font-serif text-3xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl"
@@ -87,8 +91,8 @@ defineProps<{
                 class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-8 text-xs text-slate-500 sm:flex-row lg:px-8 dark:text-white/50"
             >
                 <p>
-                    &copy; {{ new Date().getFullYear() }} All American Web
-                    Design. All rights reserved.
+                    &copy; {{ new Date().getFullYear() }} {{ company.name }}.
+                    All rights reserved.
                 </p>
                 <p>Made on the Emerald Coast.</p>
             </div>

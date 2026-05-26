@@ -1,7 +1,7 @@
 <?php
-use App\Models\ContactInquiry;
+use App\Enums\InquirySource;
 
-$isSeoAssessment = $inquiry->source === ContactInquiry::SOURCE_SEO_ASSESSMENT;
+$isSeoAssessment = $inquiry->source === InquirySource::SeoAssessment;
 $heading = $isSeoAssessment ? 'New SEO assessment request' : 'New contact inquiry';
 ?>
 <!DOCTYPE html>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PostStatus;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
@@ -73,7 +74,7 @@ test('admin can update a post and resync tags', function () {
 
     $post->refresh()->load('tags');
     expect($post->title)->toBe('New Title')
-        ->and($post->status)->toBe('draft')
+        ->and($post->status)->toBe(PostStatus::Draft)
         ->and($post->content)->toBe('<p>Updated.</p>')
         ->and($post->tags->pluck('id')->all())->toBe([$newTag->id]);
 });

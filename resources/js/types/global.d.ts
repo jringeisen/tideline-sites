@@ -1,4 +1,5 @@
 import type { Auth } from '@/types/auth';
+import type { Company } from '@/types/ui';
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -17,6 +18,7 @@ declare module '@inertiajs/core' {
     export interface InertiaConfig {
         sharedPageProps: {
             name: string;
+            company: Company;
             auth: Auth;
             sidebarOpen: boolean;
             [key: string]: unknown;

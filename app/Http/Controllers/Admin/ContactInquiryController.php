@@ -28,7 +28,7 @@ class ContactInquiryController extends Controller
             ->when($request->boolean('unread'), fn ($q) => $q->unread())
             ->when($source, fn ($q, string $source) => $q->ofSource($source))
             ->orderByDesc('created_at')
-            ->paginate(15)
+            ->paginate(self::PER_PAGE)
             ->withQueryString();
 
         return Inertia::render('Admin/ContactInquiries/Index', [

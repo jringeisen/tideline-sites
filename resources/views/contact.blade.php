@@ -9,8 +9,8 @@
         'url' => url()->current(),
         'mainEntity' => [
             '@type' => 'LocalBusiness',
-            'name' => 'All American Web Design',
-            'email' => 'hello@allamericanwebdesign.com',
+            'name' => config('company.name'),
+            'email' => config('company.email'),
             'areaServed' => 'United States',
         ],
     ];
@@ -183,7 +183,7 @@
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Phone</dt>
-                                    <dd class="mt-0.5"><a href="tel:+18506848924" class="font-medium text-white hover:underline">(850) 684-8924</a></dd>
+                                    <dd class="mt-0.5"><a href="tel:{{ str_replace('-', '', config('company.phone')) }}" class="font-medium text-white hover:underline">{{ config('company.phone_display') }}</a></dd>
                                 </div>
                             </div>
 
@@ -193,7 +193,7 @@
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Email</dt>
-                                    <dd class="mt-0.5"><a href="mailto:hello@allamericanwebdesign.com" class="font-medium text-white hover:underline">hello@allamericanwebdesign.com</a></dd>
+                                    <dd class="mt-0.5"><a href="mailto:{{ config('company.email') }}" class="font-medium text-white hover:underline">{{ config('company.email') }}</a></dd>
                                 </div>
                             </div>
 

@@ -33,7 +33,7 @@
 
     {{-- Open Graph --}}
     <meta property="og:type" content="website">
-    <meta property="og:site_name" content="All American Web Design">
+    <meta property="og:site_name" content="{{ config('company.name') }}">
     <meta property="og:title" content="{{ $title }}">
     <meta property="og:description" content="{{ $description }}">
     <meta property="og:url" content="{{ $canonical }}">

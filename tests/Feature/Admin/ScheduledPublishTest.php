@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\PostStatus;
 use App\Models\Post;
 use App\Models\User;
 
@@ -12,7 +13,7 @@ test('posts:publish-scheduled flips due scheduled posts to published', function 
 
     $this->artisan('posts:publish-scheduled')->assertExitCode(0);
 
-    expect($due->refresh()->status)->toBe(Post::STATUS_PUBLISHED)
-        ->and($future->refresh()->status)->toBe(Post::STATUS_SCHEDULED)
-        ->and($draft->refresh()->status)->toBe(Post::STATUS_DRAFT);
+    expect($due->refresh()->status)->toBe(PostStatus::Published)
+        ->and($future->refresh()->status)->toBe(PostStatus::Scheduled)
+        ->and($draft->refresh()->status)->toBe(PostStatus::Draft);
 });

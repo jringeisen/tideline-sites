@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Enums\PostStatus;
 use App\Models\Post;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -27,7 +28,7 @@ class UpdatePostRequest extends FormRequest
             'excerpt' => ['nullable', 'string', 'max:500'],
             'content' => ['required', 'string'],
             'category_id' => ['nullable', 'integer', 'exists:categories,id'],
-            'status' => ['required', Rule::in(Post::STATUSES)],
+            'status' => ['required', Rule::enum(PostStatus::class)],
             'published_at' => ['nullable', 'date', 'required_if:status,scheduled', 'required_if:status,published'],
             'tags' => ['array'],
             'tags.*' => ['integer', 'exists:tags,id'],

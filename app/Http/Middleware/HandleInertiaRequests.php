@@ -38,6 +38,12 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'name' => config('app.name'),
+            'company' => [
+                'name' => config('company.name'),
+                'email' => config('company.email'),
+                'phone' => config('company.phone'),
+                'phoneDisplay' => config('company.phone_display'),
+            ],
             'auth' => [
                 'user' => $request->user()?->append('is_admin'),
             ],

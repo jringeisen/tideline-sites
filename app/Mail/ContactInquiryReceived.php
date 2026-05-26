@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Enums\InquirySource;
 use App\Models\ContactInquiry;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,7 +19,7 @@ class ContactInquiryReceived extends Mailable implements ShouldQueue
 
     public function envelope(): Envelope
     {
-        $label = $this->inquiry->source === ContactInquiry::SOURCE_SEO_ASSESSMENT
+        $label = $this->inquiry->source === InquirySource::SeoAssessment
             ? 'SEO assessment request'
             : 'contact inquiry';
 

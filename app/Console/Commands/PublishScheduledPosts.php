@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\PostStatus;
 use App\Models\Post;
 use Illuminate\Console\Attributes\Description;
 use Illuminate\Console\Attributes\Signature;
@@ -14,10 +15,10 @@ class PublishScheduledPosts extends Command
     public function handle(): int
     {
         $count = Post::query()
-            ->where('status', Post::STATUS_SCHEDULED)
+            ->where('status', PostStatus::Scheduled->value)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now())
-            ->update(['status' => Post::STATUS_PUBLISHED]);
+            ->update(['status' => PostStatus::Published->value]);
 
         $this->info("Published {$count} scheduled post(s).");
 

@@ -3,6 +3,7 @@ import { Head, Link, router } from '@inertiajs/vue3';
 import { computed } from 'vue';
 import ContactInquiryController from '@/actions/App/Http/Controllers/Admin/ContactInquiryController';
 import { Button } from '@/components/ui/button';
+import { inquirySourceLabel } from '@/lib/inquiry';
 import contactInquiriesRoutes from '@/routes/admin/contact-inquiries';
 
 type Inquiry = {
@@ -31,9 +32,7 @@ defineOptions({
     },
 });
 
-const sourceLabel = computed(() =>
-    props.inquiry.source === 'seo_assessment' ? 'SEO Assessment' : 'Contact',
-);
+const sourceLabel = computed(() => inquirySourceLabel(props.inquiry.source));
 
 const toggleRead = () => {
     if (props.inquiry.read_at) {

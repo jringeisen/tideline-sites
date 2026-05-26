@@ -15,6 +15,7 @@ defineOptions({
 const page = usePage();
 const user = computed(() => page.props.auth?.user);
 const isAdmin = computed(() => user.value?.is_admin === true);
+const company = computed(() => page.props.company);
 </script>
 
 <template>
@@ -25,7 +26,7 @@ const isAdmin = computed(() => user.value?.is_admin === true);
             <p
                 class="text-xs font-semibold tracking-[0.18em] text-[var(--color-emerald-700)] uppercase"
             >
-                All American Web Design
+                {{ company.name }}
             </p>
             <h1
                 class="mt-2 font-serif text-3xl leading-tight tracking-tight text-[var(--color-deep-teal)] sm:text-4xl"

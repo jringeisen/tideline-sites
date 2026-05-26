@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\PostStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePostRequest;
 use App\Http\Requests\Admin\UpdatePostRequest;
@@ -23,7 +24,7 @@ class PostController extends Controller
             ->when($request->query('category'), fn ($q, $categoryId) => $q->where('category_id', $categoryId))
             ->when($request->query('q'), fn ($q, $term) => $q->where('title', 'like', "%{$term}%"))
             ->orderByDesc('updated_at')
-            ->paginate(15)
+            ->paginate(self::PER_PAGE)
             ->withQueryString();
 
         return Inertia::render('Admin/Posts/Index', [
@@ -42,7 +43,7 @@ class PostController extends Controller
         return Inertia::render('Admin/Posts/Create', [
             'categories' => Category::query()->orderBy('name')->get(['id', 'name']),
             'tags' => Tag::query()->orderBy('name')->get(['id', 'name']),
-            'statuses' => Post::STATUSES,
+            'statuses' => PostStatus::values(),
         ]);
     }
 
@@ -68,7 +69,7 @@ class PostController extends Controller
             'postTags' => $post->tags->pluck('id'),
             'categories' => Category::query()->orderBy('name')->get(['id', 'name']),
             'tags' => Tag::query()->orderBy('name')->get(['id', 'name']),
-            'statuses' => Post::STATUSES,
+            'statuses' => PostStatus::values(),
         ]);
     }
 

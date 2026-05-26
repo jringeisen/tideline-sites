@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PostStatus;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
@@ -25,7 +26,7 @@ class PostFactory extends Factory
                 ->implode("\n"),
             'category_id' => Category::factory(),
             'author_id' => User::factory(),
-            'status' => Post::STATUS_PUBLISHED,
+            'status' => PostStatus::Published,
             'published_at' => now()->subDays(fake()->numberBetween(0, 30)),
             'meta_title' => null,
             'meta_description' => null,
@@ -36,7 +37,7 @@ class PostFactory extends Factory
     public function draft(): static
     {
         return $this->state(fn () => [
-            'status' => Post::STATUS_DRAFT,
+            'status' => PostStatus::Draft,
             'published_at' => null,
         ]);
     }
@@ -44,7 +45,7 @@ class PostFactory extends Factory
     public function scheduled(\DateTimeInterface|CarbonInterface|null $at = null): static
     {
         return $this->state(fn () => [
-            'status' => Post::STATUS_SCHEDULED,
+            'status' => PostStatus::Scheduled,
             'published_at' => $at ?? now()->addHour(),
         ]);
     }
@@ -52,7 +53,7 @@ class PostFactory extends Factory
     public function published(\DateTimeInterface|CarbonInterface|null $at = null): static
     {
         return $this->state(fn () => [
-            'status' => Post::STATUS_PUBLISHED,
+            'status' => PostStatus::Published,
             'published_at' => $at ?? now()->subMinutes(5),
         ]);
     }

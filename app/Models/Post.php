@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Concerns\HasSlug;
+use App\Enums\PostStatus;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,10 +12,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 
 /**
+ * @property PostStatus $status
  * @property Carbon|null $published_at
  */
 #[Fillable([
@@ -33,19 +35,12 @@ use Laravel\Scout\Searchable;
 class Post extends Model
 {
     /** @use HasFactory<PostFactory> */
-    use HasFactory, Searchable;
-
-    public const STATUS_DRAFT = 'draft';
-
-    public const STATUS_SCHEDULED = 'scheduled';
-
-    public const STATUS_PUBLISHED = 'published';
-
-    public const STATUSES = [self::STATUS_DRAFT, self::STATUS_SCHEDULED, self::STATUS_PUBLISHED];
+    use HasFactory, HasSlug, Searchable;
 
     protected function casts(): array
     {
         return [
+            'status' => PostStatus::class,
             'published_at' => 'datetime',
         ];
     }
@@ -53,12 +48,18 @@ class Post extends Model
     protected static function booted(): void
     {
         static::saving(function (Post $post): void {
-            if (empty($post->slug)) {
-                $post->slug = self::uniqueSlug($post->title, $post->id);
-            }
-
             $post->reading_time_minutes = static::computeReadingTime((string) $post->content);
         });
+    }
+
+    protected function slugSource(): string
+    {
+        return 'title';
+    }
+
+    protected function slugFallback(): string
+    {
+        return 'post';
     }
 
     /**
@@ -66,7 +67,7 @@ class Post extends Model
      */
     public function scopePublished(Builder $query): void
     {
-        $query->where('status', self::STATUS_PUBLISHED)
+        $query->where('status', PostStatus::Published->value)
             ->whereNotNull('published_at')
             ->where('published_at', '<=', now());
     }
@@ -76,7 +77,7 @@ class Post extends Model
      */
     public function scopeScheduled(Builder $query): void
     {
-        $query->where('status', self::STATUS_SCHEDULED);
+        $query->where('status', PostStatus::Scheduled->value);
     }
 
     /**
@@ -120,7 +121,7 @@ class Post extends Model
 
     public function shouldBeSearchable(): bool
     {
-        return $this->status === self::STATUS_PUBLISHED;
+        return $this->status === PostStatus::Published;
     }
 
     public static function computeReadingTime(string $content): int
@@ -128,22 +129,5 @@ class Post extends Model
         $words = str_word_count(strip_tags($content));
 
         return max(1, (int) ceil($words / 200));
-    }
-
-    private static function uniqueSlug(string $source, ?int $ignoreId = null): string
-    {
-        $base = Str::slug($source) ?: 'post';
-        $slug = $base;
-        $i = 2;
-
-        while (static::query()
-            ->where('slug', $slug)
-            ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
-            ->exists()) {
-            $slug = "{$base}-{$i}";
-            $i++;
-        }
-
-        return $slug;
     }
 }

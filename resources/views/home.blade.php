@@ -42,8 +42,8 @@
         'description' => 'Veteran-owned web design building custom, high-converting websites for American small businesses — built in America, not outsourced.',
         'priceRange' => '$299 - $499/mo',
         'image' => asset('og-image.png'),
-        'telephone' => '+1-850-684-8924',
-        'email' => 'hello@allamericanwebdesign.com',
+        'telephone' => config('company.phone'),
+        'email' => config('company.email'),
         'address' => [
             '@type' => 'PostalAddress',
             'addressLocality' => 'Panama City Beach',

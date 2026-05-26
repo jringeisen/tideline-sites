@@ -2,22 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Concerns\DetectsFormSpam;
+use App\Enums\InquirySource;
 use App\Http\Requests\StoreSeoAssessmentRequest;
 use App\Mail\ContactInquiryReceived;
 use App\Models\ContactInquiry;
-use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 
 class SeoAssessmentController extends Controller
 {
-    /**
-     * Minimum seconds between form render and submission. Anything faster is
-     * assumed to be a bot.
-     */
-    private const MIN_FILL_SECONDS = 3;
+    use DetectsFormSpam;
 
     public function show(): View
     {
@@ -26,13 +22,13 @@ class SeoAssessmentController extends Controller
 
     public function store(StoreSeoAssessmentRequest $request): RedirectResponse
     {
-        if ($this->looksLikeSpam($request)) {
+        if ($this->looksLikeSpam($request, 'company_url')) {
             return $this->thankYouRedirect();
         }
 
         $inquiry = ContactInquiry::create([
             ...$request->validated(),
-            'source' => ContactInquiry::SOURCE_SEO_ASSESSMENT,
+            'source' => InquirySource::SeoAssessment,
         ]);
 
         $recipients = config('admin.emails', []);
@@ -41,21 +37,6 @@ class SeoAssessmentController extends Controller
         }
 
         return $this->thankYouRedirect();
-    }
-
-    private function looksLikeSpam(StoreSeoAssessmentRequest $request): bool
-    {
-        if (filled($request->input('company_url'))) {
-            return true;
-        }
-
-        try {
-            $startedAt = (int) Crypt::decryptString((string) $request->input('started_at', ''));
-        } catch (DecryptException) {
-            return true;
-        }
-
-        return (time() - $startedAt) < self::MIN_FILL_SECONDS;
     }
 
     private function thankYouRedirect(): RedirectResponse
