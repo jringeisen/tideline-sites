@@ -13,7 +13,7 @@
             <div class="md:col-span-3">
                 <h3 class="text-xs font-semibold uppercase tracking-widest text-white/60">Company</h3>
                 <ul class="mt-4 space-y-2 text-sm">
-                    <li><a href="{{ route('home') }}#services" class="transition hover:text-white">Services</a></li>
+                    <li><a href="{{ route('services.index') }}" class="transition hover:text-white">Services</a></li>
                     <li><a href="{{ route('home') }}#pricing" class="transition hover:text-white">Pricing</a></li>
                     <li><a href="{{ route('about') }}" class="transition hover:text-white">About</a></li>
                     <li><a href="{{ route('blog.index') }}" class="transition hover:text-white">Blog</a></li>
@@ -32,8 +32,8 @@
                 <p class="mt-4 text-sm leading-relaxed text-white/60">
                     Proudly building websites for small businesses across the United States, with local roots on Florida's Gulf Coast.
                 </p>
-                <a href="{{ route('service-area') }}" class="mt-4 inline-flex items-center text-sm font-semibold text-white/90 transition hover:text-white">
-                    See where we work
+                <a href="{{ route('locations.index') }}" class="mt-4 inline-flex items-center text-sm font-semibold text-white/90 transition hover:text-white">
+                    See all service areas
                     <svg class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                         <path fill-rule="evenodd" d="M10.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                     </svg>

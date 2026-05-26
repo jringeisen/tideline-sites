@@ -1,5 +1,11 @@
 <?php
 
+use Database\Seeders\ServiceSeeder;
+
+beforeEach(function () {
+    $this->seed(ServiceSeeder::class);
+});
+
 test('home page renders successfully', function () {
     $this->get(route('home'))->assertOk();
 });
@@ -62,6 +68,17 @@ test('home page emits SEO meta and LocalBusiness, Service, and FAQ JSON-LD', fun
     $response->assertSee('"areaServed"', false);
     $response->assertSee('"founder"', false);
     $response->assertSee('"knowsAbout"', false);
+});
+
+test('home page links each service card to its service page', function () {
+    $this->get(route('home'))
+        ->assertSee(route('services.show', 'web-design'), false)
+        ->assertSee('Learn more', false);
+});
+
+test('primary nav points Services at the standalone services hub', function () {
+    $this->get(route('home'))
+        ->assertSee('href="'.route('services.index').'"', false);
 });
 
 test('home page links the pricing CTAs to the contact route with a plan', function () {

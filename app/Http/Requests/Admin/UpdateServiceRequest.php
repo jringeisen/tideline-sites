@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+
+class UpdateServiceRequest extends FormRequest
+{
+    public function authorize(): bool
+    {
+        return $this->user()?->is_admin === true;
+    }
+
+    /**
+     * @return array<string, mixed>
+     */
+    public function rules(): array
+    {
+        return [
+            'name' => ['required', 'string', 'max:200'],
+            'slug' => ['nullable', 'string', 'alpha_dash', 'max:200', Rule::unique('services', 'slug')->ignore($this->route('service'))],
+            'summary' => ['nullable', 'string', 'max:500'],
+            'icon' => ['nullable', 'string', 'max:2000'],
+            'hero_subhead' => ['nullable', 'string', 'max:255'],
+            'body' => ['nullable', 'string'],
+            'faqs' => ['nullable', 'array'],
+            'faqs.*.question' => ['nullable', 'string', 'max:255'],
+            'faqs.*.answer' => ['nullable', 'string', 'max:1000'],
+            'meta_title' => ['nullable', 'string', 'max:70'],
+            'meta_description' => ['nullable', 'string', 'max:200'],
+            'og_image_url' => ['nullable', 'url', 'max:500'],
+            'is_published' => ['boolean'],
+            'sort_order' => ['nullable', 'integer', 'min:0'],
+            'locations' => ['array'],
+            'locations.*' => ['integer', 'exists:locations,id'],
+        ];
+    }
+}

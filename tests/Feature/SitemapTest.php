@@ -1,6 +1,13 @@
 <?php
 
-test('the sitemap is served as XML and includes home, contact, and all locations', function () {
+use Database\Seeders\LocationSeeder;
+use Database\Seeders\ServiceSeeder;
+
+beforeEach(function () {
+    $this->seed([ServiceSeeder::class, LocationSeeder::class]);
+});
+
+test('the sitemap is served as XML and includes core pages, services, and locations', function () {
     $response = $this->get('/sitemap.xml');
 
     $response->assertOk();
@@ -12,6 +19,9 @@ test('the sitemap is served as XML and includes home, contact, and all locations
         route('about'),
         route('service-area'),
         route('contact.show'),
+        route('services.index'),
+        route('locations.index'),
+        route('services.show', 'web-design'),
         route('location.show', 'destin'),
         route('location.show', 'panama-city-beach'),
         route('location.show', '30a'),

@@ -2,17 +2,21 @@
 
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ContactInquiryController as AdminContactInquiryController;
+use App\Http\Controllers\Admin\LocationController as AdminLocationController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
+use App\Http\Controllers\Admin\ServiceController as AdminServiceController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogFeedController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SeoAssessmentController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
+Route::get('/', [HomeController::class, 'show'])->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/service-area', 'service-area')->name('service-area');
 
@@ -26,8 +30,16 @@ Route::post('/seo-assessment', [SeoAssessmentController::class, 'store'])
     ->middleware('throttle:5,60')
     ->name('seo-assessment.store');
 
-Route::get('/locations/{slug}', [LocationController::class, 'show'])
-    ->where('slug', '[a-z0-9-]+')
+Route::prefix('services')->name('services.')->group(function () {
+    Route::get('/', [ServiceController::class, 'index'])->name('index');
+    Route::get('/{service:slug}', [ServiceController::class, 'show'])
+        ->where('service', '[a-z0-9-]+')
+        ->name('show');
+});
+
+Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+Route::get('/locations/{location:slug}', [LocationController::class, 'show'])
+    ->where('location', '[a-z0-9-]+')
     ->name('location.show');
 
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
@@ -57,6 +69,8 @@ Route::middleware(['auth', 'verified', 'admin'])
         Route::resource('posts', AdminPostController::class)->except('show');
         Route::resource('categories', AdminCategoryController::class)->except('show');
         Route::resource('tags', AdminTagController::class)->except('show');
+        Route::resource('services', AdminServiceController::class)->except('show');
+        Route::resource('locations', AdminLocationController::class)->except('show');
 
         Route::resource('contact-inquiries', AdminContactInquiryController::class)
             ->only(['index', 'show', 'destroy']);

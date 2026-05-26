@@ -5,7 +5,9 @@ import {
     FolderOpen,
     Inbox,
     LayoutGrid,
+    MapPin,
     Tag as TagIcon,
+    Wrench,
 } from 'lucide-vue-next';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
@@ -26,7 +28,9 @@ import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { dashboard } from '@/routes';
 import categories from '@/routes/admin/categories';
 import contactInquiries from '@/routes/admin/contact-inquiries';
+import locations from '@/routes/admin/locations';
 import posts from '@/routes/admin/posts';
+import services from '@/routes/admin/services';
 import tags from '@/routes/admin/tags';
 import type { NavItem } from '@/types';
 
@@ -46,6 +50,8 @@ const adminNavItems = computed<NavItem[]>(() => [
     { title: 'Posts', href: posts.index().url, icon: FileText },
     { title: 'Categories', href: categories.index().url, icon: FolderOpen },
     { title: 'Tags', href: tags.index().url, icon: TagIcon },
+    { title: 'Services', href: services.index().url, icon: Wrench },
+    { title: 'Locations', href: locations.index().url, icon: MapPin },
     {
         title: 'Contact inquiries',
         href: contactInquiries.index().url,

@@ -1,26 +1,5 @@
 @php
-    $services = [
-        [
-            'name' => 'Web Design',
-            'description' => 'Hand-crafted, lightning-fast websites built to convert visitors into customers.',
-            'icon' => 'M3 4.5A1.5 1.5 0 014.5 3h11A1.5 1.5 0 0117 4.5v8a1.5 1.5 0 01-1.5 1.5h-4l.4 2H13a.75.75 0 010 1.5H7a.75.75 0 010-1.5h1.1l.4-2h-4A1.5 1.5 0 013 12.5v-8z',
-        ],
-        [
-            'name' => 'SEO Optimization',
-            'description' => 'On-page SEO, local listings, and ongoing optimization so the right people find you on Google.',
-            'icon' => 'M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.45 4.39l3.08 3.08a.75.75 0 11-1.06 1.06l-3.08-3.08A7 7 0 012 9z',
-        ],
-        [
-            'name' => 'Blog Writing',
-            'description' => 'Original articles that rank, educate your customers, and turn your site into a magnet for search traffic.',
-            'icon' => 'M3.5 3A1.5 1.5 0 002 4.5v11A1.5 1.5 0 003.5 17h13a1.5 1.5 0 001.5-1.5v-11A1.5 1.5 0 0016.5 3h-13zM5 7.25A.75.75 0 015.75 6.5h8.5a.75.75 0 010 1.5h-8.5A.75.75 0 015 7.25zM5.75 10a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM5 13.75a.75.75 0 01.75-.75h5.5a.75.75 0 010 1.5h-5.5a.75.75 0 01-.75-.75z',
-        ],
-        [
-            'name' => 'Newsletters',
-            'description' => 'Beautifully designed monthly newsletters that keep your business top-of-mind with past customers.',
-            'icon' => 'M2.5 4A1.5 1.5 0 001 5.5v9A1.5 1.5 0 002.5 16h15a1.5 1.5 0 001.5-1.5v-9A1.5 1.5 0 0017.5 4h-15zM3 6.18l6.4 4.27a1.5 1.5 0 001.66 0L17.5 6.18V14.5H3V6.18zM16.1 5.5L10 9.57 3.9 5.5h12.2z',
-        ],
-    ];
+    /** @var \Illuminate\Support\Collection<int, \App\Models\Service> $services */
 
     $faqs = [
         ['question' => 'Do I own my website?', 'answer' => 'Yes, always. The design, content, and domain are yours. If you ever leave us, we hand it off cleanly.'],
@@ -83,17 +62,18 @@
         '@context' => 'https://schema.org',
         '@type' => 'ItemList',
         'name' => 'All American Web Design Services',
-        'itemListElement' => array_map(fn ($i, $service) => [
+        'itemListElement' => $services->values()->map(fn ($service, $i) => [
             '@type' => 'ListItem',
             'position' => $i + 1,
             'item' => [
                 '@type' => 'Service',
-                'name' => $service['name'],
-                'description' => $service['description'],
+                'name' => $service->name,
+                'description' => $service->summary,
+                'url' => route('services.show', $service->slug),
                 'provider' => ['@id' => $businessId],
                 'areaServed' => ['@type' => 'Country', 'name' => 'United States'],
             ],
-        ], array_keys($services), $services),
+        ])->all(),
     ];
 
     $faqSchema = [
@@ -292,17 +272,20 @@
 
             {{-- Foundation services — included in every plan --}}
             <div class="mx-auto mt-16 grid max-w-6xl gap-6 lg:grid-cols-2">
-                @foreach (array_slice($services, 0, 2) as $service)
+                @foreach ($services->take(2) as $service)
                     <article class="group relative flex flex-col overflow-hidden rounded-3xl border border-[var(--color-sand-300)]/60 bg-white p-8 shadow-[0_1px_0_rgba(11,42,46,0.04)] transition duration-200 ease-out hover:-translate-y-0.5 hover:border-[var(--color-emerald-600)]/30 hover:shadow-lg sm:p-10 dark:bg-white/[0.04] dark:border-white/10">
                         <span aria-hidden="true" class="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-[var(--color-navy)]/5 transition duration-300 group-hover:scale-110 dark:bg-white/[0.04]"></span>
                         <span class="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-[var(--color-navy)] text-[var(--color-cream)] ring-1 ring-white/10 dark:bg-white/10 dark:text-white dark:ring-white/15">
                             <svg viewBox="0 0 20 20" fill="currentColor" class="h-7 w-7" aria-hidden="true">
-                                <path fill-rule="evenodd" d="{{ $service['icon'] }}" clip-rule="evenodd" />
+                                <path fill-rule="evenodd" d="{{ $service->icon }}" clip-rule="evenodd" />
                             </svg>
                         </span>
-                        <h3 class="relative mt-6 font-serif text-2xl text-[var(--color-deep-teal)] sm:text-3xl">{{ $service['name'] }}</h3>
-                        <p class="relative mt-3 text-base leading-relaxed text-slate-600">{{ $service['description'] }}</p>
-                        <p class="relative mt-6 text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-red)]">Included in every plan</p>
+                        <h3 class="relative mt-6 font-serif text-2xl text-[var(--color-deep-teal)] sm:text-3xl">{{ $service->name }}</h3>
+                        <p class="relative mt-3 text-base leading-relaxed text-slate-600">{{ $service->summary }}</p>
+                        <div class="relative mt-6 flex items-center justify-between gap-4">
+                            <p class="text-xs font-medium uppercase tracking-[0.18em] text-[var(--color-red)]">Included in every plan</p>
+                            <a href="{{ route('services.show', $service->slug) }}" class="text-sm font-semibold text-[var(--color-emerald-700)] underline-offset-4 hover:underline">Learn more →</a>
+                        </div>
                     </article>
                 @endforeach
             </div>
@@ -322,18 +305,18 @@
                         </a>
                     </div>
                     <div class="mt-5 grid gap-4 sm:grid-cols-2">
-                        @foreach (array_slice($services, 2, 2) as $service)
-                            <article class="flex items-start gap-4 rounded-2xl bg-white p-5 ring-1 ring-[var(--color-sand-300)]/60 transition duration-200 ease-out hover:-translate-y-0.5 hover:ring-[var(--color-emerald-600)]/30 dark:bg-white/[0.04] dark:ring-white/10">
+                        @foreach ($services->slice(2, 2) as $service)
+                            <a href="{{ route('services.show', $service->slug) }}" class="group flex items-start gap-4 rounded-2xl bg-white p-5 ring-1 ring-[var(--color-sand-300)]/60 transition duration-200 ease-out hover:-translate-y-0.5 hover:ring-[var(--color-emerald-600)]/30 dark:bg-white/[0.04] dark:ring-white/10">
                                 <span class="flex h-10 w-10 flex-none items-center justify-center rounded-xl bg-[var(--color-navy)] text-[var(--color-cream)] ring-1 ring-white/10 dark:bg-white/10 dark:text-white dark:ring-white/15">
                                     <svg viewBox="0 0 20 20" fill="currentColor" class="h-4 w-4" aria-hidden="true">
-                                        <path fill-rule="evenodd" d="{{ $service['icon'] }}" clip-rule="evenodd" />
+                                        <path fill-rule="evenodd" d="{{ $service->icon }}" clip-rule="evenodd" />
                                     </svg>
                                 </span>
                                 <div>
-                                    <h3 class="font-serif text-lg text-[var(--color-deep-teal)]">{{ $service['name'] }}</h3>
-                                    <p class="mt-1 text-sm leading-relaxed text-slate-600">{{ $service['description'] }}</p>
+                                    <h3 class="font-serif text-lg text-[var(--color-deep-teal)] group-hover:underline">{{ $service->name }}</h3>
+                                    <p class="mt-1 text-sm leading-relaxed text-slate-600">{{ $service->summary }}</p>
                                 </div>
-                            </article>
+                            </a>
                         @endforeach
                     </div>
                 </div>

@@ -5,15 +5,23 @@ export type TaxonomyRow = {
     id: number;
     name: string;
     slug: string;
-    posts_count: number;
+    [key: string]: string | number | null | undefined;
 };
 
-defineProps<{
-    items: TaxonomyRow[];
-    editUrl: (id: number) => string;
-    emptyTitle: string;
-    emptyBody: string;
-}>();
+withDefaults(
+    defineProps<{
+        items: TaxonomyRow[];
+        editUrl: (id: number) => string;
+        emptyTitle: string;
+        emptyBody: string;
+        countLabel?: string;
+        countKey?: string;
+    }>(),
+    {
+        countLabel: 'Posts',
+        countKey: 'posts_count',
+    },
+);
 
 const emit = defineEmits<{ delete: [item: TaxonomyRow] }>();
 </script>
@@ -31,7 +39,7 @@ const emit = defineEmits<{ delete: [item: TaxonomyRow] }>();
                 <tr>
                     <th class="px-5 py-4">Name</th>
                     <th class="px-5 py-4">Slug</th>
-                    <th class="px-5 py-4">Posts</th>
+                    <th class="px-5 py-4">{{ countLabel }}</th>
                     <th class="px-5 py-4 text-right">Actions</th>
                 </tr>
             </thead>
@@ -56,7 +64,7 @@ const emit = defineEmits<{ delete: [item: TaxonomyRow] }>();
                         {{ item.slug }}
                     </td>
                     <td class="px-5 py-4 text-slate-600 dark:text-white/70">
-                        {{ item.posts_count }}
+                        {{ item[countKey] }}
                     </td>
                     <td class="px-5 py-4 text-right">
                         <Link

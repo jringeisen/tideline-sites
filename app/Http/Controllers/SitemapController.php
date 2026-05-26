@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Location;
 use App\Models\Post;
+use App\Models\Service;
 use App\Models\Tag;
 use Illuminate\Http\Response;
 
@@ -19,11 +21,24 @@ class SitemapController extends Controller
             ['loc' => route('blog.index'), 'priority' => '0.8', 'changefreq' => 'weekly'],
         ];
 
-        foreach (array_keys(config('locations', [])) as $slug) {
+        $urls[] = ['loc' => route('services.index'), 'priority' => '0.8', 'changefreq' => 'monthly'];
+        $urls[] = ['loc' => route('locations.index'), 'priority' => '0.7', 'changefreq' => 'monthly'];
+
+        foreach (Service::published()->orderBy('sort_order')->get() as $service) {
             $urls[] = [
-                'loc' => route('location.show', $slug),
+                'loc' => route('services.show', $service->slug),
                 'priority' => '0.8',
                 'changefreq' => 'monthly',
+                'lastmod' => $service->updated_at?->toAtomString(),
+            ];
+        }
+
+        foreach (Location::published()->orderBy('sort_order')->get() as $location) {
+            $urls[] = [
+                'loc' => route('location.show', $location->slug),
+                'priority' => '0.8',
+                'changefreq' => 'monthly',
+                'lastmod' => $location->updated_at?->toAtomString(),
             ];
         }
 
