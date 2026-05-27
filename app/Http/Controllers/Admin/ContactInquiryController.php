@@ -27,6 +27,7 @@ class ContactInquiryController extends Controller
             })
             ->when($request->boolean('unread'), fn ($q) => $q->unread())
             ->when($source, fn ($q, string $source) => $q->ofSource($source))
+            ->when(! $request->boolean('show_spam'), fn ($q) => $q->where('is_spam', false))
             ->orderByDesc('created_at')
             ->paginate(self::PER_PAGE)
             ->withQueryString();
@@ -37,8 +38,9 @@ class ContactInquiryController extends Controller
                 'q' => $request->query('q'),
                 'unread' => $request->boolean('unread'),
                 'source' => $source,
+                'show_spam' => $request->boolean('show_spam'),
             ],
-            'unreadCount' => ContactInquiry::query()->unread()->count(),
+            'unreadCount' => ContactInquiry::query()->unread()->where('is_spam', false)->count(),
         ]);
     }
 

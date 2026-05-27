@@ -76,6 +76,41 @@ test('unread filter hides read inquiries', function () {
         ->and($rows[0]['id'])->toBe($unread->id);
 });
 
+test('spam inquiries are hidden from the list by default', function () {
+    $clean = ContactInquiry::factory()->create(['name' => 'Real Lead']);
+    ContactInquiry::factory()->spam()->create(['name' => 'Spam Bot']);
+
+    $response = $this->actingAs($this->admin)
+        ->get('/admin/contact-inquiries')
+        ->assertOk();
+
+    $rows = $response->viewData('page')['props']['inquiries']['data'];
+    expect(collect($rows)->pluck('id')->all())->toBe([$clean->id]);
+});
+
+test('the show spam filter includes spam inquiries', function () {
+    $clean = ContactInquiry::factory()->create(['name' => 'Real Lead']);
+    $spam = ContactInquiry::factory()->spam()->create(['name' => 'Spam Bot']);
+
+    $response = $this->actingAs($this->admin)
+        ->get('/admin/contact-inquiries?show_spam=1')
+        ->assertOk();
+
+    $rows = $response->viewData('page')['props']['inquiries']['data'];
+    expect(collect($rows)->pluck('id')->all())->toContain($clean->id, $spam->id);
+});
+
+test('the unread count excludes spam inquiries', function () {
+    ContactInquiry::factory()->create(['read_at' => null]);
+    ContactInquiry::factory()->spam()->create(['read_at' => null]);
+
+    $response = $this->actingAs($this->admin)
+        ->get('/admin/contact-inquiries')
+        ->assertOk();
+
+    expect($response->viewData('page')['props']['unreadCount'])->toBe(1);
+});
+
 test('admin can view an inquiry', function () {
     $inquiry = ContactInquiry::factory()->create(['name' => 'Dana Dune']);
 

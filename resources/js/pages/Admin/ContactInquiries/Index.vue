@@ -29,7 +29,12 @@ const props = defineProps<{
         to: number;
         total: number;
     };
-    filters: { q: string | null; unread: boolean; source: string | null };
+    filters: {
+        q: string | null;
+        unread: boolean;
+        source: string | null;
+        show_spam: boolean;
+    };
     unreadCount: number;
 }>();
 
@@ -47,6 +52,7 @@ defineOptions({
 const q = ref(props.filters.q ?? '');
 const unread = ref(props.filters.unread);
 const source = ref(props.filters.source ?? '');
+const showSpam = ref(props.filters.show_spam);
 
 const applyFilters = () => {
     router.get(
@@ -55,6 +61,7 @@ const applyFilters = () => {
             q: q.value || undefined,
             unread: unread.value ? 1 : undefined,
             source: source.value || undefined,
+            show_spam: showSpam.value ? 1 : undefined,
         },
         { preserveState: true, replace: true },
     );
@@ -96,7 +103,7 @@ const destroy = (inquiry: InquiryRow) => {
         class="mt-8 rounded-3xl bg-white p-6 shadow-[0_1px_0_rgba(11,42,46,0.04)] ring-1 ring-[var(--color-sand-300)]/60 sm:p-7 dark:bg-white/[0.04] dark:ring-white/10"
     >
         <form
-            class="grid gap-3 sm:grid-cols-[2fr_auto_auto_auto]"
+            class="grid gap-3 sm:grid-cols-[2fr_auto_auto_auto_auto]"
             @submit.prevent="applyFilters"
         >
             <Input
@@ -118,6 +125,14 @@ const destroy = (inquiry: InquiryRow) => {
                     class="h-4 w-4 rounded border-[var(--color-sand-300)]"
                 />
                 Unread only
+            </label>
+            <label class="inline-flex items-center gap-2 text-sm">
+                <input
+                    v-model="showSpam"
+                    type="checkbox"
+                    class="h-4 w-4 rounded border-[var(--color-sand-300)]"
+                />
+                Show spam
             </label>
             <Button type="submit" variant="secondary">Filter</Button>
         </form>
