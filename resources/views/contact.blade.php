@@ -10,7 +10,6 @@
         'mainEntity' => [
             '@type' => 'LocalBusiness',
             'name' => config('company.name'),
-            'email' => config('company.email'),
             'areaServed' => 'United States',
         ],
     ];
@@ -193,7 +192,7 @@
                                 </span>
                                 <div>
                                     <dt class="text-white/60">Email</dt>
-                                    <dd class="mt-0.5"><a href="mailto:{{ config('company.email') }}" class="font-medium text-white hover:underline">{{ config('company.email') }}</a></dd>
+                                    <dd class="mt-0.5 font-medium text-white">Use the form &mdash; we reply within one business day.</dd>
                                 </div>
                             </div>
 

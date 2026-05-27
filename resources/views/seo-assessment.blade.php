@@ -11,7 +11,6 @@
             'provider' => [
                 '@type' => 'LocalBusiness',
                 'name' => config('company.name'),
-                'email' => config('company.email'),
                 'areaServed' => 'United States',
             ],
         ],

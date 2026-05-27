@@ -14,7 +14,6 @@
         'priceRange' => '$299 - $499/mo',
         'image' => asset('og-image.png'),
         'telephone' => config('company.phone'),
-        'email' => config('company.email'),
         'address' => [
             '@type' => 'PostalAddress',
             'addressLocality' => $location['name'],
