@@ -24,6 +24,8 @@ class ContactInquiryFactory extends Factory
             'is_veteran' => false,
             'source' => InquirySource::Contact,
             'message' => fake()->paragraph(),
+            'ip_address' => fake()->ipv4(),
+            'is_spam' => false,
         ];
     }
 
@@ -31,6 +33,13 @@ class ContactInquiryFactory extends Factory
     {
         return $this->state(fn () => [
             'is_veteran' => true,
+        ]);
+    }
+
+    public function spam(): static
+    {
+        return $this->state(fn () => [
+            'is_spam' => true,
         ]);
     }
 

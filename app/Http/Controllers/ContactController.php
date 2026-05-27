@@ -28,7 +28,14 @@ class ContactController extends Controller
             return $this->thankYouRedirect();
         }
 
-        $inquiry = ContactInquiry::create($request->validated());
+        if (ContactInquiry::isBlockedSubmission($request->validated('email'), $request->ip())) {
+            return $this->thankYouRedirect();
+        }
+
+        $inquiry = ContactInquiry::create([
+            ...$request->validated(),
+            'ip_address' => $request->ip(),
+        ]);
 
         $recipients = config('admin.emails', []);
         if (! empty($recipients)) {

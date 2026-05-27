@@ -67,6 +67,24 @@ class ContactInquiryController extends Controller
             ->with('status', 'Marked as unread.');
     }
 
+    public function markSpam(ContactInquiry $contactInquiry): RedirectResponse
+    {
+        $contactInquiry->update(['is_spam' => true]);
+
+        return redirect()
+            ->route('admin.contact-inquiries.show', $contactInquiry)
+            ->with('status', 'Marked as spam. Future submissions from this email or IP will be blocked.');
+    }
+
+    public function markNotSpam(ContactInquiry $contactInquiry): RedirectResponse
+    {
+        $contactInquiry->update(['is_spam' => false]);
+
+        return redirect()
+            ->route('admin.contact-inquiries.show', $contactInquiry)
+            ->with('status', 'Removed from spam.');
+    }
+
     public function destroy(ContactInquiry $contactInquiry): RedirectResponse
     {
         $contactInquiry->delete();

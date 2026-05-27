@@ -64,6 +64,10 @@ Route::middleware(['auth', 'verified', 'admin'])
             ->name('contact-inquiries.read');
         Route::patch('contact-inquiries/{contact_inquiry}/unread', [AdminContactInquiryController::class, 'markUnread'])
             ->name('contact-inquiries.unread');
+        Route::patch('contact-inquiries/{contact_inquiry}/spam', [AdminContactInquiryController::class, 'markSpam'])
+            ->name('contact-inquiries.spam');
+        Route::patch('contact-inquiries/{contact_inquiry}/not-spam', [AdminContactInquiryController::class, 'markNotSpam'])
+            ->name('contact-inquiries.not-spam');
     });
 
 require __DIR__.'/settings.php';

@@ -17,6 +17,7 @@ type InquiryRow = {
     plan: string | null;
     source: string;
     read_at: string | null;
+    is_spam: boolean;
     created_at: string;
 };
 
@@ -181,6 +182,12 @@ const destroy = (inquiry: InquiryRow) => {
                             "
                         >
                             {{ inquiry.read_at ? 'Read' : 'Unread' }}
+                        </span>
+                        <span
+                            v-if="inquiry.is_spam"
+                            class="ml-2 inline-flex rounded-full bg-destructive px-2.5 py-0.5 text-xs font-medium text-white"
+                        >
+                            Spam
                         </span>
                     </td>
                     <td class="px-5 py-4 text-slate-600 dark:text-white/70">

@@ -17,7 +17,9 @@ type Inquiry = {
     is_veteran: boolean;
     source: string;
     message: string | null;
+    ip_address: string | null;
     read_at: string | null;
+    is_spam: boolean;
     created_at: string;
 };
 
@@ -44,6 +46,22 @@ const toggleRead = () => {
     } else {
         router.patch(
             ContactInquiryController.markRead.url({
+                contact_inquiry: props.inquiry.id,
+            }),
+        );
+    }
+};
+
+const toggleSpam = () => {
+    if (props.inquiry.is_spam) {
+        router.patch(
+            ContactInquiryController.markNotSpam.url({
+                contact_inquiry: props.inquiry.id,
+            }),
+        );
+    } else {
+        router.patch(
+            ContactInquiryController.markSpam.url({
                 contact_inquiry: props.inquiry.id,
             }),
         );
@@ -96,6 +114,12 @@ const destroy = () => {
                 >
                     U.S. Veteran · 20% off
                 </span>
+                <span
+                    v-if="inquiry.is_spam"
+                    class="ml-2 inline-flex rounded-full bg-destructive px-2.5 py-0.5 text-xs font-semibold text-white"
+                >
+                    Spam
+                </span>
             </p>
         </div>
         <div class="flex gap-3">
@@ -106,6 +130,9 @@ const destroy = () => {
             </Button>
             <Button variant="secondary" @click="toggleRead">
                 {{ inquiry.read_at ? 'Mark unread' : 'Mark read' }}
+            </Button>
+            <Button variant="secondary" @click="toggleSpam">
+                {{ inquiry.is_spam ? 'Not spam' : 'Mark spam' }}
             </Button>
             <Button variant="destructive" @click="destroy">Delete</Button>
         </div>
@@ -175,6 +202,18 @@ const destroy = () => {
                     class="mt-1 text-[var(--color-deep-teal)] capitalize dark:text-white"
                 >
                     {{ inquiry.plan }}
+                </dd>
+            </div>
+            <div v-if="inquiry.ip_address">
+                <dt
+                    class="text-xs font-semibold tracking-[0.12em] text-[var(--color-emerald-700)] uppercase"
+                >
+                    IP address
+                </dt>
+                <dd
+                    class="mt-1 font-mono text-sm text-[var(--color-deep-teal)] dark:text-white"
+                >
+                    {{ inquiry.ip_address }}
                 </dd>
             </div>
         </dl>

@@ -26,9 +26,14 @@ class SeoAssessmentController extends Controller
             return $this->thankYouRedirect();
         }
 
+        if (ContactInquiry::isBlockedSubmission($request->validated('email'), $request->ip())) {
+            return $this->thankYouRedirect();
+        }
+
         $inquiry = ContactInquiry::create([
             ...$request->validated(),
             'source' => InquirySource::SeoAssessment,
+            'ip_address' => $request->ip(),
         ]);
 
         $recipients = config('admin.emails', []);

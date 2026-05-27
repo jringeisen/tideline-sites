@@ -26,7 +26,9 @@ class ContactInquiry extends Model
         'is_veteran',
         'source',
         'message',
+        'ip_address',
         'read_at',
+        'is_spam',
     ];
 
     /**
@@ -38,6 +40,7 @@ class ContactInquiry extends Model
             'source' => InquirySource::class,
             'is_veteran' => 'boolean',
             'read_at' => 'datetime',
+            'is_spam' => 'boolean',
         ];
     }
 
@@ -55,5 +58,37 @@ class ContactInquiry extends Model
     public function scopeOfSource(Builder $query, InquirySource|string $source): void
     {
         $query->where('source', $source instanceof InquirySource ? $source->value : $source);
+    }
+
+    /**
+     * @param  Builder<ContactInquiry>  $query
+     */
+    public function scopeSpam(Builder $query): void
+    {
+        $query->where('is_spam', true);
+    }
+
+    /**
+     * Whether a submission with the given email or IP has previously been
+     * marked as spam and should be silently rejected.
+     */
+    public static function isBlockedSubmission(?string $email, ?string $ip): bool
+    {
+        if (blank($email) && blank($ip)) {
+            return false;
+        }
+
+        return static::query()
+            ->spam()
+            ->where(function (Builder $query) use ($email, $ip): void {
+                if (filled($email)) {
+                    $query->whereRaw('lower(email) = ?', [strtolower($email)]);
+                }
+
+                if (filled($ip)) {
+                    $query->orWhere('ip_address', $ip);
+                }
+            })
+            ->exists();
     }
 }

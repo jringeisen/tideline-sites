@@ -122,6 +122,49 @@ test('admin can mark an inquiry as unread', function () {
     expect($inquiry->fresh()->read_at)->toBeNull();
 });
 
+test('admin can mark an inquiry as spam', function () {
+    $inquiry = ContactInquiry::factory()->create(['is_spam' => false]);
+
+    $this->actingAs($this->admin)
+        ->patch("/admin/contact-inquiries/{$inquiry->id}/spam")
+        ->assertRedirect();
+
+    expect($inquiry->fresh()->is_spam)->toBeTrue();
+});
+
+test('admin can mark an inquiry as not spam', function () {
+    $inquiry = ContactInquiry::factory()->spam()->create();
+
+    $this->actingAs($this->admin)
+        ->patch("/admin/contact-inquiries/{$inquiry->id}/not-spam")
+        ->assertRedirect();
+
+    expect($inquiry->fresh()->is_spam)->toBeFalse();
+});
+
+test('the inquiry show page receives the spam flag and ip address', function () {
+    $inquiry = ContactInquiry::factory()->spam()->create(['ip_address' => '203.0.113.42']);
+
+    $props = $this->actingAs($this->admin)
+        ->get("/admin/contact-inquiries/{$inquiry->id}")
+        ->assertOk()
+        ->viewData('page')['props']['inquiry'];
+
+    expect($props['is_spam'])->toBeTrue()
+        ->and($props['ip_address'])->toBe('203.0.113.42');
+});
+
+test('non-admin cannot mark inquiries as spam', function () {
+    $user = User::factory()->create(['email_verified_at' => now()]);
+    $inquiry = ContactInquiry::factory()->create();
+
+    $this->actingAs($user)
+        ->patch("/admin/contact-inquiries/{$inquiry->id}/spam")
+        ->assertForbidden();
+
+    expect($inquiry->fresh()->is_spam)->toBeFalse();
+});
+
 test('admin can delete an inquiry', function () {
     $inquiry = ContactInquiry::factory()->create();
 
