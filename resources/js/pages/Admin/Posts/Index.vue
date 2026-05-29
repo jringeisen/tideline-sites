@@ -156,7 +156,7 @@ const destroy = (post: PostRow) => {
                         <span
                             class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
                             :class="{
-                                'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)]':
+                                'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)] dark:bg-[var(--color-emerald-700)]/40 dark:text-white':
                                     post.status === 'published',
                                 'bg-amber-100 text-amber-800 dark:bg-amber-500/15 dark:text-amber-300':
                                     post.status === 'scheduled',

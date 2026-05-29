@@ -180,7 +180,7 @@ const destroy = (inquiry: InquiryRow) => {
                             class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium"
                             :class="
                                 inquiry.source === 'seo_assessment'
-                                    ? 'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)]'
+                                    ? 'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)] dark:bg-[var(--color-emerald-700)]/40 dark:text-white'
                                     : 'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80'
                             "
                         >
@@ -193,7 +193,7 @@ const destroy = (inquiry: InquiryRow) => {
                             :class="
                                 inquiry.read_at
                                     ? 'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80'
-                                    : 'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)]'
+                                    : 'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)] dark:bg-[var(--color-emerald-700)]/40 dark:text-white'
                             "
                         >
                             {{ inquiry.read_at ? 'Read' : 'Unread' }}

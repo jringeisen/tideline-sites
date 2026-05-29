@@ -102,15 +102,15 @@
                 <span class="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--color-red)]">Share</span>
                 <a href="https://twitter.com/intent/tweet?text={{ $shareText }}&url={{ $shareUrl }}"
                    target="_blank" rel="noopener noreferrer"
-                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)]">Twitter</a>
+                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)] dark:bg-white/[0.04] dark:text-white dark:ring-white/15 dark:hover:bg-white/[0.08]">Twitter</a>
                 <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ $shareUrl }}"
                    target="_blank" rel="noopener noreferrer"
-                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)]">LinkedIn</a>
+                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)] dark:bg-white/[0.04] dark:text-white dark:ring-white/15 dark:hover:bg-white/[0.08]">LinkedIn</a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u={{ $shareUrl }}"
                    target="_blank" rel="noopener noreferrer"
-                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)]">Facebook</a>
+                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)] dark:bg-white/[0.04] dark:text-white dark:ring-white/15 dark:hover:bg-white/[0.08]">Facebook</a>
                 <a href="mailto:?subject={{ $shareText }}&body={{ $shareUrl }}"
-                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)]">Email</a>
+                   class="rounded-full bg-white px-4 py-1.5 text-sm text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-sand-100)] dark:bg-white/[0.04] dark:text-white dark:ring-white/15 dark:hover:bg-white/[0.08]">Email</a>
             </section>
 
             @if ($post->author?->bio)

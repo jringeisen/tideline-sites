@@ -67,14 +67,14 @@
                     <ul class="mt-3 flex flex-wrap gap-2">
                         <li>
                             <a href="{{ route('blog.index') }}"
-                               class="inline-flex rounded-full px-3 py-1 text-sm ring-1 transition {{ ! $activeCategory && ! $activeTag ? 'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)]' : 'bg-white text-[var(--color-deep-teal)] ring-[var(--color-sand-300)] hover:bg-[var(--color-sand-100)]' }}">
+                               class="inline-flex rounded-full px-3 py-1 text-sm ring-1 transition {{ ! $activeCategory && ! $activeTag ? 'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)]' : 'bg-white text-[var(--color-deep-teal)] ring-[var(--color-sand-300)] hover:bg-[var(--color-sand-100)] dark:bg-white/[0.04] dark:text-white dark:ring-white/15 dark:hover:bg-white/[0.08]' }}">
                                 All
                             </a>
                         </li>
                         @foreach ($categories as $category)
                             <li>
                                 <a href="{{ route('blog.category', $category->slug) }}"
-                                   class="inline-flex rounded-full px-3 py-1 text-sm ring-1 transition {{ $activeCategory?->id === $category->id ? 'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)]' : 'bg-white text-[var(--color-deep-teal)] ring-[var(--color-sand-300)] hover:bg-[var(--color-sand-100)]' }}">
+                                   class="inline-flex rounded-full px-3 py-1 text-sm ring-1 transition {{ $activeCategory?->id === $category->id ? 'bg-[var(--color-emerald-900)] text-white ring-[var(--color-emerald-900)]' : 'bg-white text-[var(--color-deep-teal)] ring-[var(--color-sand-300)] hover:bg-[var(--color-sand-100)] dark:bg-white/[0.04] dark:text-white dark:ring-white/15 dark:hover:bg-white/[0.08]' }}">
                                     {{ $category->name }}
                                 </a>
                             </li>
@@ -88,7 +88,7 @@
     <section class="bg-[var(--color-cream)] pb-20">
         <div class="mx-auto max-w-5xl px-6 lg:px-8">
             @if ($posts->isEmpty())
-                <div class="rounded-2xl border border-dashed border-[var(--color-sand-300)] bg-white p-12 text-center">
+                <div class="rounded-2xl border border-dashed border-[var(--color-sand-300)] bg-white p-12 text-center dark:bg-white/[0.04]">
                     <p class="font-serif text-2xl text-[var(--color-deep-teal)]">No posts found.</p>
                     @if ($q !== '')
                         <p class="mt-2 text-sm text-slate-600">Nothing matched "{{ $q }}". Try a broader query.</p>
