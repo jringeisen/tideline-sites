@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PublicHttpUrl;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreSeoAssessmentRequest extends FormRequest
+class StoreSeoReportRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -18,10 +20,8 @@ class StoreSeoAssessmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string', 'max:120'],
-            'email' => ['required', 'email:rfc', 'max:255'],
-            'business_name' => ['required', 'string', 'max:160'],
-            'website' => ['required', 'string', 'max:255', 'url'],
+            'url' => ['required', 'string', 'max:2048', new PublicHttpUrl],
+            'industry' => ['required', 'string', Rule::in(config('seo-report.industries'))],
         ];
     }
 
@@ -31,8 +31,7 @@ class StoreSeoAssessmentRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'business_name' => 'business name',
-            'website' => 'website',
+            'url' => 'website address',
         ];
     }
 }

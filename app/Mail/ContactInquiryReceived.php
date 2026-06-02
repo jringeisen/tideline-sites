@@ -19,12 +19,16 @@ class ContactInquiryReceived extends Mailable implements ShouldQueue
 
     public function envelope(): Envelope
     {
-        $label = $this->inquiry->source === InquirySource::SeoAssessment
-            ? 'SEO assessment request'
-            : 'contact inquiry';
+        $label = match ($this->inquiry->source) {
+            InquirySource::SeoAssessment => 'SEO assessment request',
+            InquirySource::SeoReport => 'SEO report lead',
+            default => 'contact inquiry',
+        };
+
+        $from = filled($this->inquiry->name) ? $this->inquiry->name : $this->inquiry->email;
 
         return new Envelope(
-            subject: "New {$label} from {$this->inquiry->name}",
+            subject: "New {$label} from {$from}",
             replyTo: [$this->inquiry->email],
         );
     }

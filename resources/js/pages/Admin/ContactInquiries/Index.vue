@@ -117,6 +117,7 @@ const destroy = (inquiry: InquiryRow) => {
                 <option value="">All sources</option>
                 <option value="contact">Contact</option>
                 <option value="seo_assessment">SEO Assessment</option>
+                <option value="seo_report">SEO Report</option>
             </select>
             <label class="inline-flex items-center gap-2 text-sm">
                 <input
@@ -181,7 +182,9 @@ const destroy = (inquiry: InquiryRow) => {
                             :class="
                                 inquiry.source === 'seo_assessment'
                                     ? 'bg-[var(--color-emerald-700)]/10 text-[var(--color-emerald-700)] dark:bg-[var(--color-emerald-700)]/40 dark:text-white'
-                                    : 'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80'
+                                    : inquiry.source === 'seo_report'
+                                      ? 'bg-[var(--color-red)]/10 text-[var(--color-red-deep)] dark:bg-[var(--color-red)]/40 dark:text-white'
+                                      : 'bg-slate-100 text-slate-700 dark:bg-white/[0.06] dark:text-white/80'
                             "
                         >
                             {{ inquirySourceLabel(inquiry.source) }}

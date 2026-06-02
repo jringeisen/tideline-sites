@@ -8,7 +8,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogFeedController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LocationController;
-use App\Http\Controllers\SeoAssessmentController;
+use App\Http\Controllers\SeoReportController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,10 +21,16 @@ Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:5,60')
     ->name('contact.store');
 
-Route::get('/seo-assessment', [SeoAssessmentController::class, 'show'])->name('seo-assessment.show');
-Route::post('/seo-assessment', [SeoAssessmentController::class, 'store'])
+Route::get('/seo-assessment', [SeoReportController::class, 'show'])->name('seo-report.show');
+Route::post('/seo-assessment', [SeoReportController::class, 'store'])
     ->middleware('throttle:5,60')
-    ->name('seo-assessment.store');
+    ->name('seo-report.store');
+Route::get('/seo-assessment/{seoReport:token}/status', [SeoReportController::class, 'status'])
+    ->middleware('throttle:60,1')
+    ->name('seo-report.status');
+Route::post('/seo-assessment/{seoReport:token}/unlock', [SeoReportController::class, 'unlock'])
+    ->middleware('throttle:10,60')
+    ->name('seo-report.unlock');
 
 Route::get('/locations/{slug}', [LocationController::class, 'show'])
     ->where('slug', '[a-z0-9-]+')

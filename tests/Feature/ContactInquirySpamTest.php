@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ContactInquiry;
+use App\Models\SeoReport;
 use Illuminate\Support\Facades\Mail;
 
 test('a submission whose email matches a spam-marked inquiry is silently dropped', function () {
@@ -59,13 +60,36 @@ test('a non-spam inquiry with a matching email does not block submissions', func
     expect(ContactInquiry::where('email', 'regular@example.com')->count())->toBe(2);
 });
 
-test('the seo assessment form also honors the blocklist', function () {
+test('the seo report tool silently drops submissions from a blocked IP', function () {
+    ContactInquiry::factory()->spam()->create([
+        'email' => 'someone@example.com',
+        'ip_address' => '203.0.113.10',
+    ]);
+
+    $this->withServerVariables(['REMOTE_ADDR' => '203.0.113.10'])
+        ->postJson(route('seo-report.store'), [
+            'url' => 'https://example.com',
+            'industry' => 'Home Services',
+            'company_url' => '',
+            'started_at' => validStartedAt(),
+        ])->assertOk();
+
+    expect(SeoReport::count())->toBe(0);
+});
+
+test('the seo report unlock honors the email blocklist', function () {
     Mail::fake();
     ContactInquiry::factory()->spam()->create(['email' => 'spammer@example.com']);
 
-    $this->post(route('seo-assessment.store'), seoAssessmentPayload(['email' => 'spammer@example.com']))
-        ->assertRedirect(route('seo-assessment.show'));
+    $report = SeoReport::factory()->completed()->create();
 
-    expect(ContactInquiry::count())->toBe(1);
+    $this->postJson(route('seo-report.unlock', $report), [
+        'email' => 'spammer@example.com',
+        'company_url' => '',
+        'started_at' => validStartedAt(),
+    ])->assertOk()->assertJson(['locked' => true]);
+
+    expect(ContactInquiry::count())->toBe(1)
+        ->and($report->refresh()->isUnlocked())->toBeFalse();
     Mail::assertNothingSent();
 });

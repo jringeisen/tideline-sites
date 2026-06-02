@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Crypt;
 use Tests\TestCase;
 
 /*
@@ -47,4 +48,14 @@ expect()->extend('toBeOne', function () {
 function something()
 {
     // ..
+}
+
+/**
+ * A valid encrypted anti-spam "started_at" timestamp, aged past the time trap.
+ */
+function validStartedAt(int $secondsAgo = 10): string
+{
+    return Crypt::encryptString(
+        (string) (now()->timestamp - $secondsAgo),
+    );
 }
