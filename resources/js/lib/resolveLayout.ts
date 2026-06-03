@@ -30,7 +30,10 @@ const isMarketingPage = (name: string): boolean => {
  * (e.g. "Log in - All American Web Design"), while marketing pages that
  * already include the brand in their title are used verbatim.
  */
-export function formatTitle(title: string | undefined, appName: string): string {
+export function formatTitle(
+    title: string | undefined,
+    appName: string,
+): string {
     if (!title) {
         return appName;
     }

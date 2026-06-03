@@ -11,7 +11,11 @@ defineProps<{ links: PageLink[] }>();
 </script>
 
 <template>
-    <nav v-if="links.length > 3" aria-label="Pagination" class="flex flex-wrap items-center justify-center gap-1">
+    <nav
+        v-if="links.length > 3"
+        aria-label="Pagination"
+        class="flex flex-wrap items-center justify-center gap-1"
+    >
         <template v-for="(link, index) in links" :key="index">
             <span
                 v-if="!link.url"

@@ -43,25 +43,54 @@ const schema = computed<Array<Record<string, unknown>>>(
     () => (page.props.schema as Array<Record<string, unknown>>) ?? [],
 );
 
-const jsonLd = (block: Record<string, unknown>): string => JSON.stringify(block);
+const jsonLd = (block: Record<string, unknown>): string =>
+    JSON.stringify(block);
 </script>
 
 <template>
     <Head :title="meta.title">
-        <meta head-key="description" name="description" :content="meta.description" />
+        <meta
+            head-key="description"
+            name="description"
+            :content="meta.description"
+        />
         <link head-key="canonical" rel="canonical" :href="meta.canonical" />
 
         <meta head-key="og:type" property="og:type" :content="meta.ogType" />
-        <meta head-key="og:site_name" property="og:site_name" :content="companyName" />
+        <meta
+            head-key="og:site_name"
+            property="og:site_name"
+            :content="companyName"
+        />
         <meta head-key="og:title" property="og:title" :content="meta.title" />
-        <meta head-key="og:description" property="og:description" :content="meta.description" />
+        <meta
+            head-key="og:description"
+            property="og:description"
+            :content="meta.description"
+        />
         <meta head-key="og:url" property="og:url" :content="meta.canonical" />
         <meta head-key="og:image" property="og:image" :content="meta.ogImage" />
 
-        <meta head-key="twitter:card" name="twitter:card" content="summary_large_image" />
-        <meta head-key="twitter:title" name="twitter:title" :content="meta.title" />
-        <meta head-key="twitter:description" name="twitter:description" :content="meta.description" />
-        <meta head-key="twitter:image" name="twitter:image" :content="meta.ogImage" />
+        <meta
+            head-key="twitter:card"
+            name="twitter:card"
+            content="summary_large_image"
+        />
+        <meta
+            head-key="twitter:title"
+            name="twitter:title"
+            :content="meta.title"
+        />
+        <meta
+            head-key="twitter:description"
+            name="twitter:description"
+            :content="meta.description"
+        />
+        <meta
+            head-key="twitter:image"
+            name="twitter:image"
+            :content="meta.ogImage"
+        />
 
         <!-- eslint-disable vue/no-v-text-v-html-on-component -->
         <component

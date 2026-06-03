@@ -25,12 +25,14 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="font-body bg-[var(--color-cream)] text-[var(--color-ink)] antialiased">
+    <div
+        class="bg-[var(--color-cream)] font-body text-[var(--color-ink)] antialiased"
+    >
         <MarketingHead />
 
         <a
             href="#main"
-            class="sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:not-sr-only focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:shadow-lg"
+            class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:text-sm focus:shadow-lg"
         >
             Skip to content
         </a>

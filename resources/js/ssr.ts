@@ -14,9 +14,12 @@ createServer((page) =>
         title: (title) => formatTitle(title, appName),
         layout: (name) => resolveLayout(name),
         resolve: (name) => {
-            const pages = import.meta.glob<DefineComponent>('./pages/**/*.vue', {
-                eager: true,
-            });
+            const pages = import.meta.glob<DefineComponent>(
+                './pages/**/*.vue',
+                {
+                    eager: true,
+                },
+            );
 
             return pages[`./pages/${name}.vue`];
         },
