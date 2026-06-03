@@ -92,3 +92,74 @@ jobs:
 
       - name: Tests
         run: ./vendor/bin/pest
+
+  ssr-smoke:
+    name: SSR Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          tools: composer:v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install Dependencies
+        run: |
+          composer install --no-interaction --prefer-dist --optimize-autoloader
+          npm i
+
+      - name: Prepare Application
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+          php artisan wayfinder:generate --with-form
+
+      - name: Build Assets (client + SSR bundle)
+        run: npm run build
+
+      # Boots the app and the Inertia SSR server, then asserts the initial
+      # HTML contains server-rendered JSON-LD and nav anchors. These only
+      # appear when SSR actually renders — if SSR silently falls back to
+      # client rendering (e.g. a broken ssr.ts), the markers are absent and
+      # this job fails. The feature suite runs with SSR disabled and cannot
+      # catch this regression.
+      - name: SSR Smoke Test
+        run: |
+          php artisan inertia:start-ssr > /tmp/ssr.log 2>&1 &
+          SESSION_DRIVER=array CACHE_STORE=array php artisan serve --host=127.0.0.1 --port=8000 > /tmp/serve.log 2>&1 &
+
+          fail() {
+            echo "::error::$1"
+            echo '----- ssr.log -----'; cat /tmp/ssr.log || true
+            echo '----- serve.log -----'; cat /tmp/serve.log || true
+            exit 1
+          }
+
+          # Wait for the SSR server's health endpoint and the app to come up.
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:13714/health >/dev/null 2>&1 && break; sleep 1; done
+          for i in $(seq 1 30); do curl -sf http://127.0.0.1:8000/ >/dev/null 2>&1 && break; sleep 1; done
+
+          # Fetch the homepage (no DB needed) with a few retries while both processes settle.
+          HTML=""
+          for i in $(seq 1 10); do
+            HTML=$(curl -s http://127.0.0.1:8000/)
+            echo "$HTML" | grep -q 'application/ld+json' && break
+            sleep 1
+          done
+
+          echo "$HTML" | grep -q 'application/ld+json' \
+            || fail "JSON-LD missing from initial HTML — SSR is not rendering meta/schema"
+          echo "$HTML" | grep -q '"@type":"ProfessionalService"' \
+            || fail "Home JSON-LD @type missing — schema not server-rendered"
+          echo "$HTML" | grep -q 'href="/about"' \
+            || fail "Server-rendered nav anchors missing — SSR fell back to client rendering"
+
+          echo "✅ SSR smoke passed: server-rendered schema + body present in initial HTML"

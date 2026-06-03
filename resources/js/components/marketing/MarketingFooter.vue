@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
 const page = usePage();
@@ -29,9 +29,9 @@ const areas = [
         <div class="mx-auto max-w-7xl px-6 pt-16 pb-10 lg:px-8">
             <div class="grid gap-10 md:grid-cols-12">
                 <div class="md:col-span-5">
-                    <a href="/" class="flex items-center text-white">
+                    <Link href="/" class="flex items-center text-white">
                         <img src="/logo-dark.png" :alt="companyName" class="h-14 w-auto" />
-                    </a>
+                    </Link>
                     <p class="mt-4 max-w-sm text-sm leading-relaxed text-white/70">
                         Veteran-owned web design for American small businesses. Custom websites built in America, never outsourced, never templated.
                     </p>
@@ -41,7 +41,7 @@ const areas = [
                     <h3 class="text-xs font-semibold tracking-widest text-white/60 uppercase">Company</h3>
                     <ul class="mt-4 space-y-2 text-sm">
                         <li v-for="link in companyLinks" :key="link.href">
-                            <a :href="link.href" class="transition hover:text-white">{{ link.label }}</a>
+                            <Link :href="link.href" class="transition hover:text-white">{{ link.label }}</Link>
                         </li>
                     </ul>
                 </div>
@@ -50,20 +50,20 @@ const areas = [
                     <h3 class="text-xs font-semibold tracking-widest text-white/60 uppercase">Areas We Serve</h3>
                     <ul class="mt-4 flex flex-wrap gap-2 text-sm">
                         <li v-for="area in areas" :key="area.href">
-                            <a :href="area.href" class="rounded-full bg-white/10 px-3 py-1 text-white/90 transition hover:bg-white/20">
+                            <Link :href="area.href" class="rounded-full bg-white/10 px-3 py-1 text-white/90 transition hover:bg-white/20">
                                 {{ area.label }}
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <p class="mt-4 text-sm leading-relaxed text-white/60">
                         Proudly building websites for small businesses across the United States, with local roots on Florida's Gulf Coast.
                     </p>
-                    <a href="/service-area" class="mt-4 inline-flex items-center text-sm font-semibold text-white/90 transition hover:text-white">
+                    <Link href="/service-area" class="mt-4 inline-flex items-center text-sm font-semibold text-white/90 transition hover:text-white">
                         See where we work
                         <svg class="ml-1 h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fill-rule="evenodd" d="M10.293 4.293a1 1 0 011.414 0l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414-1.414L13.586 11H4a1 1 0 110-2h9.586l-3.293-3.293a1 1 0 010-1.414z" clip-rule="evenodd" />
                         </svg>
-                    </a>
+                    </Link>
                 </div>
             </div>
 

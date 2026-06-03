@@ -1,43 +1,37 @@
 <?php
 
+use Inertia\Testing\AssertableInertia as Assert;
+
 test('the about page renders successfully', function () {
     $this->get(route('about'))->assertOk();
 });
 
-test('the about page identifies the team and ownership story', function () {
+test('the about page renders the About Inertia component', function () {
     $this->get(route('about'))
-        ->assertSee('Jon Ringeisen', false)
-        ->assertSee('Elena Ringeisen', false)
-        ->assertSee('Family-owned', false)
-        ->assertSee('Veteran-owned', false)
-        ->assertSee('husband-and-wife', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('About'));
 });
 
-test('the about page tells the veteran story with specifics', function () {
+test('the about page exposes SEO meta', function () {
     $this->get(route('about'))
-        ->assertSee('U.S. Army', false)
-        ->assertSee('Sergeant', false)
-        ->assertSee('Mosul', false)
-        ->assertSee('Kuwait', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('meta.title', 'About All American Web Design — Family-owned & Veteran-owned')
+            ->where('meta.description', fn (string $description) => str_contains($description, 'veteran-owned web design')));
 });
 
 test('the about page emits Organization + Person + Breadcrumb JSON-LD', function () {
-    $response = $this->get(route('about'));
-
-    $response->assertSee('"@type":"Organization"', false);
-    $response->assertSee('"@type":"Person"', false);
-    $response->assertSee('"@type":"BreadcrumbList"', false);
-    $response->assertSee('"name":"Jon Ringeisen"', false);
-    $response->assertSee('"name":"Elena Ringeisen"', false);
-});
-
-test('the about page includes the team photo', function () {
     $this->get(route('about'))
-        ->assertSee('team/jon-elena.jpeg', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('schema', 4)
+            ->where('schema.0.@type', 'Organization')
+            ->where('schema.1.@type', 'Person')
+            ->where('schema.1.name', 'Jon Ringeisen')
+            ->where('schema.2.@type', 'Person')
+            ->where('schema.2.name', 'Elena Ringeisen')
+            ->where('schema.3.@type', 'BreadcrumbList'));
 });
 
-test('the home page teaser links to the about page', function () {
+test('the home page renders the Home component (which links to the about page)', function () {
     $this->get(route('home'))
-        ->assertSee(route('about'), false)
-        ->assertSee('Meet the team', false);
+        ->assertInertia(fn (Assert $page) => $page->component('Home'));
 });

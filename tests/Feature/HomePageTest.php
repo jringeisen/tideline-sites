@@ -1,113 +1,61 @@
 <?php
 
+use Inertia\Testing\AssertableInertia as Assert;
+
 test('home page renders successfully', function () {
     $this->get(route('home'))->assertOk();
 });
 
-test('home page exposes the brand and primary headline', function () {
+test('home page renders the Home Inertia component with SEO meta', function () {
     $this->get(route('home'))
-        ->assertSee('All American Web Design', false)
-        ->assertSee('Built in America.', false)
-        ->assertSee('Not outsourced.', false)
-        ->assertSee('Veteran-owned', false)
-        ->assertDontSee('Tideline', false)
-        ->assertDontSee('Emerald Coast', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Home')
+            ->where('meta.title', 'All American Web Design — Custom Websites, Built in America')
+            ->where('meta.description', fn (string $d) => str_contains($d, 'Built in America')));
 });
 
-test('home page advertises both pricing tiers', function () {
+test('home page exposes the four services and the FAQ list', function () {
     $this->get(route('home'))
-        ->assertSee('$299', false)
-        ->assertSee('$499', false)
-        ->assertSee('Essential', false)
-        ->assertSee('Growth', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('services', 4)
+            ->where('services.0.name', 'Web Design')
+            ->where('services.1.name', 'SEO Optimization')
+            ->has('faqs', 6));
 });
 
-test('home page shows the veteran discount banner', function () {
+test('home page emits LocalBusiness, Service, FAQ, and WebSite JSON-LD', function () {
     $this->get(route('home'))
-        ->assertSee('Veterans save 20% on every plan', false);
-});
-
-test('home page offers a veteran pricing toggle with discounted prices for every plan', function () {
-    $this->get(route('home'))
-        ->assertSee('data-veteran-toggle', false)
-        ->assertSee('Veteran pricing', false)
-        // Discounted (rounded) prices for all three plans.
-        ->assertSee('$239', false)
-        ->assertSee('$399', false)
-        ->assertSee('$800+', false)
-        // Regular prices remain in the DOM (toggled client-side).
-        ->assertSee('$299', false)
-        ->assertSee('$499', false)
-        ->assertSee('$1,000+', false);
-});
-
-test('home page presents the made-in-America positioning', function () {
-    $this->get(route('home'))
-        ->assertSee('Built here. For businesses everywhere.', false)
-        ->assertSee('100% USA', false)
-        ->assertSee('Nationwide', false)
-        ->assertSee('Built in the USA', false);
-});
-
-test('home page emits SEO meta and LocalBusiness, Service, and FAQ JSON-LD', function () {
-    $response = $this->get(route('home'));
-
-    $response->assertSee('<meta name="description"', false);
-    $response->assertSee('<link rel="canonical"', false);
-    $response->assertSee('application/ld+json', false);
-    $response->assertSee('"@type":"ProfessionalService"', false);
-    $response->assertSee('"@type":"FAQPage"', false);
-    $response->assertSee('"@type":"Service"', false);
-    $response->assertSee('"@type":"WebSite"', false);
-    $response->assertSee('"areaServed"', false);
-    $response->assertSee('"founder"', false);
-    $response->assertSee('"knowsAbout"', false);
-});
-
-test('home page links the pricing CTAs to the contact route with a plan', function () {
-    $this->get(route('home'))
-        ->assertSee('/contact?plan=essential', false)
-        ->assertSee('/contact?plan=growth', false);
-});
-
-test('home page advertises a 1-2 week average launch', function () {
-    $this->get(route('home'))
-        ->assertSee('1&ndash;2 weeks', false)
-        ->assertSee('one to two weeks', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('schema.0.@type', 'ProfessionalService')
+            ->has('schema.0.areaServed')
+            ->has('schema.0.founder')
+            ->has('schema.0.knowsAbout')
+            ->where('schema.1.@type', 'ItemList')
+            ->where('schema.1.itemListElement.0.item.@type', 'Service')
+            ->where('schema.2.@type', 'FAQPage')
+            ->where('schema.3.@type', 'WebSite'));
 });
 
 test('home page hides testimonials and businesses-launched stat by default', function () {
     config()->set('features.testimonials', false);
     config()->set('features.businesses_launched', false);
 
-    $response = $this->get(route('home'));
-
-    $response->assertDontSee('What local owners are saying', false);
-    $response->assertDontSee('Real businesses. Real results.', false);
-    $response->assertDontSee('Businesses launched', false);
+    $this->get(route('home'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('features.testimonials', false)
+            ->where('features.businessesLaunched', false));
 });
 
-test('home page shows testimonials when the feature flag is enabled', function () {
+test('home page exposes the testimonials flag when enabled', function () {
     config()->set('features.testimonials', true);
 
     $this->get(route('home'))
-        ->assertSee('Real businesses. Real results.', false)
-        ->assertSee('Sandcastle Vacation Rentals', false);
+        ->assertInertia(fn (Assert $page) => $page->where('features.testimonials', true));
 });
 
-test('home page shows the businesses-launched stat when the feature flag is enabled', function () {
+test('home page exposes the businesses-launched flag when enabled', function () {
     config()->set('features.businesses_launched', true);
 
     $this->get(route('home'))
-        ->assertSee('Businesses launched', false);
-});
-
-test('home page showcases recent project work with outbound links', function () {
-    $this->get(route('home'))
-        ->assertSee('Recent work', false)
-        ->assertSee('Venture', false)
-        ->assertSee('Wordsmith', false)
-        ->assertSee('https://learnwithventure.com', false)
-        ->assertSee('https://usewordsmith.com', false)
-        ->assertSee('rel="noopener"', false);
+        ->assertInertia(fn (Assert $page) => $page->where('features.businessesLaunched', true));
 });

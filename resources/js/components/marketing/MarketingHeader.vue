@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { usePage } from '@inertiajs/vue3';
+import { Link, usePage } from '@inertiajs/vue3';
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 
 const page = usePage();
@@ -39,23 +39,23 @@ onBeforeUnmount(() => {
 <template>
     <header class="absolute inset-x-0 top-0 z-30">
         <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-8">
-            <a href="/" class="flex items-center text-white" :aria-label="`${companyName} home`">
+            <Link href="/" class="flex items-center text-white" :aria-label="`${companyName} home`">
                 <img src="/logo-dark.png" :alt="companyName" class="h-10 w-auto" />
-            </a>
+            </Link>
 
             <nav class="hidden items-center gap-9 text-sm font-medium text-white/85 lg:flex" aria-label="Primary">
-                <a v-for="link in navLinks" :key="link.href" :href="link.href" class="transition hover:text-white">
+                <Link v-for="link in navLinks" :key="link.href" :href="link.href" class="transition hover:text-white">
                     {{ link.label }}
-                </a>
+                </Link>
             </nav>
 
             <div class="hidden items-center gap-3 lg:flex">
-                <a
+                <Link
                     href="/contact"
                     class="inline-flex items-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-[var(--color-emerald-900)] shadow-sm transition hover:bg-[var(--color-sand-200)]"
                 >
                     Get started
-                </a>
+                </Link>
             </div>
 
             <button
@@ -82,9 +82,9 @@ onBeforeUnmount(() => {
             <div class="fixed inset-0 z-40 bg-[var(--color-navy-deep,#1e2e44)]/70 backdrop-blur-sm" @click="setOpen(false)" />
             <div class="fixed inset-x-0 top-0 z-50 mx-4 mt-4 rounded-3xl bg-[var(--color-emerald-900)] p-6 text-white shadow-2xl ring-1 ring-white/15">
                 <div class="flex items-center justify-between">
-                    <a href="/" class="flex items-center text-white" :aria-label="`${companyName} home`">
+                    <Link href="/" class="flex items-center text-white" :aria-label="`${companyName} home`">
                         <img src="/logo-dark.png" :alt="companyName" class="h-10 w-auto" />
-                    </a>
+                    </Link>
                     <button
                         type="button"
                         aria-label="Close menu"
@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
                 </div>
 
                 <nav class="mt-8 flex flex-col gap-1 text-base font-medium" aria-label="Mobile">
-                    <a
+                    <Link
                         v-for="link in navLinks"
                         :key="link.href"
                         :href="link.href"
@@ -107,16 +107,16 @@ onBeforeUnmount(() => {
                         @click="setOpen(false)"
                     >
                         {{ link.label }}
-                    </a>
+                    </Link>
                 </nav>
 
                 <div class="mt-6 flex flex-col gap-3 border-t border-white/15 pt-6">
-                    <a
+                    <Link
                         href="/contact"
                         class="rounded-full bg-white px-4 py-2.5 text-center text-sm font-semibold text-[var(--color-emerald-900)] shadow-sm transition hover:bg-[var(--color-sand-200)]"
                     >
                         Get started
-                    </a>
+                    </Link>
                 </div>
             </div>
         </div>

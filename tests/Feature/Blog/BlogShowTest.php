@@ -3,6 +3,7 @@
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\User;
+use Inertia\Testing\AssertableInertia as Assert;
 
 test('blog show renders a published post with SEO meta and JSON-LD', function () {
     $author = User::factory()->create(['name' => 'Jane Author', 'bio' => 'Writes things.']);
@@ -17,18 +18,18 @@ test('blog show renders a published post with SEO meta and JSON-LD', function ()
         'category_id' => $category->id,
     ]);
 
-    $response = $this->get(route('blog.show', $post->slug));
-
-    $response->assertOk()
-        ->assertSee('How to Convert Visitors')
-        ->assertSee('<title>Conversion Guide', false)
-        ->assertSee('A guide to higher conversions.')
-        ->assertSee('<link rel="canonical"', false)
-        ->assertSee('"@type":"BlogPosting"', false)
-        ->assertSee('"@type":"BreadcrumbList"', false)
-        ->assertSee('Jane Author')
-        ->assertSee('Writes things.')
-        ->assertSee('min read');
+    $this->get(route('blog.show', $post->slug))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Blog/Show')
+            ->where('post.title', 'How to Convert Visitors')
+            ->where('post.author.name', 'Jane Author')
+            ->where('post.author.bio', 'Writes things.')
+            ->where('meta.title', 'Conversion Guide')
+            ->where('meta.description', 'A guide to higher conversions.')
+            ->where('meta.canonical', route('blog.show', 'how-to-convert-visitors'))
+            ->where('schema.0.@type', 'BlogPosting')
+            ->where('schema.1.@type', 'BreadcrumbList'));
 });
 
 test('blog show 404s for drafts and scheduled posts', function () {
@@ -41,12 +42,13 @@ test('blog show 404s for drafts and scheduled posts', function () {
     $this->get(route('blog.show', $scheduled->slug))->assertNotFound();
 });
 
-test('blog show renders share links', function () {
+test('blog show exposes the post for rendering share links', function () {
     $author = User::factory()->create();
     $post = Post::factory()->published()->for($author, 'author')->create(['slug' => 'shareable']);
 
     $this->get(route('blog.show', $post->slug))
-        ->assertSee('twitter.com/intent/tweet', false)
-        ->assertSee('linkedin.com/sharing', false)
-        ->assertSee('facebook.com/sharer', false);
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Blog/Show')
+            ->where('post.slug', 'shareable'));
 });

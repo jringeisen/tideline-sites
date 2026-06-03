@@ -2,6 +2,7 @@
 
 use App\Models\ContactInquiry;
 use Illuminate\Support\Facades\Crypt;
+use Inertia\Testing\AssertableInertia as Assert;
 
 /**
  * Build a base valid payload, defaulting to "filled out 10 seconds ago" so it
@@ -23,38 +24,31 @@ function contactPayload(array $overrides = []): array
     ], $overrides);
 }
 
-test('contact page renders the form with all expected fields', function () {
+test('contact page renders the Contact Inertia component with form scaffolding', function () {
     $this->get(route('contact.show'))
         ->assertOk()
-        ->assertSee('Let\'s build something', false)
-        ->assertSee('name="name"', false)
-        ->assertSee('name="email"', false)
-        ->assertSee('name="phone"', false)
-        ->assertSee('name="plan"', false)
-        ->assertSee('name="message"', false)
-        ->assertSee('name="website"', false)
-        ->assertSee('name="started_at"', false)
-        ->assertSee('Essential', false)
-        ->assertSee('Growth', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Contact')
+            ->has('startedAt')
+            ->where('schema.0.@type', 'ContactPage'));
 });
 
 test('the contact page preselects the plan from the query string', function () {
     $this->get(route('contact.show', ['plan' => 'growth']))
         ->assertOk()
-        ->assertSee('value="growth" selected', false);
+        ->assertInertia(fn (Assert $page) => $page->where('selectedPlan', 'growth'));
 });
 
-test('the contact page renders the veteran checkbox unchecked by default', function () {
+test('the contact page reports the veteran flag as false by default', function () {
     $this->get(route('contact.show'))
         ->assertOk()
-        ->assertSee('name="is_veteran"', false)
-        ->assertDontSee('name="is_veteran" id="is_veteran" value="1" checked', false);
+        ->assertInertia(fn (Assert $page) => $page->where('isVeteran', false));
 });
 
-test('the contact page checks the veteran box from the query string', function () {
+test('the contact page reports the veteran flag from the query string', function () {
     $this->get(route('contact.show', ['veteran' => 1]))
         ->assertOk()
-        ->assertSee('name="is_veteran" id="is_veteran" value="1" checked', false);
+        ->assertInertia(fn (Assert $page) => $page->where('isVeteran', true));
 });
 
 test('submitting with is_veteran persists the veteran flag', function () {

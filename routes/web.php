@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ContactInquiryController as AdminContactInquiryController;
 use App\Http\Controllers\Admin\PostController as AdminPostController;
@@ -7,14 +8,16 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BlogFeedController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SeoReportController;
+use App\Http\Controllers\ServiceAreaController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'home')->name('home');
-Route::view('/about', 'about')->name('about');
-Route::view('/service-area', 'service-area')->name('service-area');
+Route::get('/', HomeController::class)->name('home');
+Route::get('/about', AboutController::class)->name('about');
+Route::get('/service-area', ServiceAreaController::class)->name('service-area');
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'store'])

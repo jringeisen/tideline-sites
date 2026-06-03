@@ -1,5 +1,7 @@
 <?php
 
+use Inertia\Testing\AssertableInertia as Assert;
+
 dataset('locations', [
     'destin' => ['destin', 'Destin'],
     'panama-city-beach' => ['panama-city-beach', 'Panama City Beach'],
@@ -16,40 +18,35 @@ dataset('locations', [
     'alys-beach' => ['alys-beach', 'Alys Beach'],
 ]);
 
-test('the {slug} location page renders with the city name in the H1 and title', function (string $slug, string $name) {
+test('the {slug} location page renders the city name and title', function (string $slug, string $name) {
     $this->get(route('location.show', $slug))
         ->assertOk()
-        ->assertSee("{$name} Web Design", false)
-        ->assertSee('<title>', false)
-        ->assertSee("{$name} Web Design &amp; SEO", false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Location')
+            ->where('location.name', $name)
+            ->where('meta.title', "{$name} Web Design & SEO — All American Web Design"));
 })->with('locations');
 
 test('the {slug} location page emits city-scoped LocalBusiness + Breadcrumb JSON-LD', function (string $slug, string $name) {
     $this->get(route('location.show', $slug))
-        ->assertSee('"@type":"ProfessionalService"', false)
-        ->assertSee('"@type":"BreadcrumbList"', false)
-        ->assertSee('"addressLocality":"'.$name.'"', false);
-})->with('locations');
-
-test('the {slug} location page links to the contact and pricing', function (string $slug) {
-    $response = $this->get(route('location.show', $slug));
-
-    $response->assertSee(route('contact.show'), false);
-    $response->assertSee('pricing', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('schema.0.@type', 'ProfessionalService')
+            ->where('schema.0.address.addressLocality', $name)
+            ->where('schema.1.@type', 'BreadcrumbList'));
 })->with('locations');
 
 test('cross-links exist between sibling location pages', function () {
-    $this->get(route('location.show', 'destin'))
-        ->assertSee(route('location.show', '30a'), false)
-        ->assertSee(route('location.show', 'panama-city-beach'), false);
+    $nearbySlugs = fn ($nearby) => collect($nearby)->pluck('slug')->filter()->all();
 
-    $this->get(route('location.show', '30a'))
-        ->assertSee(route('location.show', 'destin'), false)
-        ->assertSee(route('location.show', 'panama-city-beach'), false);
+    $this->get(route('location.show', 'destin'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('nearby', fn ($nearby) => in_array('30a', $nearbySlugs($nearby), true)
+                && in_array('panama-city-beach', $nearbySlugs($nearby), true)));
 
     $this->get(route('location.show', 'panama-city-beach'))
-        ->assertSee(route('location.show', 'destin'), false)
-        ->assertSee(route('location.show', '30a'), false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('nearby', fn ($nearby) => in_array('30a', $nearbySlugs($nearby), true)
+                && in_array('destin', $nearbySlugs($nearby), true)));
 });
 
 test('an unknown location slug returns 404', function () {

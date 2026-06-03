@@ -39,6 +39,13 @@
         @fonts
 
         @vite(['resources/css/app.css', 'resources/js/app.ts', "resources/js/pages/{$page['component']}.vue"])
+
+        @production
+            {{-- Fathom - beautiful, simple website analytics --}}
+            <script src="https://cdn.usefathom.com/script.js" data-site="XFYXDHZS" defer></script>
+            {{-- / Fathom --}}
+        @endproduction
+
         <x-inertia::head>
             <title>{{ config('app.name', 'Laravel') }}</title>
         </x-inertia::head>

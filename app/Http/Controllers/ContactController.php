@@ -6,19 +6,32 @@ use App\Concerns\DetectsFormSpam;
 use App\Http\Requests\StoreContactInquiryRequest;
 use App\Mail\ContactInquiryReceived;
 use App\Models\ContactInquiry;
+use App\Support\MarketingSchema;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\View\View;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class ContactController extends Controller
 {
     use DetectsFormSpam;
 
-    public function show(): View
+    public function show(): Response
     {
-        return view('contact', [
+        return Inertia::render('Contact', [
             'selectedPlan' => request()->query('plan'),
             'isVeteran' => request()->boolean('veteran'),
+            'startedAt' => Crypt::encryptString((string) now()->timestamp),
+            'status' => session('status'),
+            'meta' => [
+                'title' => 'Contact All American Web Design — Custom Websites, Built in America',
+                'description' => "Tell us about your business and we'll be in touch within one business day. Veteran-owned, American-made web design for small businesses nationwide.",
+                'canonical' => url()->current(),
+            ],
+            'schema' => [
+                MarketingSchema::contactPage(),
+            ],
         ]);
     }
 

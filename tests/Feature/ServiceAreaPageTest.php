@@ -1,41 +1,41 @@
 <?php
 
+use Inertia\Testing\AssertableInertia as Assert;
+
 test('service area page renders successfully', function () {
     $this->get(route('service-area'))->assertOk();
 });
 
-test('service area page exposes the brand and primary headline', function () {
+test('service area page renders the ServiceArea Inertia component with SEO meta', function () {
     $this->get(route('service-area'))
-        ->assertSee('Service Area', false)
-        ->assertSee('Built across America', false)
-        ->assertSee('Destin to Panama City Beach', false)
-        ->assertDontSee('Emerald Coast', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('ServiceArea')
+            ->where('meta.title', 'Service Area — All American Web Design | Custom Websites Nationwide')
+            ->where('meta.description', fn (string $d) => str_contains($d, 'Destin to Panama City Beach')));
 });
 
 test('service area page lists every Gulf Coast town we serve', function () {
-    $response = $this->get(route('service-area'));
-
-    foreach ([
-        'Destin', 'Miramar Beach', 'Sandestin', 'Santa Rosa Beach',
-        'Grayton Beach', 'WaterColor', 'Seaside', 'Seagrove Beach',
-        'Rosemary Beach', 'Inlet Beach', 'Panama City Beach', 'Panama City',
-    ] as $city) {
-        $response->assertSee($city, false);
-    }
+    $this->get(route('service-area'))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('cities', fn ($cities) => collect([
+                'Destin', 'Miramar Beach', 'Sandestin', 'Santa Rosa Beach',
+                'Grayton Beach', 'WaterColor', 'Seaside', 'Seagrove Beach',
+                'Rosemary Beach', 'Inlet Beach', 'Panama City Beach', 'Panama City',
+            ])->every(fn (string $city) => collect($cities)->contains($city))));
 });
 
-test('service area page links to the featured location pages', function () {
+test('service area page exposes the featured location pages', function () {
     $this->get(route('service-area'))
-        ->assertSee(route('location.show', 'destin'), false)
-        ->assertSee(route('location.show', '30a'), false)
-        ->assertSee(route('location.show', 'panama-city-beach'), false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->has('featuredLocations', 3)
+            ->where('featuredLocations.0.slug', 'destin')
+            ->where('featuredLocations.1.slug', '30a')
+            ->where('featuredLocations.2.slug', 'panama-city-beach'));
 });
 
-test('service area page emits SEO meta and Service JSON-LD with areaServed', function () {
+test('service area page emits Service JSON-LD with areaServed', function () {
     $this->get(route('service-area'))
-        ->assertSee('<meta name="description"', false)
-        ->assertSee('<link rel="canonical"', false)
-        ->assertSee('application/ld+json', false)
-        ->assertSee('"@type":"Service"', false)
-        ->assertSee('"areaServed"', false);
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('schema.0.@type', 'Service')
+            ->has('schema.0.areaServed'));
 });
