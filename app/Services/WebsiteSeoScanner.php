@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Rules\PublicHttpUrl;
 use DOMDocument;
+use DOMElement;
 use DOMXPath;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
@@ -133,7 +134,7 @@ class WebsiteSeoScanner
         $images = $xpath->query('//img') ?: [];
         $imagesWithAlt = 0;
         foreach ($images as $image) {
-            if (filled($image->getAttribute('alt'))) {
+            if ($image instanceof DOMElement && filled($image->getAttribute('alt'))) {
                 $imagesWithAlt++;
             }
         }
@@ -158,9 +159,9 @@ class WebsiteSeoScanner
             'canonical' => $this->firstString($xpath, "//link[@rel='canonical']/@href"),
             'lang' => $this->firstString($xpath, '//html/@lang'),
             'viewport' => filled($this->firstString($xpath, "//meta[@name='viewport']/@content")),
-            'h1_count' => $xpath->query('//h1')?->length ?? 0,
-            'h2_count' => $xpath->query('//h2')?->length ?? 0,
-            'h3_count' => $xpath->query('//h3')?->length ?? 0,
+            'h1_count' => $xpath->query('//h1')->length,
+            'h2_count' => $xpath->query('//h2')->length,
+            'h3_count' => $xpath->query('//h3')->length,
             'h1_text' => $this->firstString($xpath, '//h1'),
             'og_tags' => $this->metaGroup($xpath, "//meta[starts-with(@property,'og:')]", 'property'),
             'twitter_tags' => $this->metaGroup($xpath, "//meta[starts-with(@name,'twitter:')]", 'name'),
@@ -170,9 +171,9 @@ class WebsiteSeoScanner
             'word_count' => str_word_count($bodyText),
             'schema_types' => array_values(array_unique($jsonLdTypes)),
             'has_schema' => $jsonLdTypes !== [],
-            'has_tel_link' => ($xpath->query("//a[starts-with(@href,'tel:')]")?->length ?? 0) > 0,
-            'has_mailto_link' => ($xpath->query("//a[starts-with(@href,'mailto:')]")?->length ?? 0) > 0,
-            'has_contact_link' => ($xpath->query("//a[contains(translate(@href,'CONTACT','contact'),'contact')]")?->length ?? 0) > 0,
+            'has_tel_link' => $xpath->query("//a[starts-with(@href,'tel:')]")->length > 0,
+            'has_mailto_link' => $xpath->query("//a[starts-with(@href,'mailto:')]")->length > 0,
+            'has_contact_link' => $xpath->query("//a[contains(translate(@href,'CONTACT','contact'),'contact')]")->length > 0,
             'phone_detected' => (bool) preg_match('/\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}/', $bodyText),
         ];
     }
@@ -257,6 +258,9 @@ class WebsiteSeoScanner
         $group = [];
 
         foreach ($xpath->query($expression) ?: [] as $node) {
+            if (! $node instanceof DOMElement) {
+                continue;
+            }
             $key = $node->getAttribute($keyAttribute);
             $content = $node->getAttribute('content');
             if (filled($key)) {
@@ -275,7 +279,7 @@ class WebsiteSeoScanner
 
         $body = $document->getElementsByTagName('body')->item(0);
 
-        return trim(preg_replace('/\s+/', ' ', $body?->textContent ?? '') ?? '');
+        return trim(preg_replace('/\s+/', ' ', $body->textContent) ?? '');
     }
 
     /**

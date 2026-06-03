@@ -6,8 +6,8 @@ use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Support\MarketingSchema;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -188,12 +188,15 @@ class BlogController extends Controller
     private function buildPostQuery(string $q): LengthAwarePaginator
     {
         if ($q !== '') {
-            return Post::search($q)
+            /** @var LengthAwarePaginator $results */
+            $results = Post::search($q)
                 ->query(fn ($query) => $query
                     ->with(['category', 'tags', 'author'])
                     ->orderByDesc('published_at'))
                 ->paginate(10)
                 ->withQueryString();
+
+            return $results;
         }
 
         return Post::published()
