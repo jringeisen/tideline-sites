@@ -41,8 +41,6 @@ class HandleInertiaRequests extends Middleware
             'company' => [
                 'name' => config('company.name'),
                 'email' => config('company.email'),
-                'phone' => config('company.phone'),
-                'phoneDisplay' => config('company.phone_display'),
             ],
             'auth' => [
                 'user' => $request->user()?->append('is_admin'),

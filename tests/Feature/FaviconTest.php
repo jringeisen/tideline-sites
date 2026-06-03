@@ -3,11 +3,11 @@
 use function Pest\Laravel\get;
 
 $expectedTags = [
-    '<link rel="icon" href="/favicons/favicon.ico" sizes="any">',
-    '<link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml">',
-    '<link rel="icon" href="/favicons/favicon-32x32.png" type="image/png" sizes="32x32">',
-    '<link rel="icon" href="/favicons/favicon-16x16.png" type="image/png" sizes="16x16">',
-    '<link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">',
+    '<link rel="icon" href="/favicons/favicon-v2.ico" sizes="any">',
+    '<link rel="icon" href="/favicons/favicon-v2.svg" type="image/svg+xml">',
+    '<link rel="icon" href="/favicons/favicon-v2-32x32.png" type="image/png" sizes="32x32">',
+    '<link rel="icon" href="/favicons/favicon-v2-16x16.png" type="image/png" sizes="16x16">',
+    '<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-v2.png">',
 ];
 
 test('marketing layout links the brand favicons', function () use ($expectedTags) {
@@ -28,11 +28,11 @@ test('inertia app layout links the brand favicons', function () use ($expectedTa
 
 test('referenced favicon files exist in public/favicons', function () {
     foreach ([
-        'favicon.ico',
-        'favicon.svg',
-        'favicon-32x32.png',
-        'favicon-16x16.png',
-        'apple-touch-icon.png',
+        'favicon-v2.ico',
+        'favicon-v2.svg',
+        'favicon-v2-32x32.png',
+        'favicon-v2-16x16.png',
+        'apple-touch-icon-v2.png',
     ] as $file) {
         expect(public_path("favicons/{$file}"))->toBeFile();
     }

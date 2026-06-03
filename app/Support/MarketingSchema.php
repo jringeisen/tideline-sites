@@ -115,7 +115,6 @@ class MarketingSchema
             'description' => 'Veteran-owned web design building custom, high-converting websites for American small businesses — built in America, not outsourced.',
             'priceRange' => '$299 - $499/mo',
             'image' => asset('og-image.png'),
-            'telephone' => config('company.phone'),
             'address' => [
                 '@type' => 'PostalAddress',
                 'addressLocality' => 'Panama City Beach',
@@ -278,7 +277,6 @@ class MarketingSchema
             'description' => $location['meta_description'],
             'priceRange' => '$299 - $499/mo',
             'image' => asset('og-image.png'),
-            'telephone' => config('company.phone'),
             'address' => [
                 '@type' => 'PostalAddress',
                 'addressLocality' => $location['name'],

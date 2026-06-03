@@ -30,11 +30,11 @@
             }
         </style>
 
-        <link rel="icon" href="/favicons/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicons/favicon.svg" type="image/svg+xml">
-        <link rel="icon" href="/favicons/favicon-32x32.png" type="image/png" sizes="32x32">
-        <link rel="icon" href="/favicons/favicon-16x16.png" type="image/png" sizes="16x16">
-        <link rel="apple-touch-icon" href="/favicons/apple-touch-icon.png">
+        <link rel="icon" href="/favicons/favicon-v2.ico" sizes="any">
+        <link rel="icon" href="/favicons/favicon-v2.svg" type="image/svg+xml">
+        <link rel="icon" href="/favicons/favicon-v2-32x32.png" type="image/png" sizes="32x32">
+        <link rel="icon" href="/favicons/favicon-v2-16x16.png" type="image/png" sizes="16x16">
+        <link rel="apple-touch-icon" href="/favicons/apple-touch-icon-v2.png">
 
         @fonts
 

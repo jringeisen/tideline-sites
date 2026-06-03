@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useForm, usePage } from '@inertiajs/vue3';
-import { CheckCircle2, Clock, Mail, MapPin, Phone } from 'lucide-vue-next';
-import { computed } from 'vue';
+import { useForm } from '@inertiajs/vue3';
+import { CheckCircle2, Clock, Mail, MapPin } from 'lucide-vue-next';
 import { store } from '@/actions/App/Http/Controllers/ContactController';
 
 const props = defineProps<{
@@ -10,19 +9,6 @@ const props = defineProps<{
     startedAt: string;
     status: string | null;
 }>();
-
-const page = usePage();
-const company = computed(
-    () =>
-        (page.props.company as {
-            phone?: string;
-            phoneDisplay?: string;
-        }) ?? {},
-);
-
-const phoneHref = computed(
-    () => `tel:${(company.value.phone ?? '').replace(/-/g, '')}`,
-);
 
 const form = useForm({
     name: '',
@@ -405,27 +391,6 @@ function submit(): void {
                             </p>
 
                             <dl class="mt-8 space-y-6 text-sm">
-                                <div class="flex items-start gap-4">
-                                    <span
-                                        class="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/10 text-[var(--color-emerald-200)]"
-                                    >
-                                        <Phone
-                                            class="h-4 w-4"
-                                            aria-hidden="true"
-                                        />
-                                    </span>
-                                    <div>
-                                        <dt class="text-white/60">Phone</dt>
-                                        <dd class="mt-0.5">
-                                            <a
-                                                :href="phoneHref"
-                                                class="font-medium text-white hover:underline"
-                                                >{{ company.phoneDisplay }}</a
-                                            >
-                                        </dd>
-                                    </div>
-                                </div>
-
                                 <div class="flex items-start gap-4">
                                     <span
                                         class="grid h-9 w-9 flex-none place-items-center rounded-xl bg-white/10 text-[var(--color-emerald-200)]"

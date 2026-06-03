@@ -17,10 +17,4 @@ return [
 
     'email' => env('COMPANY_EMAIL', 'hello@allamericanwebdesign.com'),
 
-    // E.164-style number used in tel: links and schema.org telephone fields.
-    'phone' => env('COMPANY_PHONE', '+1-850-684-8924'),
-
-    // Human-friendly number shown to visitors.
-    'phone_display' => env('COMPANY_PHONE_DISPLAY', '(850) 684-8924'),
-
 ];
