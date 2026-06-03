@@ -7,8 +7,10 @@ const company = computed(() => usePage().props.company);
 
 <template>
     <img
-        src="/logo-light.png"
+        src="/logo-light.webp"
         :alt="company.name"
+        width="800"
+        height="161"
         class="h-9 w-auto max-w-full shrink-0 object-contain dark:brightness-0 dark:invert"
     />
 </template>

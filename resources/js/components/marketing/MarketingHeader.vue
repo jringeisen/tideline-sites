@@ -49,8 +49,10 @@ onBeforeUnmount(() => {
                 :aria-label="`${companyName} home`"
             >
                 <img
-                    src="/logo-dark.png"
+                    src="/logo-dark.webp"
                     :alt="companyName"
+                    width="800"
+                    height="149"
                     class="h-10 w-auto"
                 />
             </Link>
@@ -133,8 +135,10 @@ onBeforeUnmount(() => {
                         :aria-label="`${companyName} home`"
                     >
                         <img
-                            src="/logo-dark.png"
+                            src="/logo-dark.webp"
                             :alt="companyName"
+                            width="800"
+                            height="149"
                             class="h-10 w-auto"
                         />
                     </Link>

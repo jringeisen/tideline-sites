@@ -33,8 +33,10 @@ const areas = [
                 <div class="md:col-span-5">
                     <Link href="/" class="flex items-center text-white">
                         <img
-                            src="/logo-dark.png"
+                            src="/logo-dark.webp"
                             :alt="companyName"
+                            width="800"
+                            height="149"
                             class="h-14 w-auto"
                         />
                     </Link>

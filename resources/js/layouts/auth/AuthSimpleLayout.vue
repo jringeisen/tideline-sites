@@ -26,8 +26,10 @@ const company = computed(() => usePage().props.company);
                     :aria-label="`${company.name} home`"
                 >
                     <img
-                        src="/logo-light.png"
+                        src="/logo-light.webp"
                         :alt="company.name"
+                        width="800"
+                        height="161"
                         class="h-9 w-auto object-contain"
                     />
                 </a>

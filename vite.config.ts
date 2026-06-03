@@ -17,6 +17,7 @@ export default defineConfig({
                 bunny('Instrument Sans', {
                     weights: [400, 500, 600, 700],
                     preload: false,
+                    display: 'optional',
                 }),
                 // Marketing display headlines — bold, condensed, all-caps.
                 // The hero <h1> (weight 700) is the LCP element on the homepage,
@@ -26,12 +27,17 @@ export default defineConfig({
                 bunny('Oswald', {
                     weights: [500, 600, 700],
                     preload: [{ weight: 700, style: 'normal' }],
+                    // `optional` prevents the late font swap from reflowing the
+                    // condensed hero headline (the dominant CLS culprit). The
+                    // preloaded 700 weight usually lands within the block window.
+                    display: 'optional',
                 }),
                 // Marketing body — refined serif. Below the headline, swap is fine.
                 bunny('Source Serif 4', {
                     weights: [400, 600],
                     styles: ['normal', 'italic'],
                     preload: false,
+                    display: 'optional',
                 }),
             ],
         }),
