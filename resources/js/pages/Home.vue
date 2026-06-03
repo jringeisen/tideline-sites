@@ -63,7 +63,10 @@ const projects = [
         tagline: 'Personalized K-12 learning platform',
         description:
             'A curiosity-led homeschooling platform that builds personalized K-12 learning paths for families. Built with Laravel, Inertia, and Stripe billing.',
-        image: '/projects/venture.webp',
+        image: '/projects/venture-1200.webp',
+        srcset: '/projects/venture-600.webp 600w, /projects/venture-1200.webp 1200w',
+        width: 1200,
+        height: 683,
         tags: ['Laravel', 'Inertia', 'Stripe', 'AI'],
     },
     {
@@ -73,7 +76,10 @@ const projects = [
         tagline: 'AI-assisted social media planner',
         description:
             'A social media content planning tool with AI-assisted writing. Schedule, draft, and refine posts in one place.',
-        image: '/projects/wordsmith.webp',
+        image: '/projects/wordsmith-1200.webp',
+        srcset: '/projects/wordsmith-600.webp 600w, /projects/wordsmith-1200.webp 1200w',
+        width: 1200,
+        height: 671,
         tags: ['Laravel', 'AI', 'Scheduling'],
     },
 ];
@@ -729,6 +735,10 @@ const contactHref = (plan?: string): string => {
                         >
                             <img
                                 :src="project.image"
+                                :srcset="project.srcset"
+                                sizes="(min-width: 1024px) 560px, 100vw"
+                                :width="project.width"
+                                :height="project.height"
                                 :alt="`Screenshot of ${project.name} — ${project.tagline}`"
                                 loading="lazy"
                                 class="absolute inset-0 h-full w-full object-cover object-top transition duration-300 group-hover:scale-[1.02]"

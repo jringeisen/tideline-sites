@@ -49,7 +49,7 @@ function submitSearch(): void {
                 "
             />
             <img
-                src="/american-flag.png"
+                src="/american-flag.webp"
                 alt=""
                 width="1729"
                 height="910"

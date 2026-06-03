@@ -46,7 +46,7 @@ const values: Value[] = [
             />
             <!-- American flag, muted into the navy via luminosity blend -->
             <img
-                src="/american-flag.png"
+                src="/american-flag.webp"
                 alt=""
                 width="1729"
                 height="910"
@@ -152,10 +152,10 @@ const values: Value[] = [
                             class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-[var(--color-sand-300)]/60 dark:bg-white/[0.04] dark:ring-white/10"
                         >
                             <img
-                                src="/team/jon-elena.jpeg"
+                                src="/team/jon-elena.webp"
                                 alt="Jon and Elena Ringeisen, co-founders of All American Web Design"
-                                width="1200"
-                                height="900"
+                                width="768"
+                                height="1024"
                                 loading="lazy"
                                 class="block h-auto w-full"
                             />

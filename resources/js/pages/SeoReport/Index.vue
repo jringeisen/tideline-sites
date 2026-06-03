@@ -361,7 +361,7 @@ function categoryLabel(category: string | null): string {
             "
         />
         <img
-            src="/american-flag.png"
+            src="/american-flag.webp"
             alt=""
             class="absolute inset-0 -z-10 h-full w-full object-cover opacity-20 mix-blend-luminosity"
         />

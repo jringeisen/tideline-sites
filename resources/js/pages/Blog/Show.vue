@@ -48,7 +48,7 @@ const shareUrl = computed(() => encodeURIComponent(canonical.value));
                 "
             />
             <img
-                src="/american-flag.png"
+                src="/american-flag.webp"
                 alt=""
                 width="1729"
                 height="910"

@@ -1,9 +1,18 @@
 import type { Component } from 'vue';
-import AdminLayout from '@/layouts/admin/Layout.vue';
+import { defineAsyncComponent } from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import MarketingLayout from '@/layouts/MarketingLayout.vue';
-import SettingsLayout from '@/layouts/settings/Layout.vue';
+
+// Admin and settings layouts are heavy (sidebar nav, reka-ui menus, icons) and
+// only ever used by authenticated, non-SEO pages. Load them as separate chunks
+// so public marketing pages don't ship admin JS in the main bundle.
+const AdminLayout = defineAsyncComponent(
+    () => import('@/layouts/admin/Layout.vue'),
+);
+const SettingsLayout = defineAsyncComponent(
+    () => import('@/layouts/settings/Layout.vue'),
+);
 
 /**
  * Marketing page component names (and prefixes) that render inside the
