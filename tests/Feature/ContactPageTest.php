@@ -4,26 +4,6 @@ use App\Models\ContactInquiry;
 use Illuminate\Support\Facades\Crypt;
 use Inertia\Testing\AssertableInertia as Assert;
 
-/**
- * Build a base valid payload, defaulting to "filled out 10 seconds ago" so it
- * clears the time-trap.
- *
- * @param  array<string, mixed>  $overrides
- * @return array<string, mixed>
- */
-function contactPayload(array $overrides = []): array
-{
-    return array_merge([
-        'name' => 'Jane Beachgoer',
-        'email' => 'jane@example.com',
-        'phone' => '850-555-0199',
-        'plan' => 'growth',
-        'message' => 'I run a vacation rental in Seaside and need a new website plus monthly content.',
-        'website' => '',
-        'started_at' => Crypt::encryptString(now()->subSeconds(10)->timestamp),
-    ], $overrides);
-}
-
 test('contact page renders the Contact Inertia component with form scaffolding', function () {
     $this->get(route('contact.show'))
         ->assertOk()

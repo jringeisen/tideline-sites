@@ -59,3 +59,23 @@ function validStartedAt(int $secondsAgo = 10): string
         (string) (now()->timestamp - $secondsAgo),
     );
 }
+
+/**
+ * Build a base valid contact payload, defaulting to "filled out 10 seconds ago"
+ * so it clears the time-trap.
+ *
+ * @param  array<string, mixed>  $overrides
+ * @return array<string, mixed>
+ */
+function contactPayload(array $overrides = []): array
+{
+    return array_merge([
+        'name' => 'Jane Beachgoer',
+        'email' => 'jane@example.com',
+        'phone' => '850-555-0199',
+        'plan' => 'growth',
+        'message' => 'I run a vacation rental in Seaside and need a new website plus monthly content.',
+        'website' => '',
+        'started_at' => Crypt::encryptString(now()->subSeconds(10)->timestamp),
+    ], $overrides);
+}
