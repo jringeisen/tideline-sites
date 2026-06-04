@@ -70,7 +70,7 @@ defineProps<{
                         v-for="location in locations"
                         :key="location.slug"
                         :href="`/locations/${location.slug}`"
-                        class="group flex flex-col rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60 transition hover:ring-[var(--color-emerald-700)]/40"
+                        class="group flex flex-col rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60 transition hover:ring-[var(--color-emerald-700)]/40 dark:bg-white/[0.04] dark:ring-white/10"
                     >
                         <h2
                             class="font-serif text-2xl text-[var(--color-deep-teal)]"

@@ -180,7 +180,7 @@ const services = computed<Array<[string, string, string]>>(() => [
                         <li
                             v-for="area in location.neighborhoods"
                             :key="area"
-                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)]"
+                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] dark:bg-white/[0.06] dark:text-white dark:ring-white/15"
                         >
                             {{ area }}
                         </li>

@@ -119,7 +119,7 @@ const markets = [
                     </p>
                 </div>
                 <aside
-                    class="rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60"
+                    class="rounded-2xl bg-white p-7 ring-1 ring-[var(--color-sand-300)]/60 dark:bg-white/[0.04] dark:ring-white/10"
                 >
                     <h2
                         class="text-xs font-semibold tracking-[0.18em] text-[var(--color-red)] uppercase"
@@ -198,7 +198,7 @@ const markets = [
                     <li v-for="market in markets" :key="market.slug">
                         <Link
                             :href="`/locations/${market.slug}`"
-                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-emerald-50)]"
+                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-emerald-50)] dark:bg-white/[0.06] dark:text-white dark:ring-white/15 dark:hover:bg-white/15"
                         >
                             {{ market.name }} {{ service.name }}
                         </Link>
@@ -206,7 +206,7 @@ const markets = [
                     <li>
                         <Link
                             href="/locations"
-                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-emerald-50)]"
+                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)] transition hover:bg-[var(--color-emerald-50)] dark:bg-white/[0.06] dark:text-white dark:ring-white/15 dark:hover:bg-white/15"
                         >
                             All locations →
                         </Link>

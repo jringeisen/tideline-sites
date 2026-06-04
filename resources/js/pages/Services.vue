@@ -71,7 +71,7 @@ defineProps<{
                         v-for="service in services"
                         :key="service.slug"
                         :href="`/services/${service.slug}`"
-                        class="group flex flex-col rounded-2xl bg-white p-8 ring-1 ring-[var(--color-sand-300)]/60 transition hover:ring-[var(--color-emerald-700)]/40"
+                        class="group flex flex-col rounded-2xl bg-white p-8 ring-1 ring-[var(--color-sand-300)]/60 transition hover:ring-[var(--color-emerald-700)]/40 dark:bg-white/[0.04] dark:ring-white/10"
                     >
                         <svg
                             class="h-9 w-9 text-[var(--color-emerald-700)]"
