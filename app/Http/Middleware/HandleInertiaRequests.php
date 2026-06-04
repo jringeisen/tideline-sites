@@ -41,6 +41,9 @@ class HandleInertiaRequests extends Middleware
             'company' => [
                 'name' => config('company.name'),
                 'email' => config('company.email'),
+                'phone' => config('company.phone'),
+                'locality' => config('company.locality'),
+                'region' => config('company.region'),
             ],
             'auth' => [
                 'user' => $request->user()?->append('is_admin'),

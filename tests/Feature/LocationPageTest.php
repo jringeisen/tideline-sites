@@ -49,6 +49,28 @@ test('cross-links exist between sibling location pages', function () {
                 && in_array('destin', $nearbySlugs($nearby), true)));
 });
 
+test('priority location pages emit FAQPage JSON-LD and expose FAQs + neighborhoods', function (string $slug) {
+    $this->get(route('location.show', $slug))
+        ->assertInertia(fn (Assert $page) => $page
+            ->where('schema.2.@type', 'FAQPage')
+            ->has('schema.2.mainEntity')
+            ->has('location.faqs')
+            ->has('location.neighborhoods'));
+})->with([
+    ['panama-city-beach'],
+    ['destin'],
+    ['30a'],
+]);
+
+test('the locations index lists every town', function () {
+    $this->get(route('locations.index'))
+        ->assertOk()
+        ->assertInertia(fn (Assert $page) => $page
+            ->component('Locations')
+            ->has('locations', count(config('locations')))
+            ->where('schema.0.@type', 'BreadcrumbList'));
+});
+
 test('an unknown location slug returns 404', function () {
     $this->get('/locations/orlando')->assertNotFound();
 });

@@ -22,11 +22,49 @@ class MarketingSchema
     }
 
     /**
+     * Contact fields for the business node, omitting any that are unset so we
+     * never emit a placeholder telephone.
+     *
+     * @return array<string, string>
+     */
+    private static function contactFields(): array
+    {
+        return array_filter([
+            'telephone' => config('company.phone'),
+            'email' => config('company.email'),
+        ]);
+    }
+
+    /**
+     * Public profile URLs for schema `sameAs` (GBP + socials). Empty when none
+     * are configured, in which case callers should omit the key.
+     *
+     * @return array<int, string>
+     */
+    private static function sameAs(): array
+    {
+        return config('company.social', []);
+    }
+
+    /**
+     * Merge `sameAs` into a schema array only when profiles are configured.
+     *
+     * @param  array<string, mixed>  $schema
+     * @return array<string, mixed>
+     */
+    private static function withSameAs(array $schema): array
+    {
+        $sameAs = self::sameAs();
+
+        return $sameAs === [] ? $schema : [...$schema, 'sameAs' => $sameAs];
+    }
+
+    /**
      * @return array<string, mixed>
      */
     public static function organization(): array
     {
-        return [
+        return self::withSameAs([
             '@context' => 'https://schema.org',
             '@type' => 'Organization',
             '@id' => self::businessId(),
@@ -39,7 +77,8 @@ class MarketingSchema
                 ['@id' => url()->current().'#jon'],
                 ['@id' => url()->current().'#elena'],
             ],
-        ];
+            ...self::contactFields(),
+        ]);
     }
 
     /**
@@ -106,7 +145,7 @@ class MarketingSchema
      */
     public static function homeBusiness(): array
     {
-        return [
+        return self::withSameAs([
             '@context' => 'https://schema.org',
             '@type' => 'ProfessionalService',
             '@id' => self::businessId(),
@@ -115,11 +154,17 @@ class MarketingSchema
             'description' => 'Veteran-owned web design building custom, high-converting websites for American small businesses — built in America, not outsourced.',
             'priceRange' => '$299 - $499/mo',
             'image' => asset('og-image.png'),
+            ...self::contactFields(),
             'address' => [
                 '@type' => 'PostalAddress',
                 'addressLocality' => 'Panama City Beach',
                 'addressRegion' => 'FL',
                 'addressCountry' => 'US',
+            ],
+            'geo' => [
+                '@type' => 'GeoCoordinates',
+                'latitude' => 30.1766,
+                'longitude' => -85.8055,
             ],
             'openingHoursSpecification' => [
                 '@type' => 'OpeningHoursSpecification',
@@ -148,7 +193,7 @@ class MarketingSchema
                 ['@type' => 'Person', 'name' => 'Elena Ringeisen', 'jobTitle' => 'Co-founder, Marketing & Sales'],
             ],
             'knowsAbout' => ['Web Design', 'SEO', 'Local SEO', 'Laravel', 'Small Business Websites'],
-        ];
+        ]);
     }
 
     /**
@@ -178,7 +223,30 @@ class MarketingSchema
     }
 
     /**
-     * FAQPage schema.
+     * Service schema for a single service detail page.
+     *
+     * @param  array{name: string, description: string}  $service
+     * @return array<string, mixed>
+     */
+    public static function service(array $service): array
+    {
+        return [
+            '@context' => 'https://schema.org',
+            '@type' => 'Service',
+            'name' => $service['name'],
+            'serviceType' => $service['name'],
+            'description' => $service['description'],
+            'url' => url()->current(),
+            'provider' => ['@id' => self::businessId()],
+            'areaServed' => [
+                ['@type' => 'Country', 'name' => 'United States'],
+                ['@type' => 'AdministrativeArea', 'name' => "Florida's Gulf Coast"],
+            ],
+        ];
+    }
+
+    /**
+     * FAQPage schema. Reused for the homepage and per-location FAQs.
      *
      * @param  array<int, array{question: string, answer: string}>  $faqs
      * @return array<string, mixed>
@@ -227,8 +295,10 @@ class MarketingSchema
             'url' => url()->current(),
             'mainEntity' => [
                 '@type' => 'LocalBusiness',
+                '@id' => self::businessId(),
                 'name' => config('company.name'),
                 'areaServed' => 'United States',
+                ...self::contactFields(),
             ],
         ];
     }
@@ -268,7 +338,7 @@ class MarketingSchema
     {
         $pageUrl = url()->current();
 
-        return [
+        return self::withSameAs([
             '@context' => 'https://schema.org',
             '@type' => 'ProfessionalService',
             '@id' => $pageUrl.'#business',
@@ -277,6 +347,7 @@ class MarketingSchema
             'description' => $location['meta_description'],
             'priceRange' => '$299 - $499/mo',
             'image' => asset('og-image.png'),
+            ...self::contactFields(),
             'address' => [
                 '@type' => 'PostalAddress',
                 'addressLocality' => $location['name'],
@@ -294,7 +365,7 @@ class MarketingSchema
                 'containedInPlace' => ['@type' => 'AdministrativeArea', 'name' => "Florida's Gulf Coast"],
             ],
             'parentOrganization' => ['@id' => self::businessId()],
-        ];
+        ]);
     }
 
     /**

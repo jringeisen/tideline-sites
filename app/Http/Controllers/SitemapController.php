@@ -14,10 +14,20 @@ class SitemapController extends Controller
         $urls = [
             ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly'],
             ['loc' => route('about'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('services.index'), 'priority' => '0.8', 'changefreq' => 'monthly'],
             ['loc' => route('service-area'), 'priority' => '0.8', 'changefreq' => 'monthly'],
+            ['loc' => route('locations.index'), 'priority' => '0.8', 'changefreq' => 'monthly'],
             ['loc' => route('contact.show'), 'priority' => '0.7', 'changefreq' => 'monthly'],
             ['loc' => route('blog.index'), 'priority' => '0.8', 'changefreq' => 'weekly'],
         ];
+
+        foreach (array_keys(config('offerings', [])) as $slug) {
+            $urls[] = [
+                'loc' => route('services.show', $slug),
+                'priority' => '0.7',
+                'changefreq' => 'monthly',
+            ];
+        }
 
         foreach (array_keys(config('locations', [])) as $slug) {
             $urls[] = [

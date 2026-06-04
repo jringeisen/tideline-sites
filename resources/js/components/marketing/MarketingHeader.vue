@@ -12,9 +12,9 @@ const companyName = computed<string>(
 const open = ref(false);
 
 const navLinks = [
-    { label: 'Services', href: '/#services' },
+    { label: 'Services', href: '/services' },
     { label: 'Pricing', href: '/#pricing' },
-    { label: 'Service Area', href: '/service-area' },
+    { label: 'Locations', href: '/locations' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },

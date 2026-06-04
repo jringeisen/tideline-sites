@@ -12,6 +12,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\SeoReportController;
 use App\Http\Controllers\ServiceAreaController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,12 @@ Route::post('/seo-assessment/{seoReport:token}/unlock', [SeoReportController::cl
     ->middleware('throttle:10,60')
     ->name('seo-report.unlock');
 
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/services/{slug}', [ServiceController::class, 'show'])
+    ->where('slug', '[a-z0-9-]+')
+    ->name('services.show');
+
+Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
 Route::get('/locations/{slug}', [LocationController::class, 'show'])
     ->where('slug', '[a-z0-9-]+')
     ->name('location.show');

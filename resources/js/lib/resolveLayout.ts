@@ -24,6 +24,9 @@ const MARKETING_PAGES = new Set([
     'ServiceArea',
     'Contact',
     'Location',
+    'Locations',
+    'Services',
+    'Service',
 ]);
 
 const isMarketingPage = (name: string): boolean => {

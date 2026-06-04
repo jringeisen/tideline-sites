@@ -2,6 +2,11 @@
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
+type Faq = {
+    question: string;
+    answer: string;
+};
+
 type Location = {
     slug: string;
     name: string;
@@ -12,6 +17,8 @@ type Location = {
     intro: string;
     why_local: string;
     segments: Array<[string, string]>;
+    neighborhoods?: string[];
+    faqs?: Faq[];
     geo: { lat: number; lng: number };
 };
 
@@ -25,20 +32,34 @@ const props = defineProps<{
     nearby: NearbyTown[];
 }>();
 
-const services = computed<Array<[string, string]>>(() => [
+const mapSrc = computed<string>(
+    () =>
+        `https://www.google.com/maps?q=${encodeURIComponent(
+            props.location.display_name,
+        )}&z=11&output=embed`,
+);
+
+const services = computed<Array<[string, string, string]>>(() => [
     [
         'Web Design',
         `Fast, beautiful sites built for ${props.location.name} customers.`,
+        'web-design',
     ],
     [
         'SEO Optimization',
         `Local SEO that wins searches in ${props.location.name} and nearby towns.`,
+        'seo',
     ],
     [
         'Blog Writing',
         'Original posts that pull search traffic into your business.',
+        'blog-writing',
     ],
-    ['Newsletters', 'Monthly emails that keep past customers coming back.'],
+    [
+        'Newsletters',
+        'Monthly emails that keep past customers coming back.',
+        'newsletters',
+    ],
 ]);
 </script>
 
@@ -148,6 +169,35 @@ const services = computed<Array<[string, string]>>(() => [
                 <p class="mt-4 text-lg leading-relaxed text-slate-700">
                     {{ location.why_local }}
                 </p>
+
+                <div v-if="location.neighborhoods?.length" class="mt-8">
+                    <p
+                        class="text-xs font-semibold tracking-[0.18em] text-[var(--color-red)] uppercase"
+                    >
+                        Areas we cover in {{ location.name }}
+                    </p>
+                    <ul class="mt-4 flex flex-wrap gap-2 text-sm">
+                        <li
+                            v-for="area in location.neighborhoods"
+                            :key="area"
+                            class="rounded-full bg-white px-3 py-1 text-[var(--color-deep-teal)] ring-1 ring-[var(--color-sand-300)]"
+                        >
+                            {{ area }}
+                        </li>
+                    </ul>
+                </div>
+
+                <div
+                    class="mt-10 overflow-hidden rounded-2xl ring-1 ring-[var(--color-sand-300)]/60"
+                >
+                    <iframe
+                        :src="mapSrc"
+                        :title="`Map of ${location.display_name}`"
+                        class="h-72 w-full border-0"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                    />
+                </div>
             </div>
         </section>
 
@@ -206,10 +256,11 @@ const services = computed<Array<[string, string]>>(() => [
                 <div
                     class="mx-auto mt-14 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4"
                 >
-                    <article
+                    <Link
                         v-for="(service, index) in services"
                         :key="index"
-                        class="rounded-2xl border border-[var(--color-sand-300)]/60 bg-white p-6 dark:border-white/10 dark:bg-white/[0.04]"
+                        :href="`/services/${service[2]}`"
+                        class="group rounded-2xl border border-[var(--color-sand-300)]/60 bg-white p-6 transition hover:border-[var(--color-emerald-600)]/40 dark:border-white/10 dark:bg-white/[0.04]"
                     >
                         <h3
                             class="font-serif text-lg text-[var(--color-deep-teal)]"
@@ -219,16 +270,60 @@ const services = computed<Array<[string, string]>>(() => [
                         <p class="mt-2 text-sm leading-relaxed text-slate-600">
                             {{ service[1] }}
                         </p>
-                    </article>
+                        <span
+                            class="mt-4 inline-flex items-center text-sm font-semibold text-[var(--color-emerald-700)] transition group-hover:translate-x-0.5"
+                        >
+                            Learn more →
+                        </span>
+                    </Link>
                 </div>
 
                 <p class="mt-10 text-center text-sm text-slate-600">
                     <Link
-                        href="/#services"
+                        href="/services"
                         class="font-medium text-[var(--color-emerald-700)] underline-offset-4 hover:underline"
                         >See all four services →</Link
                     >
                 </p>
+            </div>
+        </section>
+
+        <!-- ───────── FAQ ───────── -->
+        <section
+            v-if="location.faqs?.length"
+            class="bg-[var(--color-cream)] py-20 sm:py-28"
+        >
+            <div class="mx-auto max-w-3xl px-6 lg:px-8">
+                <div class="text-center">
+                    <p
+                        class="text-xs font-semibold tracking-[0.18em] text-[var(--color-red)] uppercase"
+                    >
+                        Questions
+                    </p>
+                    <h2
+                        class="mt-3 font-serif text-3xl font-bold tracking-tight text-[var(--color-deep-teal)] uppercase sm:text-4xl"
+                    >
+                        {{ location.name }} web design FAQs
+                    </h2>
+                </div>
+                <dl class="mt-12 space-y-8">
+                    <div
+                        v-for="(faq, index) in location.faqs"
+                        :key="index"
+                        class="border-b border-[var(--color-sand-300)]/60 pb-8 last:border-0"
+                    >
+                        <dt
+                            class="font-serif text-lg text-[var(--color-deep-teal)]"
+                        >
+                            {{ faq.question }}
+                        </dt>
+                        <dd
+                            class="mt-3 text-base leading-relaxed text-slate-700"
+                        >
+                            {{ faq.answer }}
+                        </dd>
+                    </div>
+                </dl>
             </div>
         </section>
 

@@ -3,7 +3,12 @@ import { Link, usePage } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import CheckIcon from '@/components/marketing/CheckIcon.vue';
 
-type Service = { name: string; description: string; icon: string };
+type Service = {
+    slug: string;
+    name: string;
+    description: string;
+    icon: string;
+};
 type Faq = { question: string; answer: string };
 
 const props = defineProps<{
@@ -160,7 +165,7 @@ const contactHref = (plan?: string): string => {
                         <span
                             class="h-1.5 w-1.5 rounded-full bg-[var(--color-red)]"
                         />
-                        Veteran-owned · Built in the USA
+                        Panama City Beach · Gulf Coast Florida
                     </span>
                     <h1
                         class="mt-6 font-serif text-6xl leading-[0.95] font-bold tracking-tight uppercase sm:text-7xl lg:text-8xl"
@@ -173,15 +178,17 @@ const contactHref = (plan?: string): string => {
                     <p
                         class="mt-6 max-w-xl text-2xl leading-snug text-white/90 sm:text-3xl"
                     >
-                        Custom websites for American small businesses.
+                        Web design &amp; SEO for Panama City Beach &amp; Gulf
+                        Coast small businesses.
                     </p>
                     <p
                         class="mt-5 max-w-xl text-base leading-relaxed text-white/75"
                     >
-                        We design and build high-converting websites, by hand,
-                        here in the States, with the discipline of a
-                        veteran-owned shop. No overseas hand-offs. No
-                        cookie-cutter templates.
+                        From Pier Park to 30A, we design and build
+                        high-converting websites by hand — with the discipline
+                        of a veteran-owned shop. Local roots on Florida's Gulf
+                        Coast, no overseas hand-offs, no cookie-cutter
+                        templates.
                     </p>
                     <div
                         class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
@@ -459,6 +466,12 @@ const contactHref = (plan?: string): string => {
                         >
                             Included in every plan
                         </p>
+                        <Link
+                            :href="`/services/${service.slug}`"
+                            class="relative mt-4 inline-flex items-center text-sm font-semibold text-[var(--color-emerald-700)] transition hover:text-[var(--color-emerald-800)]"
+                        >
+                            Learn more about {{ service.name }} →
+                        </Link>
                     </article>
                 </div>
 
@@ -497,9 +510,10 @@ const contactHref = (plan?: string): string => {
                             </a>
                         </div>
                         <div class="mt-5 grid gap-4 sm:grid-cols-2">
-                            <article
+                            <Link
                                 v-for="service in growthServices"
                                 :key="service.name"
+                                :href="`/services/${service.slug}`"
                                 class="flex items-start gap-4 rounded-2xl bg-white p-5 ring-1 ring-[var(--color-sand-300)]/60 transition duration-200 ease-out hover:-translate-y-0.5 hover:ring-[var(--color-emerald-600)]/30 dark:bg-white/[0.04] dark:ring-white/10"
                             >
                                 <span
@@ -530,7 +544,7 @@ const contactHref = (plan?: string): string => {
                                         {{ service.description }}
                                     </p>
                                 </div>
-                            </article>
+                            </Link>
                         </div>
                     </div>
                 </div>

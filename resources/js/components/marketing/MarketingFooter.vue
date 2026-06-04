@@ -2,20 +2,39 @@
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
+type Company = {
+    name?: string;
+    email?: string;
+    phone?: string | null;
+    locality?: string;
+    region?: string;
+};
+
 const page = usePage();
-const companyName = computed<string>(
-    () =>
-        (page.props.company as { name?: string } | undefined)?.name ??
-        'All American Web Design',
+const company = computed<Company>(
+    () => (page.props.company as Company | undefined) ?? {},
 );
+const companyName = computed<string>(
+    () => company.value.name ?? 'All American Web Design',
+);
+const companyEmail = computed<string | undefined>(() => company.value.email);
+const companyPhone = computed<string | null>(() => company.value.phone ?? null);
+const phoneHref = computed<string>(
+    () => `tel:+1${(company.value.phone ?? '').replace(/\D/g, '')}`,
+);
+const cityState = computed<string>(() => {
+    const { locality, region } = company.value;
+
+    return [locality, region].filter(Boolean).join(', ');
+});
 const year = new Date().getFullYear();
 
 const companyLinks = [
-    { label: 'Services', href: '/#services' },
+    { label: 'Services', href: '/services' },
     { label: 'Pricing', href: '/#pricing' },
+    { label: 'Locations', href: '/locations' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blog' },
-    { label: 'FAQ', href: '/#faq' },
     { label: 'Contact', href: '/contact' },
 ];
 
@@ -47,6 +66,29 @@ const areas = [
                         Custom websites built in America, never outsourced,
                         never templated.
                     </p>
+
+                    <address
+                        class="mt-6 space-y-1 text-sm text-white/70 not-italic"
+                    >
+                        <p class="font-semibold text-white/90">
+                            {{ companyName }}
+                        </p>
+                        <p v-if="cityState">{{ cityState }}</p>
+                        <p v-if="companyPhone">
+                            <a
+                                :href="phoneHref"
+                                class="transition hover:text-white"
+                                >{{ companyPhone }}</a
+                            >
+                        </p>
+                        <p v-if="companyEmail">
+                            <a
+                                :href="`mailto:${companyEmail}`"
+                                class="transition hover:text-white"
+                                >{{ companyEmail }}</a
+                            >
+                        </p>
+                    </address>
                 </div>
 
                 <div class="md:col-span-3">

@@ -10,7 +10,10 @@ test('the sitemap is served as XML and includes home, contact, and all locations
     foreach ([
         route('home'),
         route('about'),
+        route('services.index'),
+        route('services.show', 'web-design'),
         route('service-area'),
+        route('locations.index'),
         route('contact.show'),
         route('location.show', 'destin'),
         route('location.show', 'panama-city-beach'),

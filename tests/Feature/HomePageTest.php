@@ -10,8 +10,8 @@ test('home page renders the Home Inertia component with SEO meta', function () {
     $this->get(route('home'))
         ->assertInertia(fn (Assert $page) => $page
             ->component('Home')
-            ->where('meta.title', 'All American Web Design — Custom Websites, Built in America')
-            ->where('meta.description', fn (string $d) => str_contains($d, 'Built in America')));
+            ->where('meta.title', 'Panama City Beach Web Design & SEO — Veteran-Owned, Built in America')
+            ->where('meta.description', fn (string $d) => str_contains($d, 'Panama City Beach')));
 });
 
 test('home page exposes the four services and the FAQ list', function () {
