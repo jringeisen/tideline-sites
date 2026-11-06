@@ -31,7 +31,6 @@ class MarketingSchema
     {
         return array_filter([
             'telephone' => config('company.phone'),
-            'email' => config('company.email'),
         ]);
     }
 

@@ -40,7 +40,6 @@ class HandleInertiaRequests extends Middleware
             'name' => config('app.name'),
             'company' => [
                 'name' => config('company.name'),
-                'email' => config('company.email'),
                 'phone' => config('company.phone'),
                 'locality' => config('company.locality'),
                 'region' => config('company.region'),

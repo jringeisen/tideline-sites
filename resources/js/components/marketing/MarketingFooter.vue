@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
 import { computed } from 'vue';
+import { show as contactShow } from '@/routes/contact';
 
 type Company = {
     name?: string;
-    email?: string;
     phone?: string | null;
     locality?: string;
     region?: string;
@@ -17,7 +17,6 @@ const company = computed<Company>(
 const companyName = computed<string>(
     () => company.value.name ?? 'All American Web Design',
 );
-const companyEmail = computed<string | undefined>(() => company.value.email);
 const companyPhone = computed<string | null>(() => company.value.phone ?? null);
 const phoneHref = computed<string>(
     () => `tel:+1${(company.value.phone ?? '').replace(/\D/g, '')}`,
@@ -35,7 +34,7 @@ const companyLinks = [
     { label: 'Locations', href: '/locations' },
     { label: 'About', href: '/about' },
     { label: 'Blog', href: '/blog' },
-    { label: 'Contact', href: '/contact' },
+    { label: 'Contact', href: contactShow.url() },
 ];
 
 const areas = [
@@ -81,11 +80,11 @@ const areas = [
                                 >{{ companyPhone }}</a
                             >
                         </p>
-                        <p v-if="companyEmail">
-                            <a
-                                :href="`mailto:${companyEmail}`"
+                        <p>
+                            <Link
+                                :href="contactShow()"
                                 class="transition hover:text-white"
-                                >{{ companyEmail }}</a
+                                >Contact us</Link
                             >
                         </p>
                     </address>

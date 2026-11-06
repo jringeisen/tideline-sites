@@ -2,6 +2,25 @@
 
 use Inertia\Testing\AssertableInertia as Assert;
 
+test('public marketing pages do not expose the company email', function (string $path) {
+    config()->set('company.email', 'hello@allamericanwebdesign.com');
+
+    $response = $this->get($path)
+        ->assertSuccessful()
+        ->assertInertia(fn (Assert $page) => $page->missing('company.email'));
+
+    expect($response->getContent())->not->toContain('hello@allamericanwebdesign.com');
+})->with([
+    '/',
+    '/about',
+    '/contact',
+    '/service-area',
+    '/services',
+    '/locations',
+    '/blog',
+    '/seo-assessment',
+]);
+
 test('company NAP fields are shared to every Inertia page', function () {
     config()->set('company.phone', '(850) 555-0123');
 
